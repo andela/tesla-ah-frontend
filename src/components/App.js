@@ -1,10 +1,19 @@
 import React from 'react';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import Home from './Home';
+import Login from './Login';
+import PageNotFound from './PageNotFound';
 import '../styles.css';
 
 const App = () => (
-  <div>
-    <h1>...and then there was React...</h1>
-  </div>
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/login" component={Login} />
+      <Route component={PageNotFound} />
+    </Switch>
+
+  </BrowserRouter>
 );
 
 export default App;
