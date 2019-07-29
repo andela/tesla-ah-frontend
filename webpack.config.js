@@ -6,7 +6,9 @@ module.exports = {
   devServer: {
     historyApiFallback: {
       disableDotRule: true
-    }
+    },
+    overlay: true,
+    port:8000
   },
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
