@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack --mode development",
+    "test": "echo \"No test yet\"",
     "dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production"
   },
