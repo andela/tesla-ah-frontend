@@ -1,24 +1,46 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable no-undef */
+/* eslint-disable max-len */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
+import Jwt from 'jwt-decode';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from '../../assets/img/logo_st.png';
-import { setLoggedIn } from '../../redux/actions/ui.actions';
+import { initProfile } from '../../redux/actions/profile.actions';
+// import { setLoggedIn } from '../../redux/actions/ui.actions';
 
 export class Header extends Component {
   static propTypes = {
-    setLoggedIn: PropTypes.func.isRequired,
-    auth: PropTypes.instanceOf(Object).isRequired,
-  }
+    login: PropTypes.instanceOf(Object).isRequired,
+  };
 
   componentWillMount() {
+    const { onInitProfile } = this.props;
+    if (localStorage.getItem('user')) {
+      onInitProfile();
+    }
     // eslint-disable-next-line react/destructuring-assignment
-    this.props.setLoggedIn();
+    // this.props.setLoggedIn();
   }
 
+  getUser = (token) => {
+    let user;
+    try {
+      user = Jwt(token);
+    } catch (error) {
+      user = undefined;
+    }
+    return user;
+  };
+
   render() {
-    const { auth: { loggedIn } } = this.props;
+    const {
+      login: { loggedIn, user },
+      profile,
+    } = this.props;
+    const isAuthenticated = this.getUser(sessionStorage.getItem('token'));
     return (
       <header className="nav-to-shrink">
         <nav className="navbar navbar-expand-lg container">
@@ -62,7 +84,67 @@ export class Header extends Component {
                 </li>
               </ul>
             </Link>
-            {loggedIn ? (
+            {!loggedIn && !isAuthenticated ? (
+              <ul className="navbar-nav mr-auto nav-left">
+                <li className="nav-item active">
+                  {/* eslint-disable-nextline  */}
+                  <Link className="nav-link is-active" to="/">
+                    Home
+                    <span className="sr-only">(current)</span>
+                  </Link>
+                </li>
+                <li className="nav-item dropdown">
+                  {/* eslint-disable-nextline  */}
+                  <Link
+                    className="nav-link dropdown-toggle nav-shrink"
+                    to="/"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Categories
+                  </Link>
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    {/* eslint-disable-nextline  */}
+                    <Link className="dropdown-item" to="/">
+                      Technology
+                    </Link>
+                    {/* eslint-disable-nextline  */}
+                    <Link className="dropdown-item" to="/">
+                      Sport
+                    </Link>
+                    {/* eslint-disable-nextline  */}
+                    <Link className="dropdown-item" to="/">
+                      Design
+                    </Link>
+                    {/* eslint-disable-nextline  */}
+                    <Link className="dropdown-item" to="/">
+                      Politics
+                    </Link>
+                  </div>
+                </li>
+                <li className="nav-item">
+                  {/* eslint-disable-nextline  */}
+                  <Link className="nav-link nav-shrink" to="/">
+                    About Us
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  {/* eslint-disable-nextline  */}
+                  <Link className="nav-link nav-shrink" to="/" tabIndex="-1">
+                    Contacts
+                  </Link>
+                </li>
+              </ul>
+            ) : (
+              <div />
+            )}
+            {loggedIn || isAuthenticated ? (
               <ul className="nav-right navbar-nav">
                 <li id="nav-item noti-container">
                   <div id="noti-counter">5</div>
@@ -83,7 +165,13 @@ export class Header extends Component {
                 <li id="nav-item noti-container message">
                   <img
                     className="menu-profile-image"
-                    src="https://scontent.fkgl1-1.fna.fbcdn.net/v/t1.0-9/16196015_10154888128487744_6901111466535510271_n.png?_nc_cat=103&_nc_oc=AQm1z5jCqvLA7cItJnm3RXa2_ApxETs_BsK1Y5lNksTqg0YsrGmwP91yr73V3BLnYOw&_nc_ht=scontent.fkgl1-1.fna&oh=e18554da0038703db68054626fa73da9&oe=5DE21BE9"
+                    src={
+                      profile.user !== null
+                        ? profile.user.avatar
+                        : user.avatar
+                          ? user.avatar
+                          : 'https://scontent.fkgl1-1.fna.fbcdn.net/v/t1.0-9/16196015_10154888128487744_6901111466535510271_n.png?_nc_cat=103&_nc_oc=AQm1z5jCqvLA7cItJnm3RXa2_ApxETs_BsK1Y5lNksTqg0YsrGmwP91yr73V3BLnYOw&_nc_ht=scontent.fkgl1-1.fna&oh=e18554da0038703db68054626fa73da9&oe=5DE21BE9'
+                    }
                     alt="AH"
                   />
                 </li>
@@ -93,12 +181,12 @@ export class Header extends Component {
                 <ul className="nav-right navbar-nav">
                   <li className="nav-item">
                     <Link to="/auth/login" className="nav-link is-active">
-                        Login
+                      Login
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/auth/signup" className="nav-link is-active">
-                        Sign Up
+                      Sign Up
                     </Link>
                   </li>
                 </ul>
@@ -112,7 +200,21 @@ export class Header extends Component {
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth,
+  login: state.login,
+  profile: state.profile,
 });
 
-export default connect(mapStateToProps, { setLoggedIn })(Header);
+const mapDispatchToProps = (dispatch) => {
+  const user = JSON.parse(localStorage.getItem('user'));
+  if (user) {
+    return {
+      onInitProfile: () => dispatch(initProfile(user.username)),
+    };
+  }
+  return {};
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Header);

@@ -1,4 +1,4 @@
-import axios from '../../utils/axios-ah';
+import axios from 'axios';
 
 import {
   GET_CURRENT_USER_START,
@@ -14,6 +14,7 @@ import {
   GET_PROFILE_FAIL,
 } from './types/profile.type';
 import parseArticleArray from '../../utils/parseArticleArray';
+import { API_URL } from '../../utils/constants';
 
 export const getCurrentUserStart = () => ({
   type: GET_CURRENT_USER_START,
@@ -32,7 +33,11 @@ export const getCurrentUserFail = error => ({
 export const getCurrentUser = () => async (dispatch) => {
   try {
     dispatch(getCurrentUserStart());
-    const { data } = await axios.get('/user');
+    const { data } = await axios.get(`${API_URL}/user`, {
+      headers: {
+        token: sessionStorage.getItem('token'),
+      },
+    });
     dispatch(getCurrentUserSuccess(data.user));
   } catch (error) {
     dispatch(getCurrentUserFail(error));
@@ -40,7 +45,7 @@ export const getCurrentUser = () => async (dispatch) => {
 };
 
 export const getProfile = username => (dispatch) => {
-  axios.get(`/profiles/${username}`)
+  axios.get(`${API_URL}/profiles/${username}`)
     .then((response) => {
       const { data: { profile } } = response;
       dispatch({ type: GET_PROFILE, payload: { profile } });
@@ -51,7 +56,7 @@ export const getProfile = username => (dispatch) => {
 };
 
 export const getArticles = username => (dispatch) => {
-  axios.get(`/articles?author=${username}`)
+  axios.get(`${API_URL}/articles?author=${username}`)
     .then((response) => {
       const { data: articles } = response;
       parseArticleArray(articles.data)
@@ -89,8 +94,14 @@ export const setUpdatable = () => ({
 export const updateProfile = (userId, profileToUpdate) => async (dispatch) => {
   dispatch(updateProfileStart());
   try {
-    const { data } = await axios.put(`/user/${userId}`, profileToUpdate);
+    const { data } = await axios.put(`${API_URL}/user/${userId}`, profileToUpdate, {
+      headers: {
+        token: sessionStorage.getItem('token'),
+      },
+    });
     dispatch(updateProfileSuccess(data.user));
+    dispatch(initProfile(data.user.username));
+    localStorage.setItem('user', JSON.stringify(data.user));
   } catch (error) {
     dispatch(updateProfileFail(error));
   }

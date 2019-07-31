@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
@@ -12,6 +11,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Terms from './pages/Terms';
+import Create from './pages/Createarticle';
 import VerifyAccount from './pages/VerifyAccount';
 import Footer from './layouts/Footer';
 import ReadArticle from './pages/ReadArticle';
@@ -20,6 +20,8 @@ import ApplyPassword from './pages/ApplyPasswordForm';
 import Profile from './pages/Profile';
 import PageNotFound from './pages/PageNotFound';
 import SearchResults from './pages/SearchResults';
+import Editarticle from './pages/Editarticle';
+import MyArticles from './pages/MyArticles';
 
 const App = () => (
   <BrowserRouter>
@@ -36,6 +38,9 @@ const App = () => (
       <Route exact path="/resetPasswordRequest" component={ResetPasswordRequest} />
       <Route exact path="/profile/:username" component={Profile} />
       <Route exact path="/search" component={SearchResults} />
+      <Route exact path="/articles" component={MyArticles} />
+      <Route exact path="/article/new" component={Create} />
+      <Route exact path="/article/:slug/edit" component={Editarticle} />
       <Route component={PageNotFound} />
     </Switch>
     <Footer />

@@ -11,7 +11,7 @@ const Footer = () => (
         <div className="row mb-2">
           <div className="col-sm-4" />
           <div className="col-sm-4">
-            <div className="social-links container">
+            <div className="social-links container mt-3">
               <Link to="" className="social-links__item">
                 <i className="fab fa-facebook" />
               </Link>
@@ -26,9 +26,9 @@ const Footer = () => (
               </Link>
             </div>
           </div>
-          <div className="col-sm-4" />
+          <div className="col-sm-4 mt-5" />
         </div>
-        <h6 className="white text-center mb-5">Copyright &copy; 2019 Team Tesla</h6>
+        <h6 className="white text-center mb-5 mt-5">Copyright &copy; 2019 Team Tesla</h6>
       </div>
     </footer>
   </div>

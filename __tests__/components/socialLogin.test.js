@@ -21,6 +21,7 @@ describe('Testing social login', () => {
     wrapper = shallow(<SocialLogin {...props} />);
   });
 
+
   it('should have social login component', () => {
     expect(wrapper).toMatchSnapshot();
   });

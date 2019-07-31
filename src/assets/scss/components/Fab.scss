@@ -1,9 +1,13 @@
-.fab {
-  display: none;
+.profile-fab-cont {
+  .fab {
+    display: none;
+  }
 }
 
 @media (max-width: 991px) {
-  .fab {
-    display: block;
+  .profile-fab-cont {
+    .fab {
+      display: block;
+    }
   }
 }

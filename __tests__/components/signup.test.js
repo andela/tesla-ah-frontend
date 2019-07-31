@@ -9,23 +9,31 @@ const props = {
   ui: { loading: false },
   auth: { signupSuccess: false },
 };
-
+const props1 = {
+  createAccount: jest.fn(),
+  ui: { loading: true },
+  auth: { signupSuccess: false, loggedIn: true },
+};
 const otherProps = {
   ui: { loading: true },
   createAccount: jest.fn(),
   auth: { signupSuccess: false },
 };
 let signup;
+let signup1;
 let signupLoading;
 describe('Signup Components tests...', () => {
   beforeAll(() => {
     signup = shallow(<Signup {...props} />);
+    signup1 = shallow(<Signup {...props1} />);
     signup.instance().onChange = jest.fn();
     signup.instance().onChange();
+    // signup.instance().componentWillMount();
   });
 
   it('Should render signup component', () => {
     expect(signup).toMatchSnapshot();
+    expect(signup1).toMatchSnapshot();
   });
   it('Should find one form', () => {
     const form = signup.find('FormContainer');
@@ -34,6 +42,9 @@ describe('Signup Components tests...', () => {
   it('Should give initial state', () => {
     expect(signup.state()).toBeDefined();
     mapStateToProps({});
+  });
+  it('Should test validation', () => {
+    mapStateToProps({ ui: {}, auth: {} });
   });
   describe('Input simulations tests...', () => {
     it('Should change DOB state', () => {

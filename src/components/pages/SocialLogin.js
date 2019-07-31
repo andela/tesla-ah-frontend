@@ -1,10 +1,9 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable no-console */
 /* eslint-disable react/destructuring-assignment */
-/* eslint-disable no-undef */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-script-url */
 import React, { Component } from 'react';
+import { API_URL } from '../../utils/constants';
 
 /**
  * @param {*} props
@@ -14,15 +13,15 @@ import React, { Component } from 'react';
 
 export class SocialLogin extends Component {
   callTwitterLogin = () => {
-    window.location.replace(`${process.env.REACT_APP_BASE_URL}/api/auth/login/twitter`);
+    window.location.replace(`${API_URL}/api/auth/login/twitter`);
   };
 
   callGoogleLogin = () => {
-    window.location.replace(`${process.env.REACT_APP_BASE_URL}/api/auth/login/google`);
+    window.location.replace(`${API_URL}/api/auth/login/google`);
   };
 
   callFacebookLogin = () => {
-    window.location.replace(`${process.env.REACT_APP_BASE_URL}/api/auth/login/facebook`);
+    window.location.replace(`${API_URL}/api/auth/login/facebook`);
   }
 
   /**

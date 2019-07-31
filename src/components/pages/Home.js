@@ -17,27 +17,31 @@ import Preloader from '../widgets/Preloader';
 export class Home extends Component {
   state = {
     currentPage: 1,
+    isLoading: true,
   };
 
   componentWillMount() {
     this.props.getArticles(this.state.currentPage);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.auth.verified) {
+  componentWillReceiveProps(newProps) {
+    if (newProps.article.articles) {
+      this.setState({ isLoading: false });
+    }
+    if (newProps.auth.verified) {
       toast.success('Welcome back, you are now Verified!');
     }
   }
 
   changeCurrentPage = (numPage) => {
-    this.setState({ currentPage: numPage });
-    this.props.getArticles(this.state.currentPage);
+    this.props.getArticles(numPage);
+    this.setState({ currentPage: numPage, isLoading: true });
   };
 
   render() {
     let articleItems = [];
     let articleslist = {};
-    if (this.props.article.articles) {
+    if (!this.state.isLoading) {
       articleslist = this.props.article;
       articleItems = this.props.article.articles.map(article => (
         <Link
@@ -62,7 +66,6 @@ export class Home extends Component {
                 currentPage={this.state.currentPage}
                 totalPages={Math.ceil(this.props.article.count / 10)}
                 changeCurrentPage={this.changeCurrentPage}
-                // theme="bottom-border"
               />
             </div>
           </div>

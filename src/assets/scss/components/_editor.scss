@@ -1,139 +1,149 @@
 .create-article-container {
-    margin: 0 10% 0 20%;
-    & .editor-main-section {
-      border: 0px solid gray;
-      & .editor-main {
-        margin-top: 10%;
-        & .rigth-nav {
-          & .publishbutton {
-            min-height: 40px;
-            outline: none;
-            border: 0;
-            box-shadow: 0px 0px 15px $dark;
-            border-radius: 10px;
-            background: $dark;
-            color: rgb(231, 228, 228);
-            margin-top: 5vh;
-          }
-        }
+  min-height: 90vh;
+  & .editor-main-section {
+    border: 1px solid $white;
+    .alert-light{
+      width: 100%;
+      background: blue($color: #000000);
+    }
+    & .publishbutton {
+      min-height: 40px;
+      padding: 0 20px 0 20px;
+      outline: none;
+      border: 0;
+      box-shadow: 0px 0px 10px $white;
+      border-radius: 10px;
+      background: $green;
+      color: rgb(231, 228, 228);
+      float: right;
+      margin-top: 10px;
+    }
+    & .editor-main {
+      justify-content: center;
+      margin-top: 0;
+      & .rigth-nav {
+        border: 0px solid $white;
+      }
+      & .left-nav {
+        border: 1px solid $white;
       }
     }
-    & .editor-main-section-r {
+  }
+  & .editor-main-section-r {
+    border: 0px solid gray;
+    & .editor-main-r {
+      margin: 10% 10% 10% 6%;
       border: 0px solid gray;
-      & .editor-main-r {
-        margin: 10% 10% 10% 6%;
+      & .itemcontainer {
         border: 0px solid gray;
-        & .itemcontainer {
-          border: 0px solid gray;
-        }
-  
-        .publishbutton {
-          min-height: 40px;
-          outline: none;
-          border: 0;
-          box-shadow: 0px 0px 15px $dark;
-          border-radius: 10px;
-          background: rgb(44, 85, 124);
-          color: rgb(231, 228, 228);
-          margin-top: 5vh;
-          padding: 0 40px 0 40px;
-        }
-        .read-published-div {
-          display: block; /* or inline-block */
-          text-overflow: ellipsis;
-          word-wrap: break-word;
-          overflow: hidden;
-          max-height: 6.6em;
-          line-height: 1.8em;
-          &:hover {
-            cursor: pointer;
-          }
-        }
-  
-        .read-published-title{
-          &:hover {
-            cursor: pointer;
-          }
-        }
-  
-        .react-tagsinput {
-          background-color: #fff;
-          border: 1px solid #ccc;
-          overflow: hidden;
-          padding-left: 5px;
-          padding-top: 5px;
-        }
-  
-        .react-tagsinput--focused {
-          border-color: #2c71998a;
-        }
-  
-        .react-tagsinput-tag {
-          background-color: #4b79b48f;
-          border-radius: 2px;
-          border: 1px solid #2c71998a;
-          color: white;
-          display: inline-block;
-          font-family: sans-serif;
-          font-size: 13px;
-          font-weight: 400;
-          margin-bottom: 5px;
-          margin-right: 5px;
-          padding: 5px;
-        }
-  
-        .react-tagsinput-remove {
+      }
+
+      .publishbutton {
+        min-height: 40px;
+        padding: 0 20px 0 20px;
+        outline: none;
+        border: 0;
+        box-shadow: 0px 0px 10px $green;
+        border-radius: 10px;
+        background: $green;
+        color: rgb(231, 228, 228);
+        float: right;
+        margin-top: 10px;
+      }
+      .read-published-div {
+        display: block; /* or inline-block */
+        text-overflow: ellipsis;
+        word-wrap: break-word;
+        overflow: hidden;
+        max-height: 6.6em;
+        line-height: 1.8em;
+        &:hover {
           cursor: pointer;
-          font-weight: bold;
         }
-  
-        .react-tagsinput-tag a::before {
-          content: " ×";
+      }
+
+      .read-published-title {
+        &:hover {
+          cursor: pointer;
         }
-  
-        .react-tagsinput-input {
-          background: transparent;
-          border: 0;
-          color: #777;
-          font-family: sans-serif;
-          font-size: 13px;
-          font-weight: 400;
-          margin-bottom: 6px;
-          margin-top: 1px;
-          outline: none;
-          padding: 5px;
-          width: 80px;
+      }
+
+      .react-tagsinput {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        overflow: hidden;
+        padding-left: 5px;
+        padding-top: 5px;
+      }
+
+      .react-tagsinput--focused {
+        border-color: #2c71998a;
+      }
+
+      .react-tagsinput-tag {
+        background-color: #4b79b48f;
+        border-radius: 2px;
+        border: 1px solid #2c71998a;
+        color: white;
+        display: inline-block;
+        font-family: sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        margin-bottom: 5px;
+        margin-right: 5px;
+        padding: 5px;
+      }
+
+      .react-tagsinput-remove {
+        cursor: pointer;
+        font-weight: bold;
+      }
+
+      .react-tagsinput-tag a::before {
+        content: " ×";
+      }
+
+      .react-tagsinput-input {
+        background: transparent;
+        border: 0;
+        color: #777;
+        font-family: sans-serif;
+        font-size: 13px;
+        font-weight: 400;
+        margin-bottom: 6px;
+        margin-top: 1px;
+        outline: none;
+        padding: 5px;
+        width: 80px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 768px) {
+  .create-article-container {
+    & .editor-main-section {
+      margin-top: 30px;
+      & .editor-main {
+        & .left-nav {
+          margin: 0;
+          background: white;
+        }
+        & .rigth-nav {
+          position: fixed;
         }
       }
     }
   }
-  @media screen and (max-width: 768px) {
-    .create-article-container {
-      margin: 0 10% 0 10%;
-      & .editor-main-section {
-        margin-top: 30px;
-        & .editor-main {
-          & .left-nav {
-            margin: 7% 0 0 0;
-            background: white;
-          }
-          & .rigth-nav {
-            position: fixed;
-          }
+}
+@media screen and (max-width: 425px) {
+  .create-article-container {
+    & .editor-main-section {
+      margin-top: 10px;
+      & .editor-main {
+        & .left-nav {
+          margin: 0;
         }
       }
     }
   }
-  @media screen and (max-width: 425px) {
-    .create-article-container {
-      margin: 0 10% 0 10%;
-      & .editor-main-section {
-        margin-top: 50px;
-        & .editor-main {
-          & .left-nav {
-            margin: 15% 0 0 0;
-          }
-        }
-      }
-    }
-  }
+}

@@ -1,3 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Signup Components tests... Should render signup component 1`] = `ShallowWrapper {}`;
+
+exports[`Signup Components tests... Should render signup component 2`] = `ShallowWrapper {}`;

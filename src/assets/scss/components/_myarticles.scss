@@ -1,0 +1,111 @@
+.my-articles-container {
+   justify-content: center;
+   align-items: center;
+    min-height: 90vh;
+  
+    .bookmarks_button {
+        button {
+          background-color:$white;
+          color: $dark;
+          margin: 5px;
+          outline: none;
+          display: block;
+        }
+  
+        button:hover {
+          background-color:$gray;
+        }
+      }
+    .text-third {
+     color:$gray1;
+     margin-top: 35vh;
+    }
+  }
+  @media (min-width: 575.98px) {
+    .my-articles-container {
+      .icon-hover:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  @media (max-width: 575.98px) {
+    .my-articles-container {
+      .icon-hover {
+         display: block;
+         margin-top: 10px;
+      }
+
+      .story_readtime{
+        display: none;
+      }
+      .icon-hover:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    .my-articles-container {
+      .icon-hover {
+        display: block;
+      }
+      
+      .icon-hover:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .my-articles-container {
+      .icon-hover {
+        display: block;
+      }
+      
+      .icon-hover:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    .mobile_bookmarks_button{
+        display: block;
+    }
+    .my-articles-container {
+      
+      .icon-hover:hover {
+        cursor: pointer;
+      }
+    }
+  }
+  @media (min-width: 1200px) {
+    .mobile_bookmarks_button{
+        display: block;
+    }
+    .my-articles-container {
+      
+      .icon-hover:hover {
+        cursor: pointer;
+      }
+  
+      .icon-size {
+        font-size: 20px;
+      }
+  
+      .story-title {
+        position: absolute;
+        width: 907px;
+        height: 122px;
+  
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 35px;
+        line-height: 40px;
+        /* or 114% */
+  
+        letter-spacing: 0.02em;
+  
+        color: #000000;
+      }
+    }
+  }

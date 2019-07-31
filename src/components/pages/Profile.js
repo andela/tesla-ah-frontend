@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { capitalize } from 'lodash';
+import { withErrorHandler } from 'tesla-error-handler';
+import axios from 'axios';
+import PropTypes from 'prop-types';
 
 import Article from '../common/Article';
 import Interests from '../widgets/Interests';
@@ -14,10 +17,7 @@ import Fab from '../widgets/Fab';
 import ProfileEditForm from '../forms/ProfileEditForm';
 
 import profilePlaceholder from '../../assets/images/profile_placeholder.jpg';
-import '../../assets/scss/pages/Profile.scss';
 import Spinner from '../widgets/Spinner';
-import axios from '../../utils/axios-ah';
-import withErrorHandler from '../hoc/errorHandler';
 
 export class Profile extends Component {
   constructor(props) {
@@ -28,6 +28,16 @@ export class Profile extends Component {
     props.setCurrentUser();
     props.initProfile(props.match.params.username);
     this.showArticles = React.createRef();
+  }
+
+  componentDidUpdate() {
+    const { profile } = this.props;
+    const { mainContent } = this.state;
+    if (profile.hasArticles && !mainContent && this.showArticles) {
+      if (this.showArticles.current) {
+        this.showArticles.current.click();
+      }
+    }
   }
 
   handleTabChange = (tab) => {
@@ -128,156 +138,146 @@ export class Profile extends Component {
       heroImage = {
         backgroundImage: `url(${profile.user.cover})`,
       };
-    } else {
-      const style = {
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        transform: 'translate(-50%, -50%)',
-      };
+
+      let isCurrentUser;
+      if (profile.currentUser) {
+        isCurrentUser = match.params.username === profile.currentUser.username;
+      }
+
       return (
-        <div style={style}>
-          <Spinner />
+        <div className="view-profile--container">
+          <div className="hero" style={heroImage} />
+          <div className="info-bar">
+            <div className="container h-100">
+              <div className="row align-items-center h-100">
+                <div className="col">
+                  {profile.user && profile.user.avatar ? (
+                    <img
+                      className="d-avatar"
+                      src={profile.user.avatar}
+                      alt="Avatar"
+                    />
+                  ) : (
+                    <img className="d-avatar" src={profilePlaceholder} alt="Profile Placeholder" />
+                  )}
+                </div>
+                <ul className="col-6 nav d-flex align-items-center justify-content-between h-100">
+                  <li className="nav-item">
+                    <button
+                      ref={this.showArticles}
+                      id="articleBtn"
+                      className="nav-link"
+                      onClick={() => this.handleTabChange('articles')}
+                      type="button"
+                    >
+                      Articles
+                      <span className="badge badge-light d-badge">
+                        {profile.articlesCount}
+                      </span>
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="nav-link act"
+                      id="followerBtn"
+                      onClick={() => this.handleTabChange('followers')}
+                      type="button"
+                    >
+                      Followers
+                      <span className="badge badge-light d-badge">
+                        {profile.followersCount}
+                      </span>
+                    </button>
+                  </li>
+                  <li className="nav-item">
+                    <button
+                      className="nav-link"
+                      id="followingBtn"
+                      onClick={() => this.handleTabChange('following')}
+                      type="button"
+                    >
+                      Following
+                      <span className="badge badge-light d-badge">
+                        {profile.followingCount}
+                      </span>
+                    </button>
+                  </li>
+                </ul>
+                <div className="col d-flex justify-content-end">
+                  {isCurrentUser ? (
+                    <button
+                      type="button"
+                      className="btn-custom"
+                      data-toggle="modal"
+                      data-target="#exampleModalCenter"
+                    >
+                      Edit Profile
+                    </button>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="container d-main-content">
+            <div className="row flex-column flex-lg-row">
+              <div className="col order-1">
+                <div className="info-box info-box-content d-flex flex-column align-items-start">
+                  <span className="fullname">
+                    {`${capitalize(profile.user.firstName)} 
+                      ${capitalize(profile.user.lastName)}`}
+                  </span>
+                  <span className="username">
+                    {`@${profile.user.username}`}
+                  </span>
+                  <span className="location">
+                    <i className="fas fa-envelope" />
+                    {email}
+                  </span>
+                  <span className="joined">
+                    <i className="fas fa-calendar-plus" />
+                    {dateJoined}
+                  </span>
+                </div>
+                {!isCurrentUser ? (
+                  <button type="button" className="btn-custom">
+                    Follow
+                  </button>
+                ) : null}
+              </div>
+              <div className="col-12 col-lg-6 order-3 order-lg-2">
+                {mainContent || 'Loading...'}
+              </div>
+              <div className="col interests order-2 order-lg-3">
+                <div className="content-title d-flex justify-content-between align-items-center">
+                  <span>Bio</span>
+                </div>
+                <Interests content={bio} />
+              </div>
+            </div>
+          </div>
+          <Fab
+            id="profileFab"
+            articles={() => this.handleTabChange('articles')}
+            followers={() => this.handleTabChange('followers')}
+            following={() => this.handleTabChange('following')}
+            isCurrentUser={isCurrentUser}
+          />
+          {profile.currentUser ? (
+            <ProfileEditForm
+              updating={profile.isDonUpdating}
+              user={profile.currentUser}
+            />
+          ) : null}
         </div>
       );
     }
 
-    let isCurrentUser;
-    if (profile.currentUser) {
-      isCurrentUser = match.params.username === profile.currentUser.username;
-    }
-
-    if (profile.hasArticles && !mainContent && this.showArticles) {
-      if (this.showArticles.current) {
-        this.showArticles.current.click();
-      }
-    }
-
     return (
-      <React.Fragment>
-        <div className="hero" style={heroImage} />
-        <div className="info-bar">
-          <div className="container h-100">
-            <div className="row align-items-center h-100">
-              <div className="col">
-                {profile.user && profile.user.avatar ? (
-                  <img
-                    className="d-avatar"
-                    src={profile.user.avatar}
-                    alt="Avatar"
-                  />
-                ) : (
-                  <img className="d-avatar" src={profilePlaceholder} alt="Profile Placeholder" />
-                )}
-              </div>
-              <ul className="col-6 nav d-flex align-items-center justify-content-between h-100">
-                <li className="nav-item">
-                  <button
-                    ref={this.showArticles}
-                    id="articleBtn"
-                    className="nav-link"
-                    onClick={() => this.handleTabChange('articles')}
-                    type="button"
-                  >
-                    Articles
-                    <span className="badge badge-light d-badge">
-                      {profile.articlesCount}
-                    </span>
-                  </button>
-                </li>
-                <li className="nav-item">
-                  <button
-                    className="nav-link act"
-                    id="followerBtn"
-                    onClick={() => this.handleTabChange('followers')}
-                    type="button"
-                  >
-                    Followers
-                    <span className="badge badge-light d-badge">
-                      {profile.followersCount}
-                    </span>
-                  </button>
-                </li>
-                <li className="nav-item">
-                  <button
-                    className="nav-link"
-                    id="followingBtn"
-                    onClick={() => this.handleTabChange('following')}
-                    type="button"
-                  >
-                    Following
-                    <span className="badge badge-light d-badge">
-                      {profile.followingCount}
-                    </span>
-                  </button>
-                </li>
-              </ul>
-              <div className="col d-flex justify-content-end">
-                {isCurrentUser ? (
-                  <button
-                    type="button"
-                    className="btn-custom"
-                    data-toggle="modal"
-                    data-target="#exampleModalCenter"
-                  >
-                    Edit Profile
-                  </button>
-                ) : null}
-              </div>
-            </div>
-          </div>
+      <div className="view-profile--container">
+        <div className="view-profile--spinner">
+          <Spinner />
         </div>
-        <div className="container d-main-content">
-          <div className="row flex-column flex-lg-row">
-            <div className="col order-1">
-              <div className="info-box info-box-content d-flex flex-column align-items-start">
-                <span className="fullname">
-                  {`${capitalize(profile.user.firstName)} 
-                    ${capitalize(profile.user.lastName)}`}
-                </span>
-                <span className="username">
-                  {`@${profile.user.username}`}
-                </span>
-                <span className="location">
-                  <i className="fas fa-envelope" />
-                  {email}
-                </span>
-                <span className="joined">
-                  <i className="fas fa-calendar-plus" />
-                  {dateJoined}
-                </span>
-              </div>
-              {!isCurrentUser ? (
-                <button type="button" className="btn-custom">
-                  Follow
-                </button>
-              ) : null}
-            </div>
-            <div className="col-12 col-lg-7 order-3 order-lg-2">
-              {mainContent || 'Loading...'}
-            </div>
-            <div className="col interests order-2 order-lg-3">
-              <div className="content-title d-flex justify-content-between align-items-center">
-                <span>Bio</span>
-              </div>
-              <Interests content={bio} />
-            </div>
-          </div>
-        </div>
-        <Fab
-          id="profileFab"
-          articles={() => this.handleTabChange('articles')}
-          followers={() => this.handleTabChange('followers')}
-          following={() => this.handleTabChange('following')}
-          isCurrentUser={isCurrentUser}
-        />
-        {profile.currentUser ? (
-          <ProfileEditForm
-            updating={profile.isDonUpdating}
-            user={profile.currentUser}
-          />
-        ) : null}
-      </React.Fragment>
+      </div>
     );
   }
 }
@@ -288,5 +288,12 @@ export const mapDispatchToProps = dispatch => ({
   initProfile: username => dispatch(initProfile(username)),
   setCurrentUser: () => dispatch(getCurrentUser()),
 });
+
+Profile.propTypes = {
+  profile: PropTypes.instanceOf(Object).isRequired,
+  initProfile: PropTypes.func.isRequired,
+  setCurrentUser: PropTypes.func.isRequired,
+  match: PropTypes.instanceOf(Object).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Profile, axios));
