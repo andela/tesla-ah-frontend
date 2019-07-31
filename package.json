@@ -8,7 +8,8 @@
   "license": "MIT",
   "scripts": {
     "start": "webpack --mode development",
-    "test": "echo \"No test yet\"",
+    "test": "jest",
+    "test:watch":"jest --watch",
     "dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production"
   },
@@ -21,6 +22,9 @@
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.1.0",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "enzyme-to-json": "^3.3.5",
     "eslint": "5.3.0",
     "eslint-config-airbnb": "17.1.1",
     "eslint-loader": "^2.2.1",
@@ -29,7 +33,9 @@
     "eslint-plugin-react": "^7.14.2",
     "file-loader": "^4.1.0",
     "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.8.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "redux-mock-store": "^1.5.3",
     "webpack": "^4.38.0",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
@@ -42,5 +48,9 @@
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0"
+  },
+  "jest": {
+    "setupFilesAfterEnv": ["./__tests__/setup/setupEnzyme.js"],
+    "testPathIgnorePatterns": ["./__tests__/setup/"]
   }
 }
