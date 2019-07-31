@@ -1,12 +1,6 @@
-@import './abstracts/_variables';
-@import './components/_app';
-@import './layouts/header';
-@import './layouts/footer';
-@import './pages/home';
-@import './pages/login';
-body {
-    padding: 0;
-    margin: 0;
-    text-align: center;
-  }
-  
+@import "./abstracts/variables";
+@import "./layouts/header";
+@import "./layouts/footer";
+@import "./components/home";
+@import "./pages/home";
+@import "./pages/login";

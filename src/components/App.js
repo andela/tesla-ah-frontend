@@ -12,8 +12,6 @@ const App = () => (
       <Route exact path="/login" component={Login} />
       <Route component={PageNotFound} />
     </Switch>
-
   </BrowserRouter>
 );
-
 export default App;
