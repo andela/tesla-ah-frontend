@@ -24,8 +24,17 @@ module.exports = {
         use: ['babel-loader', 'eslint-loader']
       },
       {
-        test: /.(css)$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
+        test: /.(css|scss)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          },
+          'sass-loader'
+        ]
       },
       {
         test: /.(jpg|jpeg|png|gif|svg)$/,

@@ -9,7 +9,7 @@
   "scripts": {
     "start": "webpack --mode development",
     "test": "jest --coverage",
-    "test:watch":"jest --watch",
+    "test:watch": "jest --watch",
     "dev": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production"
   },
@@ -41,16 +41,23 @@
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
+    "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1",
     "react-redux": "^7.1.0",
+    "react-router-dom": "^5.0.1",
+    "react-test-renderer": "^16.8.6",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "sass-loader": "^7.1.0"
   },
   "jest": {
-    "setupFilesAfterEnv": ["./__tests__/setup/setupEnzyme.js"],
-    "testPathIgnorePatterns": ["./__tests__/setup/"]
+    "setupFilesAfterEnv": [
+      "./__tests__/setup/setupEnzyme.js"
+    ],
+    "testPathIgnorePatterns": [
+      "./__tests__/setup/"
+    ]
   }
 }
