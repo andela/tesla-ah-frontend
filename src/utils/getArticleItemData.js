@@ -1,0 +1,15 @@
+/* eslint-disable import/prefer-default-export */
+
+export const getArticleItemData = (article) => {
+  const content = JSON.parse(article.body);
+  const { description } = article;
+  const { blocks } = content.article.body;
+  let image = null;
+  for (let i = 1; i < blocks.length; i += 1) {
+    if (blocks[i].type === 'image') {
+      image = blocks[i].data.url;
+      break;
+    }
+  }
+  return { article, body: description, image };
+};
