@@ -31,8 +31,6 @@ const App = () => (
       <Route exact path="/terms" component={Terms} />
       <Route exact path="/verify/:token" component={VerifyAccount} />
       <Route exact path="/articles/:slug" component={ReadArticle} />
-      <Route exact path="/" component={Home} />
-      <Route exact path="/verify/:token" component={VerifyAccount} />
       <Route exact path="/resetPassword/:token" component={ApplyPassword} />
       <Route exact path="/resetPasswordRequest" component={ResetPasswordRequest} />
       <Route exact path="/profile/:username" component={Profile} />

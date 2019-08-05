@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import Pagination from 'react-pagination-library';
+import { toast } from 'react-toastify';
 import Slider from '../layouts/Slider';
 import Main from '../layouts/Maincontent';
 import { getArticles } from '../../redux/actions/article.actions';
@@ -20,6 +21,12 @@ export class Home extends Component {
 
   componentWillMount() {
     this.props.getArticles(this.state.currentPage);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.verified) {
+      toast.success('Welcome back, you are now Verified!');
+    }
   }
 
   changeCurrentPage = (numPage) => {
@@ -78,6 +85,7 @@ Home.protoTypes = {
 
 const mapStateToProps = state => ({
   article: state.article.articles,
+  auth: state.auth,
 });
 export default connect(
   mapStateToProps,

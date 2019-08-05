@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { verifyAccount } from '../../redux/actions/auth.actions';
 import Spinner from '../widgets/Spinner';
 import Alert from '../common/Alert';
@@ -12,6 +12,7 @@ export class VerifyAccount extends Component {
     this.state = {
       // eslint-disable-next-line react/no-unused-state
       verified: false,
+      redirect: false,
     };
     this.verified = false;
   }
@@ -24,6 +25,15 @@ export class VerifyAccount extends Component {
     this.props.verifyAccount(params.token);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { auth: { verified } } = nextProps;
+    if (verified) {
+      this.setState({
+        redirect: true,
+      });
+    }
+  }
+
   componentDidUpdate(prevProps) {
     const {
       auth: { verified },
@@ -34,14 +44,14 @@ export class VerifyAccount extends Component {
   }
 
   render() {
-    const {
-      ui: { loading },
-      auth: { verified, verifailed },
-    } = this.props;
+    const { ui: { loading }, auth: { verified, verifailed } } = this.props;
+    const { state } = this;
+    if (state.redirect) {
+      return <Redirect to="/" />;
+    }
     return (
       <section className="container">
-        <h2>Verify your account</h2>
-        {loading ? <Spinner caption="Verifying your account..." /> : null}
+        {loading ? (<Spinner caption="Verifying your account..." />) : null}
         {verified ? (
           <Alert type="success">
             You are now verified! Click
