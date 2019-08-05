@@ -5,6 +5,6 @@ eslint:
   config_file: .eslintrc
   ignore_file: .eslintignore
 sass-lint:
-  enabled: false  
+  enabled: false
 scss:
   enabled: false

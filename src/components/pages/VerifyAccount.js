@@ -17,45 +17,49 @@ export class VerifyAccount extends Component {
   }
 
   componentDidMount() {
-    const { match: { params } } = this.props;
+    const {
+      match: { params },
+    } = this.props;
     // eslint-disable-next-line react/destructuring-assignment
     this.props.verifyAccount(params.token);
   }
 
   componentDidUpdate(prevProps) {
-    const { auth: { verified } } = this.props;
+    const {
+      auth: { verified },
+    } = this.props;
     if (prevProps.auth.verifed === false && verified === true) {
       this.verified = true;
     }
   }
 
   render() {
-    const { ui: { loading }, auth: { verified, verifailed } } = this.props;
+    const {
+      ui: { loading },
+      auth: { verified, verifailed },
+    } = this.props;
     return (
       <section className="container">
         <h2>Verify your account</h2>
-        {loading ? (<Spinner caption="Verifying your account..." />) : null}
+        {loading ? <Spinner caption="Verifying your account..." /> : null}
         {verified ? (
           <Alert type="success">
-You are now verified! Click
-            {' '}
+            You are now verified! Click
             {/* eslint-disable-nextline  */}
             <Link to="/articles/new">here</Link>
             {' '}
-to publish new article
+            to publish new article
           </Alert>
         ) : null}
         {verifailed ? (
           <Alert type="danger">
-            You made an invalid request, make sure you are using the link provided in
-            your email to verify your account.
+            You made an invalid request, make sure you are using the link
+            provided in your email to verify your account.
             <p>
               {/* eslint-disable-nextline  */}
               <Link to="/auth/signup">Register again</Link>
               {' '}
-if you think you made
-            a mistake in your previous registration.
-
+              if you think you made a mistake in your previous registration.
             </p>
           </Alert>
         ) : null}
@@ -76,4 +80,7 @@ const mapStateToProps = state => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps, { verifyAccount })(VerifyAccount);
+export default connect(
+  mapStateToProps,
+  { verifyAccount },
+)(VerifyAccount);

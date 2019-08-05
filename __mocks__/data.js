@@ -57,4 +57,3 @@ export const article = [
     updatedAt: '2019-08-11T13:52:41.050Z',
   },
 ];
-
