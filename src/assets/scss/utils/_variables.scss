@@ -11,11 +11,16 @@ $email: rgb(199, 88, 14);
 $bookmark: rgb(83, 148, 89);
 $gray: rgb(219, 219, 219);
 $dislike: rgb(226, 186, 8);
+$black:#000000;
+$red:#FF0000;
+
 // Font
 $font-family:"Raleway";
 $text-font-family: "Roboto";
+
+// Social login
 $social-list: (
-    facebook #4b70ab,
+    facebook #4b70ab, 
     twitter #3b94d9,
     googleplus #dd4b39,
     
