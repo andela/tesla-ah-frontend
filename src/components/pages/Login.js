@@ -7,8 +7,8 @@ import PropTypes from 'prop-types';
 import Spinner from '../widgets/Spinner';
 import { login } from '../../redux/actions/users/login.actions';
 import validate from '../../utils/validations';
-import Social from '../SocialLogin';
 import TextInput from '../common/TextInput';
+import Social from './SocialLogin';
 
 export class Login extends Component {
   constructor(props) {

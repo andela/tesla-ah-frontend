@@ -31,6 +31,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         verified: true,
+        loggedIn: true,
       };
     case VERIFICATION_FAILED:
       return {

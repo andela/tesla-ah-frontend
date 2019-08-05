@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SocialLogin } from '../../src/components/SocialLogin';
+import { SocialLogin } from '../../src/components/pages/SocialLogin';
 
 // sinon.stub(window.location, 'replace');
 global.window = Object.create(window);

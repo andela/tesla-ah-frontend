@@ -1,46 +1,70 @@
-import * as actionTypes from '../../../../src/redux/actions/types/auth.type';
-import authReducer, { initialState } from '../../../../src/redux/reducers/users/login.reducer';
+/* eslint-disable no-undef */
+import authReducer from '../../../../src/redux/reducers/auth.reducer';
+import {
 
-test('LOGIN_PENDING', () => {
-  const reducer = authReducer(initialState, {
-    type: actionTypes.LOGIN_PENDING,
-    payload: { isLogging: false },
+  LOGGED_IN, LOGGED_OUT, SIGNUP_SUCCESS, VERIFIED, VERIFICATION_FAILED,
+
+} from '../../../../src/redux/actions/types/auth.type';
+
+const initialState = {
+  loggedIn: false,
+  verified: false,
+  signupSuccess: false,
+  verifailed: false,
+};
+
+describe('SIGNUP reducer tests...', () => {
+  it('Should return initial State', () => {
+    const state = authReducer(initialState, {});
+    expect(state).toEqual(initialState);
+  });
+  it('Set loggedin to TRUE', () => {
+    const expectedState = {
+      ...initialState,
+      loggedIn: true,
+    };
+
+    const state = authReducer(initialState, { type: LOGGED_IN });
+    expect(state).toEqual(expectedState);
+  });
+  it('Set loggedin to FALSE', () => {
+    const expectedState = {
+      ...initialState,
+      loggedIn: false,
+    };
+
+    const state = authReducer(initialState, { type: LOGGED_OUT });
+    expect(state).toEqual(expectedState);
   });
 
-  expect(reducer.isAdmin).toBeFalsy();
-  expect(reducer.isLogging).toBeFalsy();
-  expect(reducer.isAuthenticated).toBeFalsy();
-});
-
-test('LOGIN_SUCCESS', () => {
-  const reducer = authReducer(initialState, {
-    type: actionTypes.LOGIN_SUCCESS,
-    payload: {
-      message: 'welcome Diane',
-      isAuthenticated: true,
-      isAdmin: false,
-      isLogging: true,
-    },
+  it('Set signup success to TRUE', () => {
+    const expectedState = {
+      ...initialState,
+      signupSuccess: true,
+    };
+    const state = authReducer(initialState, { type: SIGNUP_SUCCESS });
+    expect(state).toEqual(expectedState);
   });
 
-  expect(reducer.isAuthenticated).toBeTruthy();
-  expect(reducer.isAdmin).toBeFalsy();
-  expect(reducer.isLogging).toBeTruthy();
-  expect(reducer.message).toEqual('welcome Diane');
-});
-test('LOGIN_ERROR', () => {
-  const reducer = authReducer(initialState, {
-    type: actionTypes.LOGIN_ERROR,
-    payload: {
-      message: 'Bad request!',
-      isAuthenticated: false,
-      isAdmin: false,
-      isLogging: false,
-    },
+  it('Set VERIFIED to TRUE', () => {
+    const expectedState = {
+      ...initialState,
+      loggedIn: true,
+      verified: true,
+    };
+    const state = authReducer(initialState, { type: VERIFIED });
+    expect(state).toEqual(expectedState);
   });
 
-  expect(reducer.isAuthenticated).toBeFalsy();
-  expect(reducer.isAdmin).toBeFalsy();
-  expect(reducer.isLogging).toBeFalsy();
-  expect(reducer.message).toEqual('Bad request!');
+  it('When verification fails', () => {
+    const expectedState = {
+      ...initialState,
+      verifailed: true,
+    };
+    const state = authReducer(initialState, {
+      type: VERIFICATION_FAILED,
+    });
+
+    expect(state).toEqual(expectedState);
+  });
 });

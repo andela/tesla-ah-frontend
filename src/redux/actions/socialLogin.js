@@ -8,6 +8,7 @@ import { SIGNUP_SUCCESS } from './actionTypes.js/signup';
  * @param {string} accessToken
  * @param {string} provider
  */
+
 export const socialLogin = (accessToken, provider) => async (dispatch) => {
   try {
     const result = await socialLoginTesla.post(`${process.env.REACT_APP_BASE_URL}/api/auth/login/${provider}`, {

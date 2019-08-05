@@ -6,7 +6,7 @@
 /* eslint-disable no-script-url */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { socialLogin } from '../redux/actions/socialLogin';
+import { socialLogin } from '../../redux/actions/socialLogin';
 
 /**
  * @param {*} props
