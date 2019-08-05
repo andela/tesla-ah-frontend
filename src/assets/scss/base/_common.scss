@@ -1,0 +1,12 @@
+.button {
+  &.is-grey {
+    @include easeout(.5s);
+    background: $dark;
+    color: $white;
+
+    &:hover {
+      background: $grey;
+      color: $dark;
+    }
+  }
+}

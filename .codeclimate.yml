@@ -1,0 +1,10 @@
+version: '2'
+plugins:
+  eslint:
+    enabled: true
+exclude_patterns:
+  - "__tests__"
+checks:
+  method-lines:
+    config:
+      threshold: 200

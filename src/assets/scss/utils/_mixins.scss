@@ -1,0 +1,11 @@
+@mixin easeout($s) {
+  transition: $s ease-out;
+}
+
+@mixin easein($s) {
+  transition: $s ease-in;
+}
+
+@mixin  ease($s) {
+  transition: $s ease;
+}

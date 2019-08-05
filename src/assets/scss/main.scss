@@ -1,6 +1,17 @@
-@import "./abstracts/variables";
-@import "./layouts/header";
-@import "./layouts/footer";
-@import "./components/home";
-@import "./pages/home";
-@import "./pages/login";
+@import './utils/variables';
+@import './utils/mixins';
+@import './utils/mobile';
+@import './layouts/header';
+@import './layouts/footer';
+@import './pages/home';
+@import './pages/login';
+@import './pages/signup';
+@import './layouts/form';
+@import './base//common';
+@import './layouts/spinner';
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  margin: 0;
+  padding: 0;
+}
