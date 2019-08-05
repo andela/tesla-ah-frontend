@@ -2,7 +2,10 @@
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-import { createAccount, verifyAccount } from '../../../src/redux/actions/auth.actions';
+import {
+  createAccount,
+  verifyAccount,
+} from '../../../src/redux/actions/auth.actions';
 
 const userData = {
   firstName: 'Elie',
@@ -18,7 +21,6 @@ const userData = {
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
-
 
 const store = mockStore({});
 describe('Should make it happen', () => {

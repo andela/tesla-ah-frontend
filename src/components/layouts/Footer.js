@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => (
   <div>
-    <footer>
+    <footer className="position-static fixed-bottom">
       <div className="container ">
         <h4 className="text-center mt-5">Authors Haven</h4>
         <hr />

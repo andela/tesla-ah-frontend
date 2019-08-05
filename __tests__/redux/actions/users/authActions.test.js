@@ -40,7 +40,7 @@ describe('Login should work', () => {
       });
     });
     return store.dispatch(login(loginData)).then(() => {
-      expect(store.getActions().length).toEqual(2);
+      expect(store.getActions().length).toEqual(3);
     });
   });
   test('login testing data', () => {

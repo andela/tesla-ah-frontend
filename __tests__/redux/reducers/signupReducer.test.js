@@ -1,11 +1,9 @@
 /* eslint-disable no-undef */
 import authReducer from '../../../src/redux/reducers/auth.reducer';
 import {
-  LOGGED_IN,
-  LOGGED_OUT,
-  SIGNUP_SUCCESS,
-  VERIFIED,
-  VERIFICATION_FAILED,
+
+  LOGGED_IN, LOGGED_OUT, SIGNUP_SUCCESS, VERIFIED, VERIFICATION_FAILED,
+
 } from '../../../src/redux/actions/types/auth.type';
 
 const initialState = {

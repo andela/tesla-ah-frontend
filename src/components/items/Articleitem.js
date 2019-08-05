@@ -8,11 +8,12 @@ import Image from './Imageitem';
 
 class Articleitem extends Component {
   render() {
-    const { article } = this.props;
+    const { article, show } = this.props;
     const { image, body } = article;
     const {
       slug, readtime, createdAt, title,
     } = article.article;
+    const rb = show ? <button type="submit" className="btn btn-primary remove-btn">Remove</button> : <div />;
     return (
       <div className="itemcontainer">
         <div className="content-item row mt-3 mb-3 ml-4" key={slug}>
@@ -44,7 +45,7 @@ class Articleitem extends Component {
                   </Moment>
                 </p>
               </div>
-              <div className="col-lg-6">
+              <div className="col-lg-8">
                 <p
                   htmlFor="story_readtime"
                   className="h6 text-secondary font-weight-normal"
@@ -52,6 +53,15 @@ class Articleitem extends Component {
                   {readtime}
                 </p>
               </div>
+              <div className="col-lg-2">
+                <p
+                  htmlFor="story_readtime"
+                  className="h6 text-secondary font-weight-normal"
+                >
+                  {rb}
+                </p>
+              </div>
+
               <div className="col-lg-8" />
             </div>
           </div>

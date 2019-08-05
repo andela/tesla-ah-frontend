@@ -5,8 +5,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-script-url */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { socialLogin } from '../../redux/actions/socialLogin';
 
 /**
  * @param {*} props
@@ -38,7 +36,7 @@ export class SocialLogin extends Component {
           href="javascript:void(0)"
           onClick={this.callFacebookLogin}
         >
-          <i className="icon fa fa-facebook" />
+          <i className="icon fab fa fa-facebook" />
           Facebook
         </a>
         <a
@@ -62,14 +60,4 @@ export class SocialLogin extends Component {
   }
 }
 
-/**
- * @param {*} dispatch
- * @returns {object} props
- */
-const mapDispatchToProps = dispatch => ({
-  onSocialLogin: (accessToken, provider) => dispatch(socialLogin(accessToken, provider)),
-});
-export default connect(
-  null,
-  mapDispatchToProps,
-)(SocialLogin);
+export default SocialLogin;

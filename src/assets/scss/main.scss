@@ -25,5 +25,11 @@
 @import './components/viewarticle';
 @import './components/react-rater';
 @import './components/pagination';
+@import './components/bookmark';
 
-  
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+

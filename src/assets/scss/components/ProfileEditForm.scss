@@ -1,0 +1,11 @@
+@import '../abstracts/variables';
+
+.modal-header,
+.modal-footer {
+  background-color: $dark;
+  color: white;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}

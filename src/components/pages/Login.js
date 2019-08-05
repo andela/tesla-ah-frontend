@@ -1,12 +1,12 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import Spinner from '../widgets/Spinner';
 import { login } from '../../redux/actions/users/login.actions';
-import validate from '../../utils/validations';
 import TextInput from '../common/TextInput';
 import Social from './SocialLogin';
 
@@ -28,21 +28,15 @@ export class Login extends Component {
   };
 
   redirectOnSuccess = () => {
-    const { isAuthenticated } = this.props;
-    return isAuthenticated ? this.props.history.push('/') : null;
+    const { isAuthenticated, location } = this.props;
+    const { redirect } = queryString.parse(location.search);
+    return isAuthenticated ? this.props.history.push(redirect || '/') : null;
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const formErrors = validate(this.state, 'login');
-    if (Object.values(formErrors).length) {
-      Object.values(formErrors).forEach((err) => {
-        toast.error(err);
-      });
-    } else {
-      const { email, password } = this.state;
-      this.props.login(email, password);
-    }
+    const { email, password } = this.state;
+    this.props.login(email, password);
   };
 
   render() {

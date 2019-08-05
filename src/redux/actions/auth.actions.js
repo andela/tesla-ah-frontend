@@ -2,16 +2,24 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import { setLoading, setLoaded } from './ui.actions';
 import { BACKEND_URL } from '../../utils/constants';
-import { VERIFIED, SIGNUP_SUCCESS, VERIFICATION_FAILED } from './types/auth.type';
+import {
+  VERIFIED,
+  SIGNUP_SUCCESS,
+  VERIFICATION_FAILED,
+} from './types/auth.type';
 
 export const createAccount = userInfo => async (dispatch) => {
   dispatch(setLoading());
   try {
     // eslint-disable-next-line no-unused-vars
-    const { data } = await axios.post(`${BACKEND_URL}/api/auth/signup`, userInfo);
+    const { data } = await axios.post(
+      `${BACKEND_URL}/api/auth/signup`,
+      userInfo,
+    );
     dispatch(setLoaded());
     // eslint-disable-next-line no-undef
-    localStorage.setItem('ACCESS_TOKEN', data.data.token);
+    sessionStorage.setItem('token', data.data.token);
+    localStorage.user = JSON.stringify(data.data);
     toast.success('You are now registered to AH, check your email to verify your account');
     dispatch({
       type: SIGNUP_SUCCESS,
@@ -22,7 +30,6 @@ export const createAccount = userInfo => async (dispatch) => {
     toast.error(message);
   }
 };
-
 
 export const verifyAccount = token => async (dispatch) => {
   dispatch(setLoading());

@@ -1,0 +1,29 @@
+.follow-card {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.follow-card .follow-card-content {
+  margin-left: 10px;
+}
+
+.follow-card .follow-card-info {
+  margin-bottom: 10px;
+}
+
+.follow-card .btn-custom {
+  width: 150px;
+  border-radius: 30px !important;
+}
+
+.follow-card .btn-custom.following {
+  color: #C4C4C4;
+  background: #fff;
+  border: 1px solid #C4C4C4;
+}
+
+.follow-card .d-avatar {
+  height: 80px;
+  width: 80px;
+}

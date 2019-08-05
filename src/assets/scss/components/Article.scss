@@ -1,0 +1,39 @@
+@import '../abstracts/variables';
+
+.article-card {
+  padding: 15px 10px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  box-shadow: 0 10px 6px -6px #777;
+}
+
+.article-card .d-avatar,
+.follow-card .d-avatar {
+  height: 50px;
+  width: 50px;
+}
+
+.article-card-img {
+  border-radius: 5px;
+  height: 300px;
+}
+
+.article-title {
+  color: #000;
+  font-size: 2em;
+}
+
+.article-description,
+.article-actions {
+  color: #000;
+  font-size: 1.3em;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.article-title:hover {
+  text-decoration: underline;
+}

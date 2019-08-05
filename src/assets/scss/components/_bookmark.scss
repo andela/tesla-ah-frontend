@@ -1,0 +1,15 @@
+.bookmark_container {
+  .bookmark-item-cont {
+    .remove-btn {
+      background-color: transparent;
+      color: $email;
+      border-color: $email;
+    }
+    .bookmark-link {
+      &:hover {
+        text-decoration: none;
+        font-size: 16.2px;
+      }
+    }
+  }
+}

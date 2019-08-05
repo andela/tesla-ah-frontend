@@ -4,10 +4,17 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from '../../assets/img/logo_st.png';
+import { setLoggedIn } from '../../redux/actions/ui.actions';
 
 export class Header extends Component {
   static propTypes = {
+    setLoggedIn: PropTypes.func.isRequired,
     auth: PropTypes.instanceOf(Object).isRequired,
+  }
+
+  componentWillMount() {
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.setLoggedIn();
   }
 
   render() {
@@ -24,7 +31,9 @@ export class Header extends Component {
             }}
           />
           {/* eslint-disable-nextline  */}
-          <Link to="/" className="navbar-brand blue">Authors Haven</Link>
+          <Link to="/" className="navbar-brand blue">
+            Authors Haven
+          </Link>
           <button
             className="navbar-toggler menu_button"
             type="button"
@@ -45,8 +54,7 @@ export class Header extends Component {
                 <li className="nav-item active">
                   {/* eslint-disable-nextline  */}
                   <Link className="nav-link is-active" to="/">
-                  Home
-                    {' '}
+                    Home
                     <span className="sr-only">(current)</span>
                   </Link>
                 </li>
@@ -61,32 +69,52 @@ export class Header extends Component {
                     aria-haspopup="true"
                     aria-expanded="false"
                   >
-                  Categories
+                    Categories
                   </Link>
-                  <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <div
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
                     {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">Technology</Link>
+                    <Link className="dropdown-item" to="/">
+                      Technology
+                    </Link>
                     {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">Sport</Link>
+                    <Link className="dropdown-item" to="/">
+                      Sport
+                    </Link>
                     {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">Design</Link>
+                    <Link className="dropdown-item" to="/">
+                      Design
+                    </Link>
                     {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">Politics</Link>
+                    <Link className="dropdown-item" to="/">
+                      Politics
+                    </Link>
                   </div>
                 </li>
                 <li className="nav-item">
                   {/* eslint-disable-nextline  */}
-                  <Link className="nav-link nav-shrink" to="/">About Us</Link>
+                  <Link className="nav-link nav-shrink" to="/">
+                    About Us
+                  </Link>
                 </li>
                 <li className="nav-item">
                   {/* eslint-disable-nextline  */}
-                  <Link className="nav-link nav-shrink" to="/" tabIndex="-1">Contacts</Link>
+                  <Link className="nav-link nav-shrink" to="/" tabIndex="-1">
+                    Contacts
+                  </Link>
                 </li>
               </ul>
             ) : (
               <ul className="navbar-nav mr-auto nav-left">
                 <li className="nav-item nav-right">
-                  <input className="search-field form-control" type="text" placeholder="Search" aria-label="Search" />
+                  <input
+                    className="search-field form-control"
+                    type="text"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
                 </li>
               </ul>
             )}
@@ -94,22 +122,40 @@ export class Header extends Component {
               <ul className="nav-right navbar-nav">
                 <li id="nav-item noti-container">
                   <div id="noti-counter">5</div>
-                  <i id="noti-button" className="nav-link is-active nav-shrink fa fa-bell" />
+                  <i
+                    id="noti-button"
+                    className="nav-link is-active nav-shrink fa fa-bell"
+                  />
                 </li>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <li id="nav-item noti-container message">
                   <div id="noti-counter">2</div>
-                  <i id="noti-button" className="nav-link is-active nav-shrink fa fa-envelope" />
+                  <i
+                    id="noti-button"
+                    className="nav-link is-active nav-shrink fa fa-envelope"
+                  />
                 </li>
-&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;
                 <li id="nav-item noti-container message">
-                  <img className="menu-profile-image" src="https://scontent.fkgl1-1.fna.fbcdn.net/v/t1.0-9/16196015_10154888128487744_6901111466535510271_n.png?_nc_cat=103&_nc_oc=AQm1z5jCqvLA7cItJnm3RXa2_ApxETs_BsK1Y5lNksTqg0YsrGmwP91yr73V3BLnYOw&_nc_ht=scontent.fkgl1-1.fna&oh=e18554da0038703db68054626fa73da9&oe=5DE21BE9" alt="AH" />
+                  <img
+                    className="menu-profile-image"
+                    src="https://scontent.fkgl1-1.fna.fbcdn.net/v/t1.0-9/16196015_10154888128487744_6901111466535510271_n.png?_nc_cat=103&_nc_oc=AQm1z5jCqvLA7cItJnm3RXa2_ApxETs_BsK1Y5lNksTqg0YsrGmwP91yr73V3BLnYOw&_nc_ht=scontent.fkgl1-1.fna&oh=e18554da0038703db68054626fa73da9&oe=5DE21BE9"
+                    alt="AH"
+                  />
                 </li>
               </ul>
             ) : (
               <ul className="nav-right navbar-nav">
-                <li className="nav-item"><Link to="/auth/login" className="nav-link is-active">Login</Link></li>
-                <li className="nav-item"><Link to="/auth/signup" className="nav-link is-active">Sign Up</Link></li>
+                <li className="nav-item">
+                  <Link to="/auth/login" className="nav-link is-active">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/auth/signup" className="nav-link is-active">
+                    Sign Up
+                  </Link>
+                </li>
               </ul>
             )}
           </div>
@@ -123,4 +169,4 @@ const mapStateToProps = state => ({
   auth: state.auth,
 });
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, { setLoggedIn })(Header);

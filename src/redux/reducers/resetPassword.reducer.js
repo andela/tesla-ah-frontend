@@ -12,7 +12,6 @@ const resetPasswordReducer = (state = initialState, action) => {
         ...state,
         message: action.payload.data.message,
         status: action.payload.status,
-
       };
     default:
       return state;

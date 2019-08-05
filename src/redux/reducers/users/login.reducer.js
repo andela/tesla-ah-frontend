@@ -21,14 +21,13 @@ const Login = (state = initialState, { type, payload }) => {
     case authTypes.LOGIN_ERROR:
       return {
         ...state,
-        ...payload,
+        error: payload,
       };
     case authTypes.LOGIN_SUCCESS:
       localStorage.user = JSON.stringify(payload.user);
       return {
         ...state,
         ...payload,
-        loggedIn: true,
         isAuthenticated: true,
       };
     default:

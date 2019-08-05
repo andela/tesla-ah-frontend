@@ -1,0 +1,22 @@
+@import '../abstracts/variables';
+
+.input {
+  border: 1px solid $blue;
+}
+
+.input.error {
+  border: 2px solid rgba(255, 0, 0, 0.733);
+}
+
+.input.pass {
+  border: 1px solid rgba(0, 128, 0, 0.87);
+}
+
+small.error {
+  color: rgba(255, 0, 0, 0.733) !important;
+  font-weight: bold;
+}
+
+small.pass {
+  color: rgba(0, 128, 0, 0.87) !important;
+}

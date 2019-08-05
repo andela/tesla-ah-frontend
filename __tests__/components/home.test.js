@@ -24,6 +24,7 @@ describe('Home Components tests...', () => {
   });
 
   it('Should render Home component', () => {
+    home.instance().changeCurrentPage(1);
     expect(home).toMatchSnapshot();
   });
   it('Should find one Slider', () => {
