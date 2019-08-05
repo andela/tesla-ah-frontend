@@ -1,0 +1,5 @@
+export const LOGGED_IN = 'LOGGED_IN';
+export const LOGGED_OUT = 'LOGGED_OUT';
+export const VERIFIED = 'VERIFIED';
+export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
+export const VERIFICATION_FAILED = 'VERIFICATION_FAILED';

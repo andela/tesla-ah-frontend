@@ -1,0 +1,108 @@
+
+header {
+  background: $dark;
+  width: 100%;
+    &.shrink {
+      @include easeout(.5s);
+      background: $white;
+      box-shadow: 0 0 8px $blue;
+      .nav-shrink {
+        color: $dark;
+      }
+
+      #noti-button {
+        color: $dark;
+      }
+
+      .menu-profile-image {
+        border: 2px solid $dark;
+      }
+
+    }
+
+  nav {
+    .logo {
+      height: 50px;
+      width: 50px;
+    }
+
+    .navbar-collapse {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .nav-link {
+      color: $white;
+      &.is-active {
+        color: $blue;
+      }
+    }
+    
+    a {
+      color: $white;
+      &.is-active {
+        color: $blue;
+      }
+    }
+
+    .navbar-toggler-icon {
+     i.fa {
+       color: $white;
+       font-size: 27px;
+     }
+
+    }
+
+    .menu_button {
+      color: $white;
+    }
+
+    .menuIcons {
+      color: $white;
+      font-size: 25px;
+    }
+
+    #noti-container {
+      position: relative;
+  }
+
+  #noti-button {
+    color: $white;
+    cursor: pointer;
+    font-size: 28px;
+  }
+
+  #noti-counter {
+    align-items: center;
+    background: $blue;
+    border-radius: 50%;
+    color: $white;
+    display: flex;
+    font-size: 12px;
+    font-weight: normal;
+    height: 20px;
+    justify-content: center;
+    margin: -6px 0 0 17px;
+    padding: 1px 3px;
+    position: absolute;
+    width: 20px;
+  }
+
+  .menu-profile-image {
+    border: 2px solid $white;
+    border-radius: 50%;
+    height: 40px;
+    margin-left: 10px;
+    width: 40px;
+  }
+
+  .search-field {
+    background: rgba($white, .0);
+    border: 1px solid $blue;
+    border-radius: 30px;
+  }
+  }
+}
+.shrink-menu-button {
+  color: $dark;
+}
