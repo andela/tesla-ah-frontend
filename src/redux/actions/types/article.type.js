@@ -1,3 +1,5 @@
 export const GET_ARTICLES = 'GET_ARTICLES';
 export const CREATE_ARTICLE = 'CREATE_ARTICLE';
 export const GET_ARTICLE = 'GET_ARTICLE';
+export const DELETE_ARTICLE = 'DELETE_ARTICLE';
+export const ARTICLE_ERRORS = 'ARTICLE_ERRORS';

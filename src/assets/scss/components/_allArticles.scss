@@ -1,0 +1,33 @@
+.bookmarks_button{
+  margin-left: -100px;
+  margin-right: 65px;
+  button{
+    background-color: #fff;
+    color: #817f7f;
+    outline: none;
+  }
+  
+  button:hover{
+    background-color:#eae9e9;
+  }
+}
+.icon-hover:hover{
+  cursor: pointer;
+}
+
+.story-title{
+position: absolute;
+width: 907px;
+height: 122px;
+
+font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 35px;
+line-height: 40px;
+/* or 114% */
+
+letter-spacing: 0.02em;
+
+color: #000000;
+}

@@ -3,10 +3,9 @@ import {
 } from '../actions/types/auth.type';
 
 const initialState = {
-  loggedIn: false,
+  loggedIn: true,
   verified: false,
   signupSuccess: false,
-  verifailed: false,
 };
 
 export default (state = initialState, action) => {

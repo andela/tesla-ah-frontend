@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Fetch All Articles tests... it should render the AllArticles Component 1`] = `ShallowWrapper {}`;

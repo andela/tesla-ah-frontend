@@ -1,32 +1,40 @@
-import { GET_ARTICLES, GET_ARTICLE } from './types/article.type';
-// Dummy data which will be removed after
-const articles = [
-  {
-    id: 1,
-    slug: 'there-was-react',
-    title: 'Then there was react',
-    description: 'React.js levelup project',
-    body: 'We are doing cool stuffs in Tesla, React project',
-  },
-  {
-    id: 2,
-    slug: 'there-was-redux',
-    title: 'Then there was redux',
-    description: 'Redux levelup project',
-    body: 'We are doing cool stuffs in Tesla, React project',
-  },
-];
+/* eslint-disable consistent-return */
+import Axios from 'axios';
+import {
+  GET_ARTICLES,
+  GET_ARTICLE,
+  ARTICLE_ERRORS,
+} from './types/article.type';
+import { BACKEND_URL } from '../../utils/constants';
 
 export const getArticles = () => (dispatch) => {
-  dispatch({
-    type: GET_ARTICLES,
-    payload: articles,
-  });
+  Axios.get(`${BACKEND_URL}/api/articles`)
+    .then((res) => {
+      dispatch({
+        type: GET_ARTICLES,
+        payload: res.data,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: ARTICLE_ERRORS,
+        payload: err,
+      });
+    });
 };
 
-export const getOneArticle = () => (dispatch) => {
-  dispatch({
-    type: GET_ARTICLE,
-    payload: articles[0],
-  });
+export const getOneArticle = slug => (dispatch) => {
+  Axios.get(`${BACKEND_URL}/api/articles/${slug}`)
+    .then((res) => {
+      dispatch({
+        type: GET_ARTICLE,
+        payload: res.data.article,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: ARTICLE_ERRORS,
+        payload: err,
+      });
+    });
 };

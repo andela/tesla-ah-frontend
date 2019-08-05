@@ -42,13 +42,15 @@
     "webpack-dev-server": "^3.7.2"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.10.1",
+    "Dante2": "^0.5.0-rc4",
     "axios": "^0.19.0",
     "joi-browser": "^13.4.0",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-js-pagination": "^3.0.2",
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-test-renderer": "^16.8.6",
@@ -74,5 +76,6 @@
     "transformIgnorePatterns": [
       "./src/assets/scss/*"
     ]
-  }
+  },
+  "proxy": "http://localhost:3000"
 }
