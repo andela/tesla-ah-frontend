@@ -34,7 +34,7 @@ export class SocialLogin extends Component {
     return (
       <React.Fragment>
         <a
-          className="button button--social-login button--facebook"
+          className="button-social button--social-login button--facebook"
           href="javascript:void(0)"
           onClick={this.callFacebookLogin}
         >
@@ -42,7 +42,7 @@ export class SocialLogin extends Component {
           Facebook
         </a>
         <a
-          className="button button--social-login button--twitter"
+          className="button-social button--social-login button--twitter"
           href="javascript:void(0)"
           onClick={this.callTwitterLogin}
         >
@@ -50,7 +50,7 @@ export class SocialLogin extends Component {
                 Twitter
         </a>
         <a
-          className="button button--social-login button--googleplus"
+          className="button-social button--social-login button--googleplus"
           href="javascript:void(0)"
           onClick={this.callGoogleLogin}
         >

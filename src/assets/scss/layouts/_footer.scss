@@ -1,0 +1,21 @@
+footer {
+  background: $dark;
+  color: $white;
+  padding: 15px;
+  hr {
+    background: $blue;
+  }
+  .social-links {
+    margin-right: 20%;
+    display: flex;
+    justify-content: space-around;
+
+    .social-links__item {
+      margin-right: 10px;
+      i.fab {
+        font-size: 3vh;
+        color: $blue;
+      }
+    }
+  }
+}

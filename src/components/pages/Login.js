@@ -25,7 +25,7 @@ export class Login extends Component {
 
   onChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
-  }
+  };
 
   redirectOnSuccess = () => {
     const { isAuthenticated } = this.props;
@@ -45,7 +45,6 @@ export class Login extends Component {
     }
   };
 
-
   render() {
     const { email, password } = this.state;
     const {
@@ -53,7 +52,7 @@ export class Login extends Component {
     } = this.props;
     return (
       <section className="main-section">
-        <div className="row">
+        <div className="row row-login">
           <div className="col-md-8" id="col-login">
             <h4>Login to Authors Haven</h4>
             <br />
@@ -89,7 +88,9 @@ export class Login extends Component {
                 <br />
                 <br />
 
-                <button type="submit" className="btn button is-grey-login">Login</button>
+                <button type="submit" className="btn button is-grey-login">
+                  Login
+                </button>
                 {loading ? <Spinner caption="Login..." /> : null}
               </div>
             </form>

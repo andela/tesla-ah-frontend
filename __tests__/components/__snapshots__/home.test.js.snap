@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home Components tests... Should render Home component 1`] = `ShallowWrapper {}`;
+
+exports[`Imageitem component test Should render Imageitem component 1`] = `ShallowWrapper {}`;
+
+exports[`Imageitem component test Should render Imageitem component 2`] = `ShallowWrapper {}`;
+
+exports[`Item Component tests ... Should render Articleitem component 1`] = `ShallowWrapper {}`;
+
+exports[`Item Component tests ... Should render Articleitem component 2`] = `ShallowWrapper {}`;
+
+exports[`Maincontent component test Should render Slider component 1`] = `ShallowWrapper {}`;
+
+exports[`Preloader component test Should render Slider component 1`] = `ShallowWrapper {}`;
+
+exports[`Slider component test Should render Slider component 1`] = `ShallowWrapper {}`;
+
+exports[`Slider component test Should render Slider component 2`] = `ShallowWrapper {}`;
+
+exports[`Slider component test Should render Slider component 3`] = `ShallowWrapper {}`;
+
+exports[`Sliderite component test Should render Slider item component 1`] = `ShallowWrapper {}`;
+
+exports[`Sliderite component test Should render Slider item component 2`] = `ShallowWrapper {}`;
