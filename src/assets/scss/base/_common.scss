@@ -8,5 +8,18 @@
       background: $grey;
       color: $dark;
     }
+   
+  }
+  &.is-grey-login {
+    @include easeout(.5s);
+    background: $dark;
+    color: $white;
+    width: 100%;
+
+    &:hover {
+      background: $title_color;
+      color: $white;
+    }
+   
   }
 }
