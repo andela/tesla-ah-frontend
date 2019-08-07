@@ -1,0 +1,102 @@
+.view-article-content {
+  .editor-main {
+    justify-content: center;
+  }
+  .title-content {
+    border: 0px solid gray;
+    & p {
+      font-size: 35px;
+      color: $dark;
+    }
+  }
+  .profile-content {
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+  }
+  .left-nav {
+    border: 0px solid gray;
+  }
+  .tagitem {
+    background: $gray;
+    padding: 0 10px 0 10px;
+    border: 0;
+    border-radius: 10px;
+  }
+  .rigth-nav {
+    border: 0px solid gray;
+    text-align: center;
+    padding-left: 20px;
+    .social-buttons {
+      float: right;
+      position: fixed;
+    }
+    .flauting-buttons {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: $blue;
+      & i {
+        color: white;
+        font-size: 25px;
+      }
+    }
+    .facebook {
+      background: $facebook;
+    }
+    .twitter {
+      background: $twitter;
+    }
+    .email {
+      background: $email;
+    }
+    .bookmark {
+      background: $bookmark;
+    }
+    .dislike {
+      background: $dislike;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .view-article-content {
+    .rigth-nav {
+      border: 0px solid gray;
+      .social-buttons {
+        float: left;
+        position: relative;
+        display: flex;
+        .flauting-buttons {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .view-article-content {
+    .rigth-nav {
+      border: 0px solid gray;
+      .social-buttons {
+        float: left;
+        position: relative;
+        display: flex;
+        .flauting-buttons {
+          width: 50px;
+          height: 50px;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}

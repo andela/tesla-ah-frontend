@@ -1,0 +1,193 @@
+.pagination-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+  .pagination {
+    padding: 10px 0;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+    }
+    a {
+      cursor: pointer;
+      display: inline-block;
+      padding: 8px 15px;
+      color: $blue;
+      border-radius: 50%;
+    }
+  }
+
+  .p1 a {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0;
+    text-align: center;
+    &.is-active {
+      background-color: $blue;
+      border-radius: 100%;
+      color: #fff;
+    }
+  }
+
+  .bottom-border .is-active li {
+    font-weight: 700;
+    border-bottom: 3px solid $blue;
+  }
+
+  .p3 .is-active {
+    background-color: $blue;
+    color: #fff;
+  }
+
+  .p4 {
+    a {
+      width: 30px;
+      height: 30px;
+      line-height: 40px;
+      border-radius: 50%;
+      padding: 0;
+      text-align: center;
+      position: relative;
+      border: 1px solid $blue;
+    }
+    .is-active:before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background-color: $blue;
+      position: absolute;
+      top: 5px;
+      left: 5px;
+    }
+  }
+
+  .p5 {
+    a {
+      width: 20px;
+      height: 5px;
+      padding: 0;
+      margin: auto 5px;
+      background-color: rgba(46, 204, 113, 0.4);
+    }
+    .is-active {
+      background-color: $blue;
+    }
+  }
+
+  .p6 {
+    a {
+      width: 20px;
+      height: 20px;
+      border-radius: 100%;
+      padding: 0;
+      margin: auto 5px;
+      text-align: center;
+      position: relative;
+      background-color: rgba(46, 204, 113, 0.4);
+    }
+    .is-active {
+      background-color: $blue;
+    }
+  }
+
+  .square-i a {
+    border: 1px solid $blue;
+    margin: auto 5px;
+    color: $blue;
+    font-weight: 700;
+  }
+
+  .p8 a,
+  .square-i .is-active {
+    background-color: $blue;
+    color: #fff;
+  }
+
+  .p8 {
+    a {
+      margin: auto 5px;
+      font-weight: 700;
+      border: 1px solid $blue;
+    }
+    .is-active {
+      background-color: #fff;
+      color: $blue;
+    }
+  }
+
+  .circle a {
+    width: 20px;
+    height: 20px;
+    line-height: 30px;
+    padding: 0;
+    text-align: center;
+    margin: auto 5px;
+    &.is-active {
+      border: 1px solid $blue;
+      border-radius: 100%;
+    }
+  }
+
+  .square a {
+    width: 20px;
+    height: 30px;
+    line-height: 30px;
+    padding: 0;
+    text-align: center;
+    margin: auto 5px;
+  }
+
+  .p11 a,
+  .square a.is-active {
+    border: 1px solid $blue;
+  }
+
+  .p11 {
+    a {
+      background-color: $blue;
+      margin: auto 5px;
+      color: #fff;
+      position: relative;
+      &:first-of-type:before {
+        left: -25px;
+        border-right: 22px solid ;
+        content: "";
+        position: absolute;
+        top: -3px;
+        border-top: 22px solid transparent;
+        border-bottom: 22px solid transparent;
+      }
+      &:last-of-type:after {
+        content: "";
+        position: absolute;
+        top: -3px;
+        border-top: 22px solid transparent;
+        border-bottom: 22px solid transparent;
+        right: -25px;
+        border-left: 22px solid $blue;
+      }
+    }
+    .is-active {
+      font-weight: 700;
+    }
+  }
+
+  .square-fill {
+    .is-active {
+      background-color: $blue;
+      color: #fff;
+      font-weight: 700;
+    }
+    a {
+      &:first-of-type,
+      &:last-of-type {
+        background-color: $blue;
+        color: #fff;
+        font-weight: 700;
+      }
+    }
+  }
+}

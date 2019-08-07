@@ -1,0 +1,22 @@
+.itemcontainer {
+  border: 0px solid gray;
+  .content-item {
+    border: 0px solid black;
+    .article-body {
+      display: block; /* or inline-block */
+      text-overflow: ellipsis;
+      word-wrap: break-word;
+      overflow: hidden;
+      max-height: 3.6em;
+      line-height: 1.8em;
+    }
+    .image {
+      img {
+        border-radius: 5px;
+        width: 200px;
+        height: 150px;
+        object-fit: cover
+      }
+    }
+  }
+}

@@ -1,106 +1,100 @@
 .main-section {
-    margin: auto 16.5%;
+  margin: auto 16.5%;
 
-    .row {
-        min-height: 400px;
-        margin: 0 auto;
-        width: 80%;
-        margin-top: 200px;
-        border-radius: 7px;
-        padding:70px 3% ;
-        box-shadow: 2px 2px 10px 2px #C9C9C9;
-    
-        #col-login {
-            width: 100%;
-            margin: 0 auto;
+  .row-login {
+    min-height: 400px;
+    margin: 0 auto;
+    width: 70%;
+    margin-top: 100px;
+    border-radius: 7px;
+    padding: 70px 10px 70px 10px;
+    box-shadow: 2px 2px 10px 2px #c9c9c9;
 
-            h4{
-                color: $title_color;
-                font-weight: 500;
-                text-shadow:  0px 4px 4px rgba(0, 174, 255, 0.25);
-                letter-spacing: 0.02em;
-                text-align: center;
-            }
-            $base-spacing-unit: 22.5px;
-            $half-spacing-unit: 5px;
-            $border-radius-global: 15px;
-            $button-width: 143.5px;
-            $button-height: 40px;
-            $button-text-color: white;
+    #col-login {
+      width: 100%;
+      margin: 0 auto;
 
-            %button,
-            .social {
-            width: $button-width;
-            display: inline-block;
-                padding: 0 ($base-spacing-unit - ($half-spacing-unit / 2)) 0 ($half-spacing-unit / 2);
-                border: 0 none;
-                border-radius: $border-radius-global;
-                text-decoration: none;
-                transition: all 250ms linear;
+      h4 {
+        color: $title_color;
+        font-weight: 500;
+        text-shadow: 0px 4px 4px rgba(0, 174, 255, 0.25);
+        letter-spacing: 0.02em;
+        text-align: center;
+      }
+      $base-spacing-unit: 22.5px;
+      $half-spacing-unit: 5px;
+      $border-radius-global: 15px;
+      $button-width: 143.5px;
+      $button-height: 40px;
+      $button-text-color: white;
 
-                &:hover {
-                    text-decoration: none;
-                    
-                }
+      %button,
+      .social {
+        width: $button-width;
+        display: inline-block;
+        padding: 0 ($base-spacing-unit - ($half-spacing-unit / 2)) 0
+          ($half-spacing-unit / 2);
+        border: 0 none;
+        border-radius: $border-radius-global;
+        text-decoration: none;
+        transition: all 250ms linear;
 
-            }
-
-            .button--social-login {
-                margin-bottom: $half-spacing-unit;
-                margin-right: $half-spacing-unit;
-                color: $button-text-color;
-                height: $button-height;
-                line-height: $button-height - 4;
-                position: relative;
-                text-align: left;
-
-                .icon {
-                    margin-right: $half-spacing-unit;
-                    font-size: $base-spacing-unit;
-                    line-height: $base-spacing-unit;
-                    width: ($base-spacing-unit * 2) - ($half-spacing-unit / 2);
-                    height: $base-spacing-unit;
-                    text-align: center;
-                    display: inline-block;
-                    position: relative;
-                    top: 4px;
-
-                    &:before {
-                        display: inline-block;
-                        width: ($base-spacing-unit * 2) - ($half-spacing-unit / 2) - 2;
-                    }
-
-                    &:after {
-                        content:"";
-                    }
-
-                }
-
-            }
-
-            @each $name, $color in $social-list {
-
-                .button--#{$name} {
-                    background-color: $color;
-                    border: 1px solid darken($color, 10%);
-                    
-                    .icon {
-                        border-right: 1px solid darken($color, 10%);
-
-                        &:after {
-                            border-right: 1px solid lighten($color, 10%);
-                        }
-                    }
-
-                    &:hover {
-                        background-color: darken($color, 5%);
-                        color: $button-text-color;
-                        font-weight: bold;
-                    }
-
-                }
-
-            }
+        &:hover {
+          text-decoration: none;
         }
+      }
+
+      .button--social-login {
+        margin-bottom: $half-spacing-unit;
+        margin-right: $half-spacing-unit;
+        color: $button-text-color;
+        height: $button-height;
+        line-height: $button-height - 4;
+        position: relative;
+        text-align: left;
+
+        .icon {
+          margin-right: $half-spacing-unit;
+          font-size: $base-spacing-unit;
+          line-height: $base-spacing-unit;
+          width: ($base-spacing-unit * 2) - ($half-spacing-unit / 2);
+          height: $base-spacing-unit;
+          text-align: center;
+          display: inline-block;
+          position: relative;
+          top: 4px;
+
+          &:before {
+            display: inline-block;
+            width: ($base-spacing-unit * 2) - ($half-spacing-unit / 2) - 2;
+          }
+
+          &:after {
+            content: "";
+          }
+        }
+      }
+
+      @each $name, $color in $social-list {
+        .button--#{$name} {
+          background-color: $color;
+          border: 1px solid darken($color, 10%);
+
+          .icon {
+            border-right: 1px solid darken($color, 10%);
+
+            &:after {
+              border-right: 1px solid lighten($color, 10%);
+            }
+          }
+
+          &:hover {
+            background-color: darken($color, 5%);
+            color: $button-text-color;
+            font-weight: bold;
+          }
+        }
+      }
     }
+  }
 }
