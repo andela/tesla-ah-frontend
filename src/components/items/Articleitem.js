@@ -18,10 +18,7 @@ class Articleitem extends Component {
         <div className="content-item row mt-3 mb-3 ml-4" key={slug}>
           <div className={`${image !== null ? 'col-lg-8' : 'col-lg-11'}`}>
             <div className="row">
-              <p
-                htmlFor="story_title"
-                className="h6 text-dark font-weight-bold"
-              >
+              <p htmlFor="story_title" className="h6 text-dark font-weight-bold">
                 {title}
               </p>
             </div>
@@ -34,24 +31,17 @@ class Articleitem extends Component {
               </p>
             </div>
             <div className="row">
-              <div className="col-lg-0">
-                <p
-                  htmlFor="story_date"
-                  className="h6 text-secondary font-weight-normal"
-                >
-                  <Moment format="D MMM YYYY">
-                    {createdAt}
-                  </Moment>
+              <div className="created-date">
+                <p htmlFor="story_date" className="h6 text-secondary font-weight-normal">
+                  <Moment format="D MMM YYYY">{createdAt}</Moment>
                 </p>
               </div>
-              <div className="col-lg-6">
-                <p
-                  htmlFor="story_readtime"
-                  className="h6 text-secondary font-weight-normal"
-                >
+              <div className="read-time">
+                <p htmlFor="story_readtime" className="h6 text-secondary font-weight-normal">
                   {readtime}
                 </p>
               </div>
+
               <div className="col-lg-8" />
             </div>
           </div>

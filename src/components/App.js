@@ -1,12 +1,16 @@
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
+import {
+  Route,
+  BrowserRouter,
+  Switch,
+  Redirect,
+} from 'react-router-dom';
 import { connect } from 'react-redux';
-import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'moment-timezone';
 import 'react-toastify/dist/ReactToastify.css';
 import '../assets/scss/main.scss';
-
 import Header from './layouts/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -23,8 +27,9 @@ import PageNotFound from './pages/PageNotFound';
 import SearchResults from './pages/SearchResults';
 import Editarticle from './pages/Editarticle';
 import MyArticles from './pages/MyArticles';
+import Bookmarks from './pages/Bookmark';
 
-const App = () => (
+const App = ({ isAuthenticated }) => (
   <BrowserRouter>
     <Header />
     <ToastContainer />
@@ -42,6 +47,19 @@ const App = () => (
       <Route exact path="/articles" component={MyArticles} />
       <Route exact path="/article/new" component={Create} />
       <Route exact path="/article/:slug/edit" component={Editarticle} />
+      <Route
+        exact
+        path="/bookmarks"
+        render={props => (isAuthenticated ? (
+          <Bookmarks {...props} />
+        ) : (
+        // eslint-disable-next-line react/prop-types
+          <Redirect to={`/auth/login?redirect=${props.location.pathname}`} />
+        ))
+        }
+      />
+
+
       <Route component={PageNotFound} />
     </Switch>
     <Footer />

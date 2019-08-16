@@ -7,10 +7,10 @@ import resetPasswordReducer from './resetPassword.reducer';
 import applyPasswordReducer from './applyPassword.reducer';
 import author from './authorprofile.reducer';
 import profileReducer from './profile.reducer';
-
 import searchReducer from './article/search.reducer';
 import optInOptOutEmailReducer from './optInOptOutEmail.reducer';
 import optInOptOutAppReducer from './optInOptOutApp.reducer';
+import bookmarkedArticles from './bookmarks.reducer';
 
 export default combineReducers({
   ui: uiReducer,
@@ -24,4 +24,5 @@ export default combineReducers({
   search: searchReducer,
   optInOptOutApp: optInOptOutAppReducer,
   optInOptOutEmail: optInOptOutEmailReducer,
+  bookmarkedArticles,
 });
