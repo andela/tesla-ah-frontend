@@ -8,6 +8,7 @@ import Spinner from '../widgets/Spinner';
 import { login } from '../../redux/actions/users/login.actions';
 import validate from '../../utils/validations';
 import TextInput from '../common/TextInput';
+import Social from './SocialLogin';
 
 export class Login extends Component {
   constructor(props) {
@@ -57,18 +58,7 @@ export class Login extends Component {
             <h4>Login to Authors Haven</h4>
             <br />
             <br />
-            <a className="social button--social-login button--facebook" href="/">
-              <i className="icon fa fa-facebook" />
-              Facebook
-            </a>
-            <a className="social button--social-login button--twitter" href="/">
-              <i className="icon fa fa-twitter" />
-              Twitter
-            </a>
-            <a className="social button--social-login button--googleplus" href="/">
-              <i className="icon fa fa-google-plus" />
-              Google +
-            </a>
+            <Social />
             <br />
             <br />
             <form onSubmit={this.handleSubmit}>

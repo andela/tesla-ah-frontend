@@ -16,3 +16,8 @@ $social-list: (
     googleplus #dd4b39,
     
 );
+// Breakpoints for responsiveness
+$mobile: 480px;
+$tablet: 768px;
+$desktop-min: $tablet + 1px;
+$desktop-max: 1024px;

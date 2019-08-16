@@ -1,16 +1,21 @@
-@import './utils/variables';
-@import './utils/mixins';
-@import './layouts/header';
-@import './layouts/footer';
-@import './pages/home';
-@import './pages/login';
-@import './pages/signup';
-@import './base//common';
-@import './layouts/spinner';
-@import './layouts/form';
+@import "./utils/variables";
+@import "./utils/mixins";
+@import "./layouts/header";
+@import "./layouts/footer";
+@import "./pages/home";
+@import "./pages/login";
+@import "./pages/signup";
+@import "./base/common";
+@import "./layouts/form";
+@import "./layouts/spinner";
+@import "./utils/mobile";
+@import "./components/app";
+@import "./pages/socialLogin";
+@import "./components/social";
 
 body {
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: "Source Sans Pro", sans-serif;
   margin: 0;
   padding: 0;
+  text-align: center;
 }

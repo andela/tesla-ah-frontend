@@ -35,3 +35,4 @@ checks:
   identical-code:
     config:
       threshold: 250
+      
