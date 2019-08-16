@@ -1,3 +1,4 @@
+
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-undef */
 
@@ -19,6 +20,10 @@ export const loginError = error => ({
   type: userActionTypes.LOGIN_ERROR,
   payload: error,
 });
+export const loggedIn = () => ({
+  type: userActionTypes.LOGGED_IN,
+  loggedIn: true,
+});
 
 export const login = (email, password) => async (dispatch) => {
   dispatch(loginPending());
@@ -34,6 +39,7 @@ export const login = (email, password) => async (dispatch) => {
     sessionStorage.setItem('token', token);
     toast.success(`Thank you ${user.firstName}, you are now logged in successfully!`);
     dispatch(loginSuccess(token, user));
+    dispatch(loggedIn());
   } catch (error) {
     const message = (await error.response) ? error.response.data.error.message : 'something wrong';
     toast.error(message);

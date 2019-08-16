@@ -29,32 +29,34 @@ export class SocialLogin extends Component {
    */
   render() {
     return (
-      <React.Fragment>
-        <a
-          className="social button--social-login button--facebook"
-          href="javascript:void(0)"
-          onClick={this.callFacebookLogin}
-        >
-          <i className="icon fa fa-facebook" />
-          Facebook
-        </a>
-        <a
-          className="social button--social-login button--twitter"
-          href="javascript:void(0)"
-          onClick={this.callTwitterLogin}
-        >
-          <i className="icon fa fa-twitter" />
-          Twitter
-        </a>
-        <a
-          className="social button--social-login button--googleplus"
-          href="javascript:void(0)"
-          onClick={this.callGoogleLogin}
-        >
-          <i className="icon fa fa-google-plus" />
-          Google +
-        </a>
-      </React.Fragment>
+      <div className="social-btn-container">
+        <div className="social-buttons">
+          <a
+            className="btn btn-fb btn btn-block button--facebook"
+            href="javascript:void(0)"
+            onClick={this.callFacebookLogin}
+          >
+            <i className="icon fab fa-facebook-f" />
+            &nbsp;&nbsp;Sign in with Facebook
+          </a>
+          <a
+            className="btn btn-tw btn-block button--twitter"
+            href="javascript:void(0)"
+            onClick={this.callTwitterLogin}
+          >
+            <i className="fab fa-twitter" />
+            &nbsp;&nbsp;Sign in with Twitter
+          </a>
+          <a
+            className="btn btn-danger btn-block button--googleplus"
+            href="javascript:void(0)"
+            onClick={this.callGoogleLogin}
+          >
+            <i className="fab fa-google" />
+            &nbsp;&nbsp;Sign in with Google
+          </a>
+        </div>
+      </div>
     );
   }
 }
