@@ -1,7 +1,9 @@
 /* eslint-disable */
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const Dotenv = require('dotenv-webpack');
+
 module.exports = {
   devServer: {
     historyApiFallback: {
@@ -10,7 +12,10 @@ module.exports = {
     overlay: true,
     port: 8000
   },
-  entry: path.join(__dirname, "src", "index.js"),
+  node: {
+    fs: 'empty'
+  },
+  entry: path.join(__dirname, 'src', 'index.js'),
   output: {
     path: path.join(__dirname, "build"),
     filename: "bundle.js",
@@ -28,7 +33,7 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               modules: false
             }
@@ -55,6 +60,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new Dotenv({path: path.resolve(__dirname, '.env')}),
     new HtmlWebpackPlugin({
       filename: "index.html",
       template: path.join(__dirname, "src", "index.html")

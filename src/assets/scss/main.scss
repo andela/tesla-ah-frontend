@@ -5,12 +5,18 @@
 @import './pages/home';
 @import './pages/login';
 @import './pages/signup';
-@import './layouts/form';
 @import './base//common';
 @import './layouts/spinner';
+@import './layouts/form';
+@import './utils/mobile';
+@import './components/app';
+@import './pages/socialLogin.scss';
+@import './components/social';
+@import '../scss/pages/login';
 
 body {
   font-family: 'Source Sans Pro', sans-serif;
   margin: 0;
   padding: 0;
+  text-align: center;
 }

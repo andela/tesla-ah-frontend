@@ -1,0 +1,72 @@
+.carousel-login{
+    border: 1px solid black;
+    height: 70vh;
+   & .carousel-login-div{
+     margin-top: 15vh;
+     margin-left: 20vh;
+     width: 40vh;
+     height: 40vh;
+   }
+  }
+  #login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:rgba(255,255,255,.8);
+  }
+  #login-dp .help-block{
+    font-size:12px    
+  }
+  #login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ddd;
+    clear:both;
+    padding:14px;
+  }
+  #login-dp .social-buttons{
+    margin:12px 0    
+  }
+  #login-dp .social-buttons a{
+    width: 49%;
+  }
+  #login-dp .form-group {
+    margin-bottom: 10px;
+  }
+  .btn-fb{
+    color: $white;
+    background-color:#3b5998;
+  }
+  .checkbox{
+    color: $white;
+  }
+  .btn-fb:hover{
+    color: $white;
+    background-color:#496ebc 
+  }
+  .btn-tw{
+  color: $white;
+  background-color:#55acee;
+  }
+  .btn-tw:hover{
+  color: $white;
+  background-color:#59b5fa;
+  }
+  @media(max-width:768px){
+    #login-dp{
+    background-color: inherit;
+    color: $white;
+    }
+    #login-dp .bottom{
+    background-color: inherit;
+    border-top:0 none;
+    }
+  }
+@media(max-width:480px){
+     .carousel-login{& .carousel-login-div{
+      height: 40vh;
+      margin-left: 4vh;
+      margin-top: 10vh;
+      width: 85%;    
+     }
+    }
+  }

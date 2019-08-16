@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing social login should have social login component 1`] = `ShallowWrapper {}`;
