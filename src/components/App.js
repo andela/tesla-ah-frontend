@@ -15,6 +15,8 @@ import Terms from './pages/Terms';
 import VerifyAccount from './pages/VerifyAccount';
 import Footer from './layouts/Footer';
 import ReadArticle from './pages/ReadArticle';
+import ResetPasswordRequest from './pages/ResetPasswordEmail';
+import ApplyPassword from './pages/ApplyPasswordForm';
 
 const App = () => (
   <BrowserRouter>
@@ -29,9 +31,12 @@ const App = () => (
       <Route exact path="/articles/:slug" component={ReadArticle} />
       <Route exact path="/" component={Home} />
       <Route exact path="/verify/:token" component={VerifyAccount} />
+      <Route exact path="/resetPassword/:token" component={ApplyPassword} />
+      <Route exact path="/resetPasswordRequest" component={ResetPasswordRequest} />
       <Route component={PageNotFound} />
     </Switch>
     <Footer />
   </BrowserRouter>
 );
+
 export default App;

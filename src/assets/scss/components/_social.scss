@@ -6,7 +6,7 @@ $button-height: 40px;
 $button-text-color: white;
 
 %button,
-.button-social {
+.social {
   width: $button-width;
   display: inline-block;
 	padding: 0 ($base-spacing-unit - ($half-spacing-unit / 2)) 0 ($half-spacing-unit / 2);

@@ -84,13 +84,11 @@ export class Login extends Component {
                   />
                 </div>
 
-                <Link to="/auth/login">Forgot Password</Link>
+                <Link to="/resetPasswordRequest">Forgot Password?</Link>
                 <br />
                 <br />
 
-                <button type="submit" className="btn button is-grey-login">
-                  Login
-                </button>
+                <button type="submit" className="btn button is-grey-login">Login</button>
                 {loading ? <Spinner caption="Login..." /> : null}
               </div>
             </form>
