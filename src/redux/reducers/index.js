@@ -8,6 +8,7 @@ import applyPasswordReducer from './applyPassword.reducer';
 import author from './authorprofile.reducer';
 import profileReducer from './profile.reducer';
 
+import searchReducer from './article/search.reducer';
 
 export default combineReducers({
   ui: uiReducer,
@@ -18,4 +19,5 @@ export default combineReducers({
   applyPassword: applyPasswordReducer,
   author,
   profile: profileReducer,
+  search: searchReducer,
 });

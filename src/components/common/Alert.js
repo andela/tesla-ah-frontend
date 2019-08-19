@@ -3,7 +3,7 @@ import Proptypes from 'prop-types';
 
 // eslint-disable-next-line react/prop-types
 const Alert = ({ type, children }) => {
-  const alertClass = `alert alert-${type}`;
+  const alertClass = `alert alert-${type} alert__container`;
   return <div className={alertClass}>{children}</div>;
 };
 

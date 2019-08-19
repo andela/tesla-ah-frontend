@@ -19,6 +19,7 @@ import ResetPasswordRequest from './pages/ResetPasswordEmail';
 import ApplyPassword from './pages/ApplyPasswordForm';
 import Profile from './pages/Profile';
 import PageNotFound from './pages/PageNotFound';
+import SearchResults from './pages/SearchResults';
 
 const App = () => (
   <BrowserRouter>
@@ -28,12 +29,13 @@ const App = () => (
       <Route exact path="/" component={Home} />
       <Route exact path="/auth/login" component={Login} />
       <Route exact path="/auth/signup" component={Signup} />
-      <Route exact path="/terms" component={Terms} />
       <Route exact path="/verify/:token" component={VerifyAccount} />
+      <Route exact path="/terms" component={Terms} />
       <Route exact path="/articles/:slug" component={ReadArticle} />
       <Route exact path="/resetPassword/:token" component={ApplyPassword} />
       <Route exact path="/resetPasswordRequest" component={ResetPasswordRequest} />
       <Route exact path="/profile/:username" component={Profile} />
+      <Route exact path="/search" component={SearchResults} />
       <Route component={PageNotFound} />
     </Switch>
     <Footer />

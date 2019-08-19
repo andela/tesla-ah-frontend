@@ -1,3 +1,7 @@
 export const GET_ARTICLES = 'GET_ARTICLES';
 export const CREATE_ARTICLE = 'CREATE_ARTICLE';
 export const GET_ARTICLE = 'GET_ARTICLE';
+export const SEARCH_PENDING = 'SEARCH_PENDING';
+export const SEARCH_DONE = 'SEARCH_DONE';
+export const SEARCH_FAILED = 'SEARCH_FAILED';
+export const SEARCH_CLEAR = 'SEARCH_CLEAR';

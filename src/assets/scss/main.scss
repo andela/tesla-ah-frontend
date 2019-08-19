@@ -1,23 +1,23 @@
-@import "./utils/animations";
-@import "./utils/variables";
-@import "./utils/mixins";
-@import "./layouts/header";
-@import "./layouts/footer";
-@import "./pages/home";
-@import "./pages/login";
-@import "./pages/signup";
-@import "./base/common";
-@import "./layouts/form";
-@import "./layouts/spinner";
-@import "./utils/mobile";
-@import "./components/app";
-@import "./pages/socialLogin";
-@import "./components/social";
-@import "./components/home";
-@import "./layouts/slider";
-@import "./components/articleitem";
-@import "./components/editor";
-@import "./components/preloader";
+@import './utils/animations';
+@import './utils/variables';
+@import './utils/mixins';
+@import './layouts/header';
+@import './layouts/footer';
+@import './pages/home';
+@import './pages/login';
+@import './pages/signup';
+@import './base/common';
+@import './layouts/form';
+@import './layouts/spinner';
+@import './utils/mobile';
+@import './components/app';
+@import './pages/socialLogin';
+@import './components/social';
+@import './components/home';
+@import './layouts/slider';
+@import './components/articleitem';
+@import './components/editor';
+@import './components/preloader';
 @import './pages/signup';
 @import './base/common';
 @import './layouts/spinner';
@@ -25,9 +25,11 @@
 @import './components/viewarticle';
 @import './components/react-rater';
 @import './components/pagination';
+@import './components/article';
+@import './components/search';
 
 body {
-  font-family: "Source Sans Pro", sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
   margin: 0;
   padding: 0;
 }

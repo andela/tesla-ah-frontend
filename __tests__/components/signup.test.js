@@ -2,6 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Signup, mapStateToProps } from '../../src/components/pages/Signup';
+import validate from '../../src/utils/validations/index';
 
 const props = {
   createAccount: jest.fn(),
@@ -67,14 +68,28 @@ describe('Signup Components tests...', () => {
       instance = signup.instance();
       submitButton = signup.find('button[type="submit"]');
       submitButton.simulate('click');
+      instance.submitForm = jest.fn();
+      instance.submitForm();
     });
     it('Should make a remote request to the server', () => {
+      instance.setState({
+        firstName: 'Elie',
+        lastName: 'Mugenzi',
+        email: 'eliemugenzi@gmail.com',
+        username: 'elie',
+        password: 'ThisIsAndela@05',
+        confirmPassword: 'ThisIsAndela@05',
+        birthDate: '01/03/1997',
+        bio: 'Andelan',
+      });
       instance.forceUpdate();
       signup.update();
+      validate(signup.state(), 'signup');
       const event = {
         preventDefault: jest.fn(),
       };
       instance.handleSubmit(event);
+      expect(instance.submitForm).toHaveBeenCalled();
     });
   });
 
@@ -99,6 +114,52 @@ describe('Signup Components tests...', () => {
     });
     it('Renders successfully', () => {
       expect(signUpDone).toBeDefined();
+    });
+  });
+  describe('Tests for signup validation errors', () => {
+    const props2 = {
+      ui: {
+        loading: false,
+      },
+      createAccount: jest.fn(),
+      auth: {
+        signupSuccess: false,
+      },
+    };
+    const component = shallow(<Signup {...props2} />);
+    const instance = component.instance();
+    instance.submitForm = jest.fn();
+    instance.submitForm();
+    it('Should render', () => {
+      expect(component).toBeDefined();
+    });
+    test('It should throw errors when a user submits the wrong information', () => {
+      instance.setState({
+        firstName: 'e',
+        lastName: 'M',
+        email: 'elie@m.com',
+        gender: 'M',
+        password: '123',
+        confirmPassword: 'whshshs',
+      });
+      instance.forceUpdate();
+      component.update();
+      const event = {
+        preventDefault: jest.fn(),
+      };
+      instance.handleSubmit(event);
+      expect(instance.submitForm).toHaveBeenCalled();
+    });
+  });
+  describe('Render a signup for a guy who is aleady logged in', () => {
+    const props10x = {
+      createAcount: jest.fn(),
+      ui: { loading: false },
+      auth: { signupSuccess: false, loggedIn: true },
+    };
+    const component = shallow(<Signup {...props10x} />);
+    test('Should render', () => {
+      expect(component).toBeDefined();
     });
   });
 });

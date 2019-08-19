@@ -45,7 +45,7 @@ export class SocialLogin extends Component {
           onClick={this.callTwitterLogin}
         >
           <i className="icon fa fa-twitter" />
-                Twitter
+          Twitter
         </a>
         <a
           className="social button--social-login button--googleplus"
@@ -53,7 +53,7 @@ export class SocialLogin extends Component {
           onClick={this.callGoogleLogin}
         >
           <i className="icon fa fa-google-plus" />
-                Google +
+          Google +
         </a>
       </React.Fragment>
     );

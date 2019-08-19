@@ -1,3 +1,4 @@
+@import '../utils/mobile';
 form {
   position: relative;
 
@@ -16,5 +17,61 @@ form {
 
   .form-radios {
     margin: auto 5%;
+  }
+}
+
+.filter__form{
+  display: flex;
+  @include mediaMd{
+    display: block;
+  }
+  button[type=submit]{
+    background:$blue;
+    padding:.5rem 1rem;
+    height: 40px;
+    transform: translateY(10px);
+    @include mediaMd{
+      margin-top:10px;
+      margin-bottom: 30px;
+    }
+    i{
+      color:$white;
+      font-size: 25px;
+    }
+  }
+  &--field{
+    margin-right:20px;
+    input[type=search]{
+      border:1px solid lighten($dark,50%);
+      outline: none;
+      width:30vw;
+      height:40px;
+      border-radius: 5px;
+      margin:10px auto;
+      padding-left:8px;
+      @include mediaSm{
+        width: 90vw;
+      }
+      @include mediaMd{
+        width: 90vw;
+      }
+    }
+    select{
+      border:1px solid lighten($dark,50%);
+      outline:none;
+      width: 20vw;
+      height: 40px;
+      transform: translateY(10px);
+      border-radius: 5px;
+      background: $white;
+      @include mediaSm{
+        width: 90vw;
+        margin:10px auto;
+      }
+      @include mediaMd{
+        width: 90vw;
+        margin:10px auto;
+      }
+    }
   }
 }

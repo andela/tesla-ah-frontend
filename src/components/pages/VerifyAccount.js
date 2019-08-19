@@ -50,7 +50,7 @@ export class VerifyAccount extends Component {
       return <Redirect to="/" />;
     }
     return (
-      <section className="container">
+      <section className="container verify__container">
         {loading ? (<Spinner caption="Verifying your account..." />) : null}
         {verified ? (
           <Alert type="success">
