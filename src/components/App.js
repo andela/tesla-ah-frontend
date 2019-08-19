@@ -3,8 +3,8 @@
 import React from 'react';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import 'moment-timezone';
 import 'react-toastify/dist/ReactToastify.css';
-import axios from 'axios';
 import '../assets/scss/main.scss';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -13,22 +13,25 @@ import Header from './layouts/Header';
 import Signup from './pages/Signup';
 import Terms from './pages/Terms';
 import VerifyAccount from './pages/VerifyAccount';
+import Footer from './layouts/Footer';
+import ReadArticle from './pages/ReadArticle';
 
-const App = () => {
-  axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
-  return (
-    <BrowserRouter>
-      <Header />
-      <ToastContainer />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/auth/login" component={Login} />
-        <Route exact path="/auth/signup" component={Signup} />
-        <Route exact path="/terms" component={Terms} />
-        <Route exact path="/verify/:token" component={VerifyAccount} />
-        <Route component={PageNotFound} />
-      </Switch>
-    </BrowserRouter>
-  );
-};
+const App = () => (
+  <BrowserRouter>
+    <Header />
+    <ToastContainer />
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/auth/login" component={Login} />
+      <Route exact path="/auth/signup" component={Signup} />
+      <Route exact path="/terms" component={Terms} />
+      <Route exact path="/verify/:token" component={VerifyAccount} />
+      <Route exact path="/articles/:slug" component={ReadArticle} />
+      <Route exact path="/" component={Home} />
+      <Route exact path="/verify/:token" component={VerifyAccount} />
+      <Route component={PageNotFound} />
+    </Switch>
+    <Footer />
+  </BrowserRouter>
+);
 export default App;
