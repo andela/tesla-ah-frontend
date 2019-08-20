@@ -3,7 +3,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable no-script-url */
 import React, { Component } from 'react';
-import { API_URL } from '../../utils/constants';
+import { BACKEND_URL } from '../../utils/constants';
+
 
 /**
  * @param {*} props
@@ -13,20 +14,21 @@ import { API_URL } from '../../utils/constants';
 
 export class SocialLogin extends Component {
   callTwitterLogin = () => {
-    window.location.replace(`${API_URL}/api/auth/login/twitter`);
+    window.location.replace(`${BACKEND_URL}/api/auth/login/twitter`);
   };
 
   callGoogleLogin = () => {
-    window.location.replace(`${API_URL}/api/auth/login/google`);
+    window.location.replace(`${BACKEND_URL}/api/auth/login/google`);
   };
 
   callFacebookLogin = () => {
-    window.location.replace(`${API_URL}/api/auth/login/facebook`);
+    window.location.replace(`${BACKEND_URL}/api/auth/login/facebook`);
   }
 
   /**
    * @returns {*} dispatch
    */
+
   render() {
     return (
       <div className="social-btn-container">

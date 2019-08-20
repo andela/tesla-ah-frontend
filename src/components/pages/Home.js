@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import QueryString from 'query-string';
 import { Link } from 'react-router-dom';
 import Pagination from 'react-pagination-library';
 import { toast } from 'react-toastify';
@@ -22,6 +23,15 @@ export class Home extends Component {
 
   componentWillMount() {
     this.props.getArticles(this.state.currentPage);
+  }
+
+  // eslint-disable-next-line consistent-return
+  componentDidMount() {
+    const token = sessionStorage.getItem('token');
+    if (!token) {
+      const search = QueryString.parse(this.props.location.search);
+      sessionStorage.setItem('token', search.token);
+    }
   }
 
   componentWillReceiveProps(newProps) {
@@ -84,11 +94,18 @@ export class Home extends Component {
 
 Home.protoTypes = {
   getArticles: PropTypes.func.isRequired,
+  location: PropTypes.instanceOf(Object),
+};
+Home.defaultProps = {
+  location: {
+    state: '',
+  },
 };
 
 const mapStateToProps = state => ({
   article: state.article.articles,
   auth: state.auth,
+  search: state.search,
 });
 export default connect(
   mapStateToProps,

@@ -13,3 +13,7 @@ export const RESET_PROPS = 'RESET_PROPS';
 export const DELETE_ARTICLE = 'DELETE_ARTICLE';
 export const ARTICLE_ERRORS = 'ARTICLE_ERRORS';
 export const GET_MY_ARTICLES = 'GET_MY_ARTICLES';
+export const BOOKMARK = 'BOOKMARK';
+export const BOOKMARK_ERROR = 'BOOKMARK_ERROR';
+export const GET_BOOKMARK = 'GET_BOOKMARK';
+export const GET_ONE_ARTICLE = 'GET_ONE_ARTICLE';
