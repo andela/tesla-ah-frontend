@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
@@ -9,11 +11,16 @@ import Moment from 'react-moment';
 import { toast } from 'react-toastify';
 import jwt from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
-import { getArticle, deleteArticle, resetProps } from '../../redux/actions/article.actions';
+import {
+  getArticle,
+  deleteArticle,
+  resetProps,
+  getBoomarks,
+  bookmark,
+} from '../../redux/actions/article.actions';
 import { getUserProfile } from '../../redux/actions/author/authoruser.action';
 import { DEFAULT_AVATA } from '../../utils/constants';
 import Preloader from '../widgets/Preloader';
-
 
 class ReadArticle extends Component {
   state = {
@@ -23,16 +30,17 @@ class ReadArticle extends Component {
     slug: '',
     redirect: false,
     isProfileRequested: false,
+    AllBoomarked: {},
+    userId: {},
+    isBookmarked: false,
+    isPreviousBookmarked: false,
   };
 
   componentWillMount() {
     const { slug } = this.props.match.params;
-    let user = {};
+    this.props.getBoomarks();
     this.props.getArticle(slug);
-    if (sessionStorage.getItem('token')) {
-      user = jwt(sessionStorage.getItem('token'));
-    }
-    this.setState({ user, slug });
+    this.setState({ slug });
   }
 
   componentWillReceiveProps(newProps) {
@@ -50,7 +58,45 @@ class ReadArticle extends Component {
       this.setState({ redirect: true });
       toast.success('Articles has been deleted successfully...');
     }
+    if (newProps.myBookmarks.length > 0) {
+      const { slug } = this.props.match.params;
+      if (
+        this.isThisSlugBookmarked(slug, newProps.myBookmarks)
+        && !this.state.isPreviousBookmarked
+      ) {
+        this.setState({ isBookmarked: true, isPreviousBookmarked: true });
+      }
+    }
   }
+
+  handleClickBookmark = () => {
+    const {
+      match: {
+        params: { slug },
+      },
+      bookmark: bookmarkArticle,
+    } = this.props;
+    const token = sessionStorage.getItem('token');
+    try {
+      jwt(token);
+      bookmarkArticle(slug);
+      this.props.getBoomarks(slug);
+      this.setState({
+        // eslint-disable-next-line react/no-access-state-in-setstate
+        isBookmarked: !this.state.isBookmarked,
+      });
+    } catch (err) {
+      this.setState({ redirect: true });
+    }
+  };
+
+  isThisSlugBookmarked = (slug, bookmarks = []) => {
+    const data = bookmarks.find(item => item && item.slug === slug);
+    if (data) {
+      return true;
+    }
+    return false;
+  };
 
   render() {
     const {
@@ -60,9 +106,19 @@ class ReadArticle extends Component {
     } = this.state;
     let contentBlocks = [];
     if (this.state.redirect) {
-      return <Redirect to="/articles" />;
+      return (
+        <Redirect
+          to={{
+            pathname: '/auth/login',
+            state: { redirectt: this.props.location.pathname },
+          }}
+        />
+      );
     }
     if (Article && Author.profile) {
+      const BookmarkButton = this.state.isBookmarked
+        ? 'fas fa-bookmark'
+        : 'far fa-bookmark';
       const content = JSON.parse(Article.article.body);
       const { blocks } = content.article.body;
       contentBlocks = blocks.splice(1, blocks.length);
@@ -79,11 +135,19 @@ class ReadArticle extends Component {
                 </div>
                 <div className="row profile-content ml-1">
                   <div className="">
-                    <Link to={`/profile/${this.state.Article.article.author.username}`}><img className="" src={avatar || DEFAULT_AVATA} alt="" /></Link>
+                    <Link
+                      to={`/profile/${this.state.Article.article.author.username}`}
+                    >
+                      <img className="" src={avatar || DEFAULT_AVATA} alt="" />
+                    </Link>
                   </div>
                   <div className="ml-3">
                     <div>
-                      <Link to={`/profile/${this.state.Article.article.author.username}`}><strong>{`${firstName}  ${lastName}`}</strong></Link>
+                      <Link
+                        to={`/profile/${this.state.Article.article.author.username}`}
+                      >
+                        <strong>{`${firstName}  ${lastName}`}</strong>
+                      </Link>
                     </div>
                     <div>
                       <Moment format="D MMM YYYY">
@@ -112,13 +176,14 @@ class ReadArticle extends Component {
                     <i className="fas fa-envelope-open" />
                   </div>
                   <div
+                    onClick={this.handleClickBookmark}
                     className={`${
                       username === this.state.Article.article.author.username
                         ? 'hide-button'
                         : ''
                     } flauting-buttons mt-3 bookmark`}
                   >
-                    <i className="far fa-bookmark" />
+                    <i className={BookmarkButton} />
                   </div>
                   <div
                     className={`${
@@ -167,17 +232,35 @@ class ReadArticle extends Component {
               <div className="modal-dialog">
                 <div className="modal-content">
                   <div className="modal-header model-header-div">
-                    <button type="button" className="close text-white" data-dismiss="modal">&times;</button>
+                    <button
+                      type="button"
+                      className="close text-white"
+                      data-dismiss="modal"
+                    >
+                      &times;
+                    </button>
                   </div>
                   <div className="modal-body modal-body-div">
                     <p> Are you sure you want to delete this article ?</p>
                   </div>
                   <div className="modal-footer modal-footer-div">
-                    <button type="button" className="btn btn-default text-white" data-dismiss="modal">No</button>
-                    <button type="button" className="btn btn-default text-white" data-dismiss="modal" onClick={() => this.props.deleteArticle(this.state.slug)}>Yes</button>
+                    <button
+                      type="button"
+                      className="btn btn-default text-white"
+                      data-dismiss="modal"
+                    >
+                      No
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-default text-white"
+                      data-dismiss="modal"
+                      onClick={() => this.props.deleteArticle(this.state.slug)}
+                    >
+                      Yes
+                    </button>
                   </div>
                 </div>
-
               </div>
             </div>
           </section>
@@ -196,11 +279,18 @@ const mapStateToProps = state => ({
   Article: state.article.article,
   Author: state.author.authorprofile,
   Delete: state.article.deletedArticle,
+  myBookmarks: state.article.Boomarks,
+  bookmark: state.article.bookmark,
 });
 
 export default connect(
   mapStateToProps,
   {
-    getArticle, getUserProfile, deleteArticle, resetProps,
+    getArticle,
+    getUserProfile,
+    deleteArticle,
+    resetProps,
+    getBoomarks,
+    bookmark,
   },
 )(ReadArticle);

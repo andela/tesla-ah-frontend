@@ -70,3 +70,15 @@ export const article = [
     updatedAt: '2019-08-11T13:52:41.050Z',
   },
 ];
+export const bookmarkk = [
+  {
+    id: 1,
+    slug: 'andela-kigali-xjzjvei6d',
+    userId: 2,
+  },
+  {
+    id: 2,
+    slug: 'andela-kigali-xjzjvei78',
+    userId: 2,
+  },
+];

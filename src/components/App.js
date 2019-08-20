@@ -1,5 +1,6 @@
 /* eslint-disable import/no-named-as-default */
 import React from 'react';
+import { connect } from 'react-redux';
 import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'moment-timezone';
@@ -47,4 +48,5 @@ const App = () => (
   </BrowserRouter>
 );
 
-export default App;
+const mapStateToProps = ({ login: { isAuthenticated } }) => ({ isAuthenticated });
+export default connect(mapStateToProps)(App);
