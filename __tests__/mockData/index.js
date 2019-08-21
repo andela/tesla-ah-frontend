@@ -250,6 +250,8 @@ export const profile = {
   hasArticles: false,
 };
 
+export const jsonUser = JSON.stringify(profile.user);
+
 export const profileUpdateForm = {
   firstName: {
     elementType: 'input',

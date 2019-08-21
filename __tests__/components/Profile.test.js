@@ -8,7 +8,7 @@ import {
   mapDispatchToProps,
   mapStateToProps,
 } from '../../src/components/pages/Profile';
-import { profile } from '../mockData';
+import { profile, jsonUser } from '../mockData';
 
 jest.mock('../../src/components/forms/ProfileEditForm', () => () => (
   <div id="mockProfileEditForm">mockProfileEditForm</div>
@@ -17,7 +17,7 @@ jest.mock('../../src/components/forms/ProfileEditForm', () => () => (
 const renderProfile = (args) => {
   const defaultProps = {
     setCurrentUser: jest.fn(),
-    initProfile: jest.fn(),
+    onInitProfile: jest.fn(),
     history: {},
     profile: {},
     match: {
@@ -32,8 +32,14 @@ const renderProfile = (args) => {
 };
 
 describe('Profile Compoment', () => {
+  beforeEach(() => {
+    localStorage.setItem('user', jsonUser);
+  });
+
   it('renders Profile component without main content', () => {
-    const wrapper = renderProfile();
+    const wrapper = renderProfile({
+      profile: { ...profile, user: null },
+    });
     expect(wrapper.find('Spinner').length).toBe(1);
   });
 
@@ -78,7 +84,7 @@ describe('Profile Compoment', () => {
 
   it('should map dispatch to props', () => {
     const dispatch = jest.fn();
-    mapDispatchToProps(dispatch).initProfile(profile.user.username);
+    mapDispatchToProps(dispatch).onInitProfile(profile.user.username);
     mapDispatchToProps(dispatch).setCurrentUser();
     expect(mapDispatchToProps).toBe(mapDispatchToProps);
   });

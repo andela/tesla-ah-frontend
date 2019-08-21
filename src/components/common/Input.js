@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
-
 import React from 'react';
+import PropTypes from 'prop-types';
 import { capitalize } from 'lodash';
 
 import '../../assets/scss/components/Input.scss';
@@ -98,6 +98,28 @@ const Input = (props) => {
       {validationHelper}
     </div>
   );
+};
+
+const stringPropType = PropTypes.string;
+
+Input.defaultProps = {
+  invalid: false,
+  touched: false,
+  value: '',
+  formLabel: 'Add a label',
+  errorMessage: '',
+};
+
+Input.propTypes = {
+  invalid: PropTypes.bool,
+  shouldValidate: PropTypes.instanceOf(Object).isRequired,
+  touched: PropTypes.bool,
+  inputtype: stringPropType.isRequired,
+  changed: PropTypes.func.isRequired,
+  elementConfig: PropTypes.instanceOf(Object).isRequired,
+  value: stringPropType,
+  formLabel: stringPropType,
+  errorMessage: stringPropType,
 };
 
 export default Input;

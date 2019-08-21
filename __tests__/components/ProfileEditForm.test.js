@@ -12,6 +12,7 @@ const renderProfileEditForm = (args) => {
   const defaultProps = {
     user: {},
     onUpdateProfile: jest.fn(),
+    onInitProfile: jest.fn(),
     history: {
       replace: jest.fn(),
     },

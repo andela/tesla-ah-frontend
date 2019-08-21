@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Fab as FabButton, Action } from 'react-tiny-fab';
 
 import '../../assets/scss/components/Fab.scss';
@@ -42,6 +43,13 @@ const Fab = (props) => {
       </FabButton>
     </div>
   );
+};
+
+Fab.propTypes = {
+  articles: PropTypes.func.isRequired,
+  followers: PropTypes.func.isRequired,
+  following: PropTypes.func.isRequired,
+  isCurrentUser: PropTypes.bool.isRequired,
 };
 
 export default Fab;
