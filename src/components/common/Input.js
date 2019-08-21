@@ -20,7 +20,7 @@ const Input = (props) => {
   } = props;
   let inputElement = null;
   let validationHelper = null;
-  const inputClasses = ['form-control input'];
+  const inputClasses = ['form-control input-custom'];
 
   if (invalid && shouldValidate && touched) {
     inputClasses.push('error');
@@ -46,15 +46,34 @@ const Input = (props) => {
 
   switch (inputtype) {
     case 'input':
-      inputElement = (
-        <input
-          className={inputClasses.join(' ')}
-          onChange={changed}
-          {...elementConfig}
-          value={value}
-        />
-      );
-      break;
+      if (elementConfig.type === 'file') {
+        const inputValue = value.split('\\');
+        const fileName = inputValue[inputValue.length - 1];
+        inputElement = (
+          <React.Fragment>
+            <div className="custom-file">
+              <input
+                className="custom-file-input"
+                onChange={changed}
+                {...elementConfig}
+                aria-describedby="inputGroupFileAddon01"
+              />
+              <label className={`${inputClasses.join(' ')} custom-file-label`}>{fileName || 'Choose a file'}</label>
+            </div>
+          </React.Fragment>
+        );
+        break;
+      } else {
+        inputElement = (
+          <input
+            className={inputClasses.join(' ')}
+            onChange={changed}
+            {...elementConfig}
+            value={value}
+          />
+        );
+        break;
+      }
     case 'textarea':
       inputElement = (
         <textarea
@@ -93,7 +112,7 @@ const Input = (props) => {
 
   return (
     <div className="form-group d-flex flex-column align-items-start">
-      <label htmlFor="exampleInputPassword1">{capitalize(formLabel)}</label>
+      <label>{capitalize(formLabel)}</label>
       {inputElement}
       {validationHelper}
     </div>

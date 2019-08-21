@@ -1,14 +1,14 @@
 @import '../abstracts/variables';
 
-.input {
-  border: 1px solid $blue;
+.input-custom {
+  border: 1px solid $blue !important;
 }
 
-.input.error {
+.input-custom.error {
   border: 2px solid rgba(255, 0, 0, 0.733);
 }
 
-.input.pass {
+.input-custom.pass {
   border: 1px solid rgba(0, 128, 0, 0.87);
 }
 

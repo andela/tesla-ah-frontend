@@ -40,7 +40,7 @@ export class Login extends Component {
   redirectOnSuccess = () => {
     const { isAuthenticated, location } = this.props;
     const { redirect } = queryString.parse(location.search);
-    return isAuthenticated ? this.props.history.push(redirect || '/') : null;
+    return isAuthenticated ? this.props.history.replace(redirect || '/') : null;
   };
 
   handleSubmit = (e) => {
@@ -121,6 +121,12 @@ const mapStateToProps = ({ login: { isAuthenticated, isLogging } }) => ({
   isAuthenticated,
   isLogging,
 });
+
+Login.defaultProps = {
+  location: {
+    search: '',
+  },
+};
 
 Login.propTypes = {
   location: PropTypes.instanceOf(Object),

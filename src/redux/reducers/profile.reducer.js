@@ -15,7 +15,6 @@ import {
   GET_FOLLOWING_FAIL,
   FOLLOW_USER_START,
   FOLLOW_USER_SUCCESS,
-  UNFOLLOW_USER_SUCCESS,
   SET_FOLLOWERS_UPDATABLE,
 } from '../actions/types/profile.type';
 import updateObject from '../../utils/updateObject';
@@ -79,32 +78,24 @@ const setProfileUpdatable = state => updateObject(state, {
   updating: false,
 });
 
-const getFollowers = (state, { followers }) => {
-  console.log('>>>>>', followers);
-  return updateObject(state, {
-    followers,
-    followersCount: followers.length,
-  });
-};
+const getFollowers = (state, { followers }) => updateObject(state, {
+  followers,
+  followersCount: followers.length,
+});
 
-const getFollowing = (state, { following }) => {
-  console.log('>>>>>>>', following);
-  return updateObject(state, {
-    following,
-    followingCount: following.length,
-  });
-};
 
-const successfulFollow = (state, { followers, following }) => {
-  console.log('>>>>>>>', followers, following);
-  return updateObject(state, {
-    followers,
-    followersCount: followers.length,
-    following,
-    followingCount: following.length,
-    isDoneUpdatingFollowers: true,
-  });
-};
+const getFollowing = (state, { following }) => updateObject(state, {
+  following,
+  followingCount: following.length,
+});
+
+const successfulFollow = (state, { followers, following }) => updateObject(state, {
+  followers,
+  followersCount: followers.length,
+  following,
+  followingCount: following.length,
+  isDoneUpdatingFollowers: true,
+});
 
 
 const reducer = (state = initialState, action) => {
@@ -138,7 +129,6 @@ const reducer = (state = initialState, action) => {
     case FOLLOW_USER_START:
       return updateObject(state, { isDoneUpdatingFollowers: false });
     case FOLLOW_USER_SUCCESS:
-    case UNFOLLOW_USER_SUCCESS:
       return successfulFollow(state, payload);
     case SET_FOLLOWERS_UPDATABLE:
       return updateObject(state, { isDoneUpdatingFollowers: false });

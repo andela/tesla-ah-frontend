@@ -18,8 +18,13 @@ const renderProfile = (args) => {
   const defaultProps = {
     setCurrentUser: jest.fn(),
     onInitProfile: jest.fn(),
+    onSetFollowersUpdatable: jest.fn(),
+    onFollowUser: jest.fn(),
     history: {},
     profile: {},
+    login: {
+      token: 'token',
+    },
     match: {
       params: {
         username: 'deschants',
@@ -27,13 +32,14 @@ const renderProfile = (args) => {
     },
   };
   const props = { ...defaultProps, ...args };
-
+  Profile.prototype.showArticles = { current: { click: jest.fn() } };
   return mount(<MemoryRouter><Profile {...props} /></MemoryRouter>);
 };
 
 describe('Profile Compoment', () => {
   beforeEach(() => {
     localStorage.setItem('user', jsonUser);
+    sessionStorage.setItem('token', 'token');
   });
 
   it('renders Profile component without main content', () => {
@@ -45,7 +51,7 @@ describe('Profile Compoment', () => {
 
   it('renders Profile component', () => {
     const wrapper = renderProfile({
-      profile: { ...profile },
+      profile: { ...profile, isDoneUpdatingFollowers: true },
     });
     wrapper
       .find('#articleBtn')
@@ -62,6 +68,12 @@ describe('Profile Compoment', () => {
         user: { avatar: null },
         currentUser: null,
         hasArticles: true,
+      },
+      history: {
+        push: jest.fn(),
+        location: {
+          pathname: '/path',
+        },
       },
     });
     wrapper.instance().showArticles = {
@@ -80,12 +92,35 @@ describe('Profile Compoment', () => {
     wrapper.find('Fab#profileFab').first().props().articles();
     wrapper.find('Fab#profileFab').first().props().following();
     wrapper.find('Fab#profileFab').first().props().followers();
+    wrapper.find('#followUser').simulate('click');
+  });
+
+  it('redirects to login if not logged in', () => {
+    sessionStorage.removeItem('token');
+    const wrapper = renderProfile({
+      profile: {
+        ...profile,
+        user: { avatar: null },
+        currentUser: null,
+        hasArticles: true,
+      },
+      history: {
+        push: jest.fn(),
+        location: {
+          pathname: '/path',
+        },
+      },
+    });
+    wrapper.find('#followUser').simulate('click');
   });
 
   it('should map dispatch to props', () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).onInitProfile(profile.user.username);
+    mapDispatchToProps(dispatch).onFollowUser(profile.user.username, true, true);
+    mapDispatchToProps(dispatch).onFollowUser(profile.user.username, true, false);
     mapDispatchToProps(dispatch).setCurrentUser();
+    mapDispatchToProps(dispatch).onSetFollowersUpdatable();
     expect(mapDispatchToProps).toBe(mapDispatchToProps);
   });
 
@@ -101,6 +136,8 @@ describe('Profile Compoment', () => {
       .find('.content-title > span')
       .first()
       .text()).toEqual('Followers');
+    wrapper.find('#unfollowBtnCard').first().simulate('click');
+    wrapper.find('#followBtnCard').first().simulate('click');
   });
 
   it('should render following tab', () => {
@@ -110,5 +147,32 @@ describe('Profile Compoment', () => {
       .find('.content-title > span')
       .first()
       .text()).toEqual('Following');
+    wrapper.find('#unfollowBtnCard').first().simulate('click');
+  });
+});
+
+describe('Profile Compoment Functions', () => {
+  beforeEach(() => {
+    localStorage.removeItem('user', jsonUser);
+    sessionStorage.setItem('token', 'token');
+  });
+
+  it('redirects to login if not logged in', () => {
+    sessionStorage.removeItem('token');
+    const wrapper = renderProfile({
+      profile: {
+        ...profile,
+        user: { avatar: null, username: 'someone' },
+        currentUser: null,
+        hasArticles: true,
+      },
+      history: {
+        push: jest.fn(),
+        location: {
+          pathname: '/path',
+        },
+      },
+    });
+    wrapper.find('#followUser').simulate('click');
   });
 });

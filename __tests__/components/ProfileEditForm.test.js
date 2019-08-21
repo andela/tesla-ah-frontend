@@ -93,6 +93,7 @@ describe('Profile Edit Form', () => {
   it('should map dispatch and state to props', () => {
     const dispatch = jest.fn();
     mapDispatchToProps(dispatch).onUpdateProfile(profile.user.id, {});
+    mapDispatchToProps(dispatch).onInitProfile(profile.user.username);
     mapDispatchToProps(dispatch).onSetUpdatable();
     expect(mapDispatchToProps).toBe(mapDispatchToProps);
     mapStateToProps({ profile: { ...profile } });

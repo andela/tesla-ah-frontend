@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { capitalize } from 'lodash';
 import '../../assets/scss/components/FollowCard.scss';
+import profilePlaceholder from '../../assets/images/profile.svg';
 
 const FollowCard = (props) => {
   const {
@@ -22,6 +23,7 @@ const FollowCard = (props) => {
   if (isCurrentUser && followType === 'Followers' && !isFollowedBack) {
     actionButton = (
       <button
+        id="followBtnCard"
         type="button"
         className="btn-custom"
         onClick={onFollowUser}
@@ -32,6 +34,7 @@ const FollowCard = (props) => {
   } else if (isCurrentUser && followType === 'Followers' && isFollowedBack) {
     actionButton = (
       <button
+        id="unfollowBtnCard"
         type="button"
         className="btn-custom unfollow"
         onClick={onUnfollowUser}
@@ -43,6 +46,7 @@ const FollowCard = (props) => {
     actionButton = (
       <button
         type="button"
+        id="unfollowBtnCard"
         className="btn-custom unfollow"
         onClick={onUnfollowUser}
       >
@@ -53,10 +57,17 @@ const FollowCard = (props) => {
     actionButton = null;
   }
 
+  let avatarImg;
+  if (avatar) {
+    avatarImg = <img className="d-avatar" src={avatar} alt="avatar" />;
+  } else {
+    avatarImg = <img className="d-avatar" src={profilePlaceholder} alt="avatar" />;
+  }
+
   return (
     <React.Fragment>
       <div className="follow-card--container d-flex">
-        <img className="d-avatar" src={avatar} alt="avatar" />
+        {avatarImg}
         <div className="follow-card-content flex-grow-1">
           <div className="d-flex justify-content-between align-items-center">
             <div className="follow-card-info d-flex flex-column align-items-start">

@@ -1,13 +1,9 @@
-.profile-fab-cont {
-  .fab {
-    display: none;
-  }
+.fab--container {
+  display: none;
 }
 
 @media (max-width: 991px) {
-  .profile-fab-cont {
-    .fab {
-      display: block;
-    }
+  .fab--container {
+    display: block;
   }
 }

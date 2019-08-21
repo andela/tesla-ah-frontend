@@ -1,0 +1,220 @@
+.view-profile--container {
+  background-color: #F4F4F4;
+
+  .no-padding {
+    padding: 0;
+  }
+
+  .view-profile--spinner {
+    position: relative;
+    height: 700px;
+    width: 50px;
+    margin: auto;
+    padding-top: 300px;
+
+    .spinner {
+      margin: 0;
+      width: 50px;
+    }
+  }
+  
+  .hero {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 500px;
+    position: relative;
+  }
+  
+  .d-avatar {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 4px solid #FFFFFF;
+    z-index: 15;
+  }
+  
+  .info-bar {
+    height: 70px;
+    background-color: $dark;
+  }
+  
+  .info-bar .d-avatar {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    position: absolute;
+    top: -100px;
+    left: 18px;
+    border: 4px solid #FFFFFF;
+    z-index: 15;
+  }
+  
+  .info-bar ul li button {
+    font-size: 1em;
+    color: #fff;
+    background-color: transparent;
+    border: none;
+  }
+  
+  .info-bar ul li button:hover,
+  .info-bar ul li button:focus {
+    border-bottom: 4px solid $blue;
+    box-shadow: none;
+  }
+  
+  .d-badge {
+    color: $blue;
+    margin-left: 5px;
+  }
+  
+  .btn-custom {
+    color: #fff;
+    width: 100%;
+    height: 50px;
+    background: $blue;
+    border: 1px solid #fff;
+    box-sizing: border-box;
+    border-radius: 30px;
+  }
+  
+  .h-100 {
+    height: 100%;
+  }
+  
+  .d-sidenav {
+    height: 100%;
+    width: 75px;
+    background-color: $dark;
+    overflow-x: hidden;
+    display: none;
+  }
+  
+  .d-sidenav .d-avatar {
+    height: 60px;
+    width: 60px;
+    position: inherit;
+    border: 2px solid #FFFFFF;
+    margin: 5px 5px 15px 5px;
+  }
+  
+  .d-main {
+    width: 100%;
+  }
+  
+  .d-sidenav a {
+    padding: 5px;
+    text-decoration: none;
+    font-size: 2em;
+    color: #fff;
+    display: block;
+  }
+  
+  .d-sidenav a:hover {
+    color: $blue;
+  }
+  
+  .badgeable {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .badgeable .d-badge {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 0 5px;
+    border-radius: 50%;
+    background: $blue;
+    color: white;
+    font-size: 15px;
+  }
+  
+  .info-box {
+    background-color: #fff;
+    border-radius: 0px 0px 10px 10px;
+    padding: 70px 10px 10px 10px;
+  }
+  
+  .info-box-content {
+    border-radius: 0;
+  }
+  
+  .d-main-content .btn-custom {
+    border-radius: 0px 0px 10px 10px;  
+  }
+  
+  .info-box-content span {
+    margin-bottom: 5px;
+  }
+  
+  .fullname {
+    font-weight: bold;
+  }
+  
+  .username {
+    color: #4a4c55;
+  }
+  
+  .info-box-content span i {
+   font-size: 1.5em;
+   color: $blue;
+   margin-right: 10px;
+  }
+  
+  .content-title {
+    background-color: #fff;
+    height: 50px;
+    padding: 0 10px;
+    border-bottom: 2px solid $dark;
+  }
+  
+  .interests .info-box {
+    padding-top: 10px;
+  }
+
+  .scrollable {
+    height: 800px;
+    overflow: scroll;
+  }
+  
+  @media (min-height: 300px) {
+    .d-sidenav {
+      position: sticky;
+      top: 0;
+    }
+  }
+  
+  @media (max-width: 991px) {
+    .d-sidenav {
+      display: block;
+    }
+  
+    .info-bar {
+      display: none;
+    }
+  
+    .hero {
+      height: 150px;
+    }
+  
+    .info-box {
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 0 !important;
+    }
+  
+    .info-box-content {
+      margin: 10px 0 0 0;
+    }
+  
+    .btn-custom {
+      height: 50px;
+      border-radius: 0 0 10px 10px;
+    }
+    
+    .content-title {
+      margin-top: 10px;
+    }
+  }
+}

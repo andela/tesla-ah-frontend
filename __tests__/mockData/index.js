@@ -112,7 +112,7 @@ export const profile = {
         firstName: 'SuperUser',
         lastName: 'SuperUser',
         email: 'superuser@gmail.com',
-        username: 'superUser',
+        username: '_deschant',
         avatar:
           'https://images.pexels.com/photos/2168356/pexels-photo-2168356.jpeg?cs=srgb&dl=beautiful-eyes-blur-close-up-2168356.jpg&fm=jpg',
       },
@@ -131,9 +131,25 @@ export const profile = {
         avatar:
           'https://images.pexels.com/photos/1122868/pexels-photo-1122868.jpeg?cs=srgb&dl=action-adult-adventure-1122868.jpg&fm=jpg',
       },
+      isFollowedback: true,
     },
   ],
   following: [
+    {
+      userId: 13,
+      createdAt: '2019-08-07T08:49:17.589Z',
+      updatedAt: '2019-08-07T08:49:17.589Z',
+      followerId: 5,
+      followedUser: {
+        id: 5,
+        firstName: 'Eric',
+        lastName: 'Prestein',
+        email: 'gprestein055@gmail.com',
+        username: 'ericprestein',
+        avatar:
+          'https://images.pexels.com/photos/1122868/pexels-photo-1122868.jpeg?cs=srgb&dl=action-adult-adventure-1122868.jpg&fm=jpg',
+      },
+    },
     {
       userId: 5,
       createdAt: '2019-08-07T08:49:17.589Z',

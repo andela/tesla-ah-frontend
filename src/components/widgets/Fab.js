@@ -14,12 +14,12 @@ const Fab = (props) => {
   } = props;
   const actionStyles = { backgroundColor: '#00aeff', color: '#fff' };
   return (
-    <div className="fab">
+    <div className="fab--container">
       <FabButton
         mainButtonStyles={{ ...actionStyles, backgroundColor: '#303346' }}
         position={{ bottom: 24, right: 24 }}
         icon={<i className="fas fa-bars" />}
-        event="hover"
+        event="click"
       >
         <Action id="fabArticles" text="Articles" style={actionStyles} onClick={articles}>
           <i className="fas fa-feather" />

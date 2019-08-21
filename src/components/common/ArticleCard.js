@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { trim } from 'lodash';
 
-import '../../assets/scss/components/Article.scss';
+import '../../assets/scss/components/ArticleCard.scss';
 
 const Article = (props) => {
   const {

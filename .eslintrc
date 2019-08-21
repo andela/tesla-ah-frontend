@@ -28,12 +28,12 @@
     ],
     "import/no-named-as-default": "warn",
     "jsx-a11y/anchor-is-valid": "off",
-    "react/prop-types": "warn",
+    "react/prop-types": "off",
     "no-debugger": "off",
     "no-undef": "warn",
-    "react/no-unused-state": "warn",
     "no-unused-vars": "warn",
-    "no-trailing-spaces": "warn"
+    "no-trailing-spaces": "warn",
+    "max-len": "warn"
   },
   "root": true
 }
