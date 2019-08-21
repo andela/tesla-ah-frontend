@@ -6,10 +6,10 @@ import { ToastContainer } from 'react-toastify';
 import 'moment-timezone';
 import 'react-toastify/dist/ReactToastify.css';
 import '../assets/scss/main.scss';
+
+import Header from './layouts/Header';
 import Home from './pages/Home';
 import Login from './pages/Login';
-import PageNotFound from './pages/PageNotFound';
-import Header from './layouts/Header';
 import Signup from './pages/Signup';
 import Terms from './pages/Terms';
 import VerifyAccount from './pages/VerifyAccount';
@@ -17,6 +17,8 @@ import Footer from './layouts/Footer';
 import ReadArticle from './pages/ReadArticle';
 import ResetPasswordRequest from './pages/ResetPasswordEmail';
 import ApplyPassword from './pages/ApplyPasswordForm';
+import Profile from './pages/Profile';
+import PageNotFound from './pages/PageNotFound';
 
 const App = () => (
   <BrowserRouter>
@@ -33,6 +35,7 @@ const App = () => (
       <Route exact path="/verify/:token" component={VerifyAccount} />
       <Route exact path="/resetPassword/:token" component={ApplyPassword} />
       <Route exact path="/resetPasswordRequest" component={ResetPasswordRequest} />
+      <Route exact path="/profile/:username" component={Profile} />
       <Route component={PageNotFound} />
     </Switch>
     <Footer />

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SocialLogin } from '../../src/components/pages/SocialLogin';
+import { SocialLogin, mapDispatchToProps } from '../../src/components/pages/SocialLogin';
 
 // sinon.stub(window.location, 'replace');
 global.window = Object.create(window);
@@ -38,5 +38,10 @@ describe('Testing social login', () => {
   it('Should Login with Gooogle', () => {
     wrapper.find('.button--googleplus').simulate('click');
     expect(window.location.replace).toHaveBeenCalled();
+  });
+
+  it('should map dispatch to props', () => {
+    const dispatch = jest.fn();
+    mapDispatchToProps(dispatch).onSocialLogin();
   });
 });

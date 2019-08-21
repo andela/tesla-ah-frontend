@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Signup } from '../../src/components/pages/Signup';
+import { Signup, mapStateToProps } from '../../src/components/pages/Signup';
 
 const props = {
   createAccount: jest.fn(),
@@ -32,6 +32,7 @@ describe('Signup Components tests...', () => {
   });
   it('Should give initial state', () => {
     expect(signup.state()).toBeDefined();
+    mapStateToProps({});
   });
   describe('Input simulations tests...', () => {
     it('Should change DOB state', () => {

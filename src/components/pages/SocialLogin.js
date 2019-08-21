@@ -66,7 +66,7 @@ export class SocialLogin extends Component {
  * @param {*} dispatch
  * @returns {object} props
  */
-const mapDispatchToProps = dispatch => ({
+export const mapDispatchToProps = dispatch => ({
   onSocialLogin: (accessToken, provider) => dispatch(socialLogin(accessToken, provider)),
 });
 export default connect(

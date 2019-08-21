@@ -31,12 +31,11 @@ export class Signup extends Component {
     };
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   onChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
-  }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -71,10 +70,13 @@ export class Signup extends Component {
         dateOfBirth: birthDate,
       });
     }
-  }
+  };
 
   render() {
-    const { ui: { loading }, auth: { signupSuccess } } = this.props;
+    const {
+      ui: { loading },
+      auth: { signupSuccess },
+    } = this.props;
     return (
       <section className="container">
         <main className="row mt-5 mb-5 signup__section">
@@ -83,9 +85,8 @@ export class Signup extends Component {
             {signupSuccess ? (
               <Alert type="success">
                 <p>
-Thank you for creating an account with Authors Haven,
-                you will receive an email shortly!
-
+                  Thank you for creating an account with Authors Haven, you will
+                  receive an email shortly!
                 </p>
               </Alert>
             ) : (
@@ -168,7 +169,9 @@ Thank you for creating an account with Authors Haven,
                     required
                   />
                 </div>
-                <div className="form-group"><label htmlFor="gender">Gender</label></div>
+                <div className="form-group">
+                  <label htmlFor="gender">Gender</label>
+                </div>
                 <div className="row form-radios">
                   <div className="form-check col-sm-6 form-group">
                     <input
@@ -204,24 +207,28 @@ Thank you for creating an account with Authors Haven,
                   {/* eslint-disable-nextline  */}
                   <Link to="/terms">Read terms and conditions first...</Link>
                   <br />
-                  <input type="checkbox" className="form-check-input" required />
-                  <label htmlFor="Checkbox" className="form-check-label">I agree with the terms and conditions...</label>
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    required
+                  />
+                  <label htmlFor="Checkbox" className="form-check-label">
+                    I agree with the terms and conditions...
+                  </label>
                 </div>
-                <button type="submit" className="btn button is-grey">Register</button>
-                {loading ? (
-                  <Spinner caption="Registering..." />
-                ) : null}
+                <button type="submit" className="btn button is-grey">
+                  Register
+                </button>
+                {loading ? <Spinner caption="Registering..." /> : null}
                 <div className="mt-3">
                   <p>
-                      Already have an account?
-                    {' '}
+                    Already have an account?
                     {/* eslint-disable-nextline  */}
                     <Link to="/auth/login">Login</Link>
                   </p>
                 </div>
               </Form>
             )}
-
           </div>
           <div className="col-md-6">
             <img src={happyFaces} alt="AH People" className="signup__people" />
@@ -232,7 +239,7 @@ Thank you for creating an account with Authors Haven,
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   ui: state.ui,
   auth: state.auth,
 });
@@ -243,4 +250,7 @@ Signup.propTypes = {
   auth: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default connect(mapStateToProps, { createAccount })(Signup);
+export default connect(
+  mapStateToProps,
+  { createAccount },
+)(Signup);

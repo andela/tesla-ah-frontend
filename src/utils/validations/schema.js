@@ -6,10 +6,8 @@ const names = Joi.string()
   .regex(/^[A-Za-z_-]+$/)
   .min(3);
 export default Joi.object().keys({
-  firstName: names
-    .label('First name must have at least 3 letters and must contain only letters, underscores(_) and hyphens (-)'),
-  lastName: names
-    .label('Last name must have at least 3 letters and must contain only letters, underscores(_) and hyphens (-)'),
+  firstName: names.label('First name must have at least 3 letters and must contain only letters, underscores(_) and hyphens (-)'),
+  lastName: names.label('Last name must have at least 3 letters and must contain only letters, underscores(_) and hyphens (-)'),
   username: Joi.string()
     .trim()
     .lowercase()
@@ -27,8 +25,7 @@ export default Joi.object().keys({
     .trim()
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/)
     .required()
-    .label('Password must be at least 8 letters containing'
-      + ' at least a number a Lowercase letter and an Uppercase letter'),
+    .label('Password must be at least 8 letters containing at least a number a Lowercase letter and an Uppercase letter'),
   confirmPassword: Joi.any()
     .required()
     .valid(Joi.ref('password'))
