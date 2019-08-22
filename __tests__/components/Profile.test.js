@@ -14,6 +14,12 @@ jest.mock('../../src/components/forms/ProfileEditForm', () => () => (
   <div id="mockProfileEditForm">mockProfileEditForm</div>
 ));
 
+jest.mock('../../src/components/pages/OptInOptOutApp', () => () => (
+  <div id="mockOptApp">mockOptApp</div>
+));
+jest.mock('../../src/components/pages/OptInOptOutEmail', () => () => (
+  <div id="mockOptEmail">mockOptEmail</div>
+));
 const renderProfile = (args) => {
   const defaultProps = {
     setCurrentUser: jest.fn(),
@@ -58,6 +64,8 @@ describe('Profile Compoment', () => {
       .first()
       .simulate('click');
     expect(wrapper.find('#mockProfileEditForm').length).toBe(1);
+    expect(wrapper.find('#mockOptApp').length).toBe(1);
+    expect(wrapper.find('#mockOptEmail').length).toBe(1);
     expect(wrapper).toMatchSnapshot();
   });
 

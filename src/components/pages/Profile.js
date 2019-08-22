@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable import/no-unresolved */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -16,11 +17,12 @@ import {
   setFollowersUpdatable,
 } from '../../redux/actions/profile.actions';
 import Fab from '../widgets/Fab';
-// eslint-disable-next-line import/no-named-as-default
 import ProfileEditForm from '../forms/ProfileEditForm';
 
 import profilePlaceholder from '../../assets/images/profile.svg';
 import Spinner from '../widgets/Spinner';
+import OptInOptOutApp from './OptInOptOutApp';
+import OptInOptOutEmail from './OptInOptOutEmail';
 
 export class Profile extends Component {
   static getDerivedStateFromProps(props) {
@@ -331,6 +333,21 @@ export class Profile extends Component {
                     <i className="fas fa-calendar-plus" />
                     {dateJoined}
                   </span>
+                  {isCurrentUser ? (
+                    <div>
+                      <br />
+                      <span className="notifications">
+                    Notifications
+                      </span>
+                      <div>
+                        <OptInOptOutApp />
+                      </div>
+                      <div>
+                        <OptInOptOutEmail />
+                      </div>
+
+                    </div>
+                  ) : null }
                 </div>
                 {!isCurrentUser ? followButton : null}
               </div>
