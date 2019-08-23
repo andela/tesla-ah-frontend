@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import happyFaces from '../../assets/img/signup.png';
@@ -28,10 +28,18 @@ export class Signup extends Component {
       gender: 'M',
       bio: '',
       birthDate: '',
+      redirect: false,
     };
   }
 
-  componentDidMount() {}
+  componentWillMount() {
+    if (this.props.auth.loggedIn) {
+      toast.success('Welcome back to Authors Haven');
+      this.setState({
+        redirect: true,
+      });
+    }
+  }
 
   onChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
@@ -56,6 +64,7 @@ export class Signup extends Component {
           confirmPassword,
           bio,
           birthDate,
+          gender,
         },
       } = this;
       // eslint-disable-next-line react/destructuring-assignment
@@ -67,6 +76,7 @@ export class Signup extends Component {
         password,
         confirmPassword,
         bio,
+        gender,
         dateOfBirth: birthDate,
       });
     }
@@ -77,6 +87,9 @@ export class Signup extends Component {
       ui: { loading },
       auth: { signupSuccess },
     } = this.props;
+    if (this.state.redirect) {
+      return <Redirect to="/" />;
+    }
     return (
       <section className="container">
         <main className="row mt-5 mb-5 signup__section">
@@ -171,29 +184,10 @@ export class Signup extends Component {
                 </div>
                 <div className="form-group">
                   <label htmlFor="gender">Gender</label>
-                </div>
-                <div className="row form-radios">
-                  <div className="form-check col-sm-6 form-group">
-                    <input
-                      type="radio"
-                      className="form-check-input"
-                      name="gender"
-                      value="M"
-                      onChange={this.onChange}
-                      checked
-                    />
-                    <label className="form-check-label">Male</label>
-                  </div>
-                  <div className="form-check col-sm-6">
-                    <input
-                      type="radio"
-                      className="form-check-input"
-                      name="gender"
-                      value="F"
-                      onChange={this.onChange}
-                    />
-                    <label className="form-check-label">Female</label>
-                  </div>
+                  <select name="gender" value={this.state.gender} onChange={e => this.setState({ gender: e.target.value })} className="form-control">
+                    <option value="M">Male</option>
+                    <option value="F">Female</option>
+                  </select>
                 </div>
                 <div className="form-group">
                   <textarea
@@ -204,16 +198,17 @@ export class Signup extends Component {
                   />
                 </div>
                 <div className="form-check mb-4">
-                  {/* eslint-disable-nextline  */}
-                  <Link to="/terms">Read terms and conditions first...</Link>
-                  <br />
                   <input
                     type="checkbox"
                     className="form-check-input"
                     required
                   />
                   <label htmlFor="Checkbox" className="form-check-label">
-                    I agree with the terms and conditions...
+                    I agree with the
+                    {' '}
+                    {/* eslint-disable-nextline  */}
+                    <Link to="/terms">Terms and conditions</Link>
+
                   </label>
                 </div>
                 <button type="submit" className="btn button is-grey">
@@ -222,7 +217,7 @@ export class Signup extends Component {
                 {loading ? <Spinner caption="Registering..." /> : null}
                 <div className="mt-3">
                   <p>
-                    Already have an account?
+                    Already have an account? &nbsp;
                     {/* eslint-disable-nextline  */}
                     <Link to="/auth/login">Login</Link>
                   </p>

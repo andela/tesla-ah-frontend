@@ -42,26 +42,21 @@ describe('Signup Components tests...', () => {
       });
       expect(signup.instance().onChange).toHaveBeenCalled();
     });
-    it('Should update Gender to M', () => {
-      const gender = signup.find('input[name="gender"]');
-      gender.first().simulate('change', {
-        target: { value: 'M' },
-      });
-      expect(signup.instance().onChange).toHaveBeenCalled();
-    });
-    it('Should update gender to F', () => {
-      const gender = signup.find('input[name="gender"]');
-      gender.at(1).simulate('change', {
-        target: { value: 'F' },
-      });
-      expect(signup.instance().onChange).toHaveBeenCalled();
-    });
     it('Should update BIO state', () => {
       const bio = signup.find('textarea');
       bio.simulate('change', {
         target: { value: 'Human being' },
       });
       expect(signup.instance().onChange).toHaveBeenCalled();
+    });
+    it('Should update gender', () => {
+      const select = signup.find('select');
+      select.simulate('change', {
+        target: {
+          value: 'F',
+        },
+      });
+      expect(signup.state('gender')).toEqual('F');
     });
   });
 
