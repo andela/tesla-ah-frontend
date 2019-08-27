@@ -1,4 +1,5 @@
 .view-article-content {
+  min-height: 90vh;
   .editor-main {
     justify-content: center;
   }
@@ -32,6 +33,9 @@
     .social-buttons {
       float: right;
       position: fixed;
+      .hide-button{
+        display: none;
+      }
     }
     .flauting-buttons {
       width: 60px;
@@ -64,7 +68,29 @@
     .dislike {
       background: $dislike;
     }
+    .delete {
+      background: $red;
+    }
+    
   }
+  .model-header-div{
+    background: $red;
+    border-radius:0; 
+    color: $white;
+}
+ .modal-footer-div{
+    background: $red;
+    border-radius:0; 
+    color: $white;
+}
+.modal-body-div{
+  background: $sec-red;
+  border-radius:0; 
+  color: $white;
+  p{
+    font-size: 20px;
+  }
+}
 }
 
 @media screen and (max-width: 768px) {

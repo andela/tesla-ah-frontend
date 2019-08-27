@@ -2,6 +2,8 @@
 import moxios from 'moxios';
 import thunk from 'redux-thunk';
 import configureMockStore from 'redux-mock-store';
+import axios from 'axios';
+import { API_URL } from '../../../src/utils/constants';
 
 import {
   UPDATE_PROFILE_START,
@@ -19,7 +21,6 @@ import {
   setUpdatable,
 } from '../../../src/redux/actions/profile.actions';
 import { users } from '../../mockData';
-import axios from '../../../src/utils/axios-ah';
 
 const middleware = [thunk];
 const mockStore = configureMockStore(middleware);
@@ -33,11 +34,11 @@ describe('Profile Init Actions', () => {
   });
 
   test('should have GET_PROFILE, GET_ARTICLE', () => {
-    moxios.stubRequest(`/profiles/${users[0].username}`, {
+    moxios.stubRequest(`${API_URL}/profiles/${users[0].username}`, {
       status: 200,
       response: { profile: users[0] },
     });
-    moxios.stubRequest(`/articles?author=${users[0].username}`, {
+    moxios.stubRequest(`${API_URL}/articles?author=${users[0].username}`, {
       status: 200,
       response: { articles: [] },
     });
@@ -48,7 +49,7 @@ describe('Profile Init Actions', () => {
   });
 
   test('should fail with GET_PROFILE_FAIL if one of the requests fail', () => {
-    moxios.stubRequest(`/profiles/${users[0].username}`, {
+    moxios.stubRequest(`${API_URL}/profiles/${users[0].username}`, {
       status: 401,
       response: { error: new Error('Request failed with status code 401') },
     });
@@ -59,7 +60,7 @@ describe('Profile Init Actions', () => {
   });
 
   test('should fail with GET_ARTICLE_FAIL if one of the requests fail', () => {
-    moxios.stubRequest(`/articles?author=${users[0].username}`, {
+    moxios.stubRequest(`${API_URL}/articles?author=${users[0].username}`, {
       status: 401,
       response: { error: new Error('Request failed with status code 401') },
     });
@@ -79,7 +80,7 @@ describe('Profile Update Actions', () => {
   });
 
   it('should update profile with UPDATE_PROFILE_START and UPDATE_PROFILE_SUCCESS', () => {
-    moxios.stubRequest(`/user/${users[0].id}`, {
+    moxios.stubRequest(`${API_URL}/user/${users[0].id}`, {
       status: 200,
       response: { user: users[0] },
     });
@@ -102,7 +103,7 @@ describe('Profile Update Actions', () => {
   });
 
   it('should fail updating profile with UPDATE_PROFILE_START and UPDATE_PROFILE_FAIL', () => {
-    moxios.stubRequest(`/user/${users[0].id}`, {
+    moxios.stubRequest(`${API_URL}/user/${users[0].id}`, {
       status: 400,
       response: { error: new Error('') },
     });
@@ -129,7 +130,7 @@ describe('Get current user', () => {
   });
 
   it('should get current user with GET_CURRENT_USER_START and GET_CURRENT_USER_SUCCESS', () => {
-    moxios.stubRequest('/user', {
+    moxios.stubRequest(`${API_URL}/user`, {
       status: 200,
       response: { user: users[0] },
     });
@@ -150,7 +151,7 @@ describe('Get current user', () => {
   });
 
   it('should fail to fetch current user with GET_CURRENT_USER_START and GET_CURRENT_USER_FAIL', () => {
-    moxios.stubRequest('/user', {
+    moxios.stubRequest(`${API_URL}/user`, {
       status: 400,
       response: { error: new Error('Request failed with status code 400') },
     });

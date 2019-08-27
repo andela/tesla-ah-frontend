@@ -7,7 +7,7 @@ const Image = props => (props.image !== null ? (
     <img
       src={props.image}
       alt={props.title}
-      className="rounded-1 w-100"
+      className="rounded-1 w-100 img-fluid"
     />
   </div>
 ) : (<div />));

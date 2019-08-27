@@ -8,16 +8,16 @@ exclude_patterns:
 checks:
   argument-count:
     config:
-      threshold: 4
+      threshold: 6
   complex-logic:
     config:
-      threshold: 10
+      threshold: 6
   file-lines:
     config:
       threshold: 400
   method-complexity:
     config:
-      threshold: 20
+      threshold: 15
   method-count:
     config:
       threshold: 20
@@ -26,7 +26,7 @@ checks:
       threshold: 400
   nested-control-flow:
     config:
-      threshold: 4
+      threshold: 6
   return-statements:
     config:
       threshold: 8
