@@ -1,0 +1,44 @@
+.article{
+  margin:20px auto;
+  border:1px solid $grey;
+  padding: 20px;
+  border-radius: 5px;
+  &__content{
+    padding: 5px;
+  }
+  &__title{
+    font-size: 25px;
+    font-weight: 100;
+  }
+  &__footer{
+    display: flex;
+    justify-content: space-between;
+    &--time{
+      display: flex;
+      justify-content: space-evenly;
+      span:first-child{
+        margin-right:20px;
+      }
+    }
+    &--bookmark{
+      i{
+        font-size: 23px;
+        @include easeout(0.5s);
+      }
+      &:hover{
+        i{
+          color:$blue;
+          @include easeout(0.5s);
+        }
+      }
+    }
+  }
+
+  &__image{
+    position: relative;
+    img{
+      height: 100%;
+      width: 100%;
+    }
+  }
+}

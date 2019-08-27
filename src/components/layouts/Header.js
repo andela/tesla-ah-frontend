@@ -49,64 +49,7 @@ export class Header extends Component {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            {!loggedIn ? (
-              <ul className="navbar-nav mr-auto nav-left">
-                <li className="nav-item active">
-                  {/* eslint-disable-nextline  */}
-                  <Link className="nav-link is-active" to="/">
-                    Home
-                    <span className="sr-only">(current)</span>
-                  </Link>
-                </li>
-                <li className="nav-item dropdown">
-                  {/* eslint-disable-nextline  */}
-                  <Link
-                    className="nav-link dropdown-toggle nav-shrink"
-                    to="/"
-                    id="navbarDropdown"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Categories
-                  </Link>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">
-                      Technology
-                    </Link>
-                    {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">
-                      Sport
-                    </Link>
-                    {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">
-                      Design
-                    </Link>
-                    {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">
-                      Politics
-                    </Link>
-                  </div>
-                </li>
-                <li className="nav-item">
-                  {/* eslint-disable-nextline  */}
-                  <Link className="nav-link nav-shrink" to="/">
-                    About Us
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  {/* eslint-disable-nextline  */}
-                  <Link className="nav-link nav-shrink" to="/" tabIndex="-1">
-                    Contacts
-                  </Link>
-                </li>
-              </ul>
-            ) : (
+            <Link to="/search" className="search__anchor--form">
               <ul className="navbar-nav mr-auto nav-left">
                 <li className="nav-item nav-right">
                   <input
@@ -114,10 +57,11 @@ export class Header extends Component {
                     type="text"
                     placeholder="Search"
                     aria-label="Search"
+                    disabled
                   />
                 </li>
               </ul>
-            )}
+            </Link>
             {loggedIn ? (
               <ul className="nav-right navbar-nav">
                 <li id="nav-item noti-container">
@@ -145,18 +89,20 @@ export class Header extends Component {
                 </li>
               </ul>
             ) : (
-              <ul className="nav-right navbar-nav">
-                <li className="nav-item">
-                  <Link to="/auth/login" className="nav-link is-active">
-                    Login
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/auth/signup" className="nav-link is-active">
-                    Sign Up
-                  </Link>
-                </li>
-              </ul>
+              <div>
+                <ul className="nav-right navbar-nav">
+                  <li className="nav-item">
+                    <Link to="/auth/login" className="nav-link is-active">
+                        Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link to="/auth/signup" className="nav-link is-active">
+                        Sign Up
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             )}
           </div>
         </nav>
