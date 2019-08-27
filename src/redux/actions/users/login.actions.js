@@ -4,7 +4,7 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import jwt from 'jwt-decode';
-import { BASE_URL } from '../../../utils/constants';
+import { BACKEND_URL } from '../../../utils/constants';
 import * as userActionTypes from '../types/auth.type';
 
 export const loginPending = () => ({
@@ -31,11 +31,11 @@ export const login = (email, password) => async (dispatch) => {
     password,
   };
   try {
-    const send = await axios.post(`${BASE_URL}/api/auth/login`, loginData);
+    const send = await axios.post(`${BACKEND_URL}/api/auth/login`, loginData);
     const { data } = send;
     const token = data.data.token;
     const user = jwt(token);
-    localStorage.setItem('token', token);
+    sessionStorage.setItem('token', token);
     toast.success(`Thank you ${user.firstName}, you are now logged in successfully!`);
     dispatch(loginSuccess(token, user));
     dispatch(loggedIn());

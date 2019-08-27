@@ -1,3 +1,4 @@
+@import '../utils/mobile';
 .main-section {
   margin: auto 16.5%;
 
@@ -9,6 +10,12 @@
     border-radius: 7px;
     padding: 70px 10px 70px 10px;
     box-shadow: 2px 2px 10px 2px #c9c9c9;
+    @include mediaSm {
+      width: 100%;
+    }
+    @include mediaMd {
+      width: 100%
+    }
 
     #col-login {
       width: 100%;
@@ -20,6 +27,7 @@
         text-shadow: 0px 4px 4px rgba(0, 174, 255, 0.25);
         letter-spacing: 0.02em;
         text-align: center;
+        
       }
     }
   }

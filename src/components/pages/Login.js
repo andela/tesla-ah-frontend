@@ -82,7 +82,9 @@ export class Login extends Component {
                 <br />
                 <br />
 
-                <button type="submit" className="btn button is-grey-login">Login</button>
+                <button type="submit" className="btn button is-grey-login">
+                  Login
+                </button>
                 {loading ? <Spinner caption="Login..." /> : null}
               </div>
             </form>
@@ -99,10 +101,17 @@ const mapStateToProps = ({ ui, login: { isAuthenticated } }) => ({
 });
 
 Login.propTypes = {
+  location: PropTypes.instanceOf(Object),
   login: PropTypes.func.isRequired,
   ui: PropTypes.instanceOf(Object).isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+};
+
+Login.defaultProps = {
+  location: {
+    search: '',
+  },
 };
 
 export default connect(

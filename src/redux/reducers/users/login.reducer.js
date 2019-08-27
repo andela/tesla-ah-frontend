@@ -17,6 +17,7 @@ const Login = (state = initialState, { type, payload }) => {
       return {
         ...state,
         ...payload,
+        isLogging: true,
       };
     case authTypes.LOGIN_ERROR:
       return {

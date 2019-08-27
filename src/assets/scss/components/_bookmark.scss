@@ -1,9 +1,27 @@
+@import '../utils/mobile';
 .bookmark_container {
+  @include mediaMd {
+    & .itemcontainer {
+      margin-left: -15px;
+      & [for='story_readtime'] {
+        float: right;
+      }
+      & img {
+        @include mediaMd {
+          margin-left: -20px;
+        }
+      }
+    }
+  }
   .bookmark-item-cont {
     .remove-btn {
       background-color: transparent;
       color: $email;
       border-color: $email;
+      margin-left: 6px;
+      @include mediaMd {
+        margin-left: -10px;
+      }
     }
     .bookmark-link {
       &:hover {
