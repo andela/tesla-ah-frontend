@@ -23,6 +23,7 @@ class ReadArticle extends Component {
     slug: '',
     redirect: false,
     isProfileRequested: false,
+    editorState: null,
   };
 
   componentWillMount() {
@@ -52,11 +53,35 @@ class ReadArticle extends Component {
     }
   }
 
+  handleChange = (editorState) => {
+    const { Article } = this.state;
+    const content = JSON.parse(Article.article.body);
+    const { blocks } = content.article.body;
+    const contentBlocks = blocks.splice(1, blocks.length);
+    // console.log(this.state.editorState ? 'state' : 'change');
+    // console.log((this.state.editorState || editorState).getEditorState().getCurrentContent());
+    this.setState(prevState => ({
+      ...prevState,
+      editorState: prevState.editorState || editorState,
+    }));
+    const { anchorOffset, focusOffset, anchorKey } = editorState.getEditorState().getSelection();
+    contentBlocks.forEach(({ key, text }) => {
+      if (anchorKey === key) {
+        const start = Math.min(anchorOffset, focusOffset);
+        const end = Math.max(anchorOffset, focusOffset);
+        const highlightedText = text.substring(start, end);
+        console.log(highlightedText);
+      }
+    });
+    return false;
+  }
+
   render() {
     const {
       Article,
       Author,
       user: { username },
+      editorState,
     } = this.state;
     let contentBlocks = [];
     if (this.state.redirect) {
@@ -95,8 +120,8 @@ class ReadArticle extends Component {
                 </div>
                 <div className="mt-3">
                   <DisplayContent
-                    content={{ blocks: contentBlocks, entityMap: {} }}
-                    read_only
+                    content={editorState || { blocks: contentBlocks, entityMap: {} }}
+                    onChange={this.handleChange}
                   />
                 </div>
               </div>
