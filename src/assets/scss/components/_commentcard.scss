@@ -1,0 +1,120 @@
+.comment-card-container {
+  border: 0px solid gray;
+  min-height: 200px;
+  button{
+    outline: none;
+  }
+  .emoji{
+     position: absolute;
+     z-index: 1000;
+  }
+  .comment-card-count {
+    height: 60px;
+    background: $sec-white;
+    padding-top: 2px;
+    p {
+      float: left;
+    }
+    label{
+      float: right;
+      position: relative;
+      margin-right: 1.5%;
+      
+    }
+  }
+  .comment-card-add-cm {
+    margin: 10px 0 0 0;
+    input {
+      margin: 0 0 0 20px;
+      height: 50px;
+      width: 70%;
+      border: 2px solid $sec-white;
+      border-radius: 10px;
+      padding: 0 0 0 20px;
+      outline: none;
+    }
+    .comment-btn {
+      background: $green;
+      height: 40px;
+      color: $white;
+      border-radius: 10px;
+      margin: 0 0 0 20px;
+      border: none;
+      outline: none;
+    }
+  }
+  .comment-item {
+    margin-top: 20px;
+    border: 0px solid gray;
+    width: 100%;
+    .deleteted-comment{
+      color: $orange;
+    }
+    label {
+      font-size: 14px;
+      color: $gray1;
+    }
+    i {
+      color: $gray1;
+      cursor: pointer;
+    }
+    button {
+      outline: none;
+    }
+    .reply{
+      input{
+          padding: 5px 10px 5px 10px;
+          outline: none;
+      }  
+      .comment-btn {
+          background-color: $green;
+          border: none;
+          color: $white;
+          padding: 5px 20px 5px 20px;
+          outline: none;
+      }
+    }
+    .commentMenu{
+      float: right;
+      .comment-btn{
+        color: $gray1;
+        border: 1px solid $gray1;
+        border-radius: 10px;
+        i{
+         color: $green;
+        }
+      }
+    }
+    .edited-btn{
+      cursor: pointer;
+    }
+    .comment-edit-history {
+      padding-left: 10px;
+      border-left: 3px solid $orange;
+      img{
+        height: 30px;
+      }
+      .hide-comment-edit-his, i{
+        color: $orange;
+        font-weight: bold;
+      }
+      i{
+        font-size: 15px;
+      }
+    }
+  }
+  .green {
+    color: $green;
+  }
+  .red {
+    color: $red;
+  }
+  .emoji-open{
+    i{
+      font-size: 25px;
+      margin-left: 10px;
+      margin-right: 10px;
+      color: $gray1;
+    }
+  }
+}

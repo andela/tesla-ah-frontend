@@ -1,4 +1,5 @@
 /* eslint-disable max-len */
+/* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-unused-state */
@@ -24,6 +25,8 @@ import { DEFAULT_AVATA } from '../../utils/constants';
 import Preloader from '../widgets/Preloader';
 import LikeAndDislike from '../common/LikeAndDislike';
 import Share from '../common/Share';
+import Comments from '../Card/CommentCard';
+
 
 class ReadArticle extends Component {
   state = {
@@ -31,7 +34,8 @@ class ReadArticle extends Component {
     Author: {},
     user: {},
     slug: '',
-    redirect: false,
+    redirectToLogin: false,
+    redirectToMyArticles: false,
     isProfileRequested: false,
     AllBoomarked: {},
     userId: {},
@@ -40,6 +44,7 @@ class ReadArticle extends Component {
   };
 
   componentWillMount() {
+    window.scroll(0, window.pageYOffset - this.props.scrollStepInPx);
     const { slug } = this.props.match.params;
     this.props.getBoomarks();
     this.props.getArticle(slug);
@@ -62,7 +67,7 @@ class ReadArticle extends Component {
       this.setState({ Author: newProps.Author });
     }
     if (newProps.Delete.message) {
-      this.setState({ redirect: true });
+      this.setState({ redirectToMyArticles: true });
       toast.success('Articles has been deleted successfully...');
     }
     if (newProps.myBookmarks.length > 0) {
@@ -93,7 +98,7 @@ class ReadArticle extends Component {
         isBookmarked: !this.state.isBookmarked,
       });
     } catch (err) {
-      this.setState({ redirect: true });
+      this.setState({ redirectToLogin: true });
     }
   };
 
@@ -113,7 +118,7 @@ class ReadArticle extends Component {
       user: { username, id: userId },
     } = this.state;
     let contentBlocks = [];
-    if (this.state.redirect) {
+    if (this.state.redirectToLogin) {
       return (
         <Redirect
           to={{
@@ -122,6 +127,9 @@ class ReadArticle extends Component {
           }}
         />
       );
+    }
+    if (this.state.redirectToMyArticles) {
+      return <Redirect to="/articles" />;
     }
     if (Article && Author.profile) {
       const BookmarkButton = this.state.isBookmarked
@@ -170,7 +178,13 @@ class ReadArticle extends Component {
                     content={{ blocks: contentBlocks, entityMap: {} }}
                     read_only
                   />
-                  { username !== this.state.Article.article.author.username && (<LikeAndDislike slug={slug} userId={userId} pathname={this.props.location.pathname} />)}
+                  <Comments
+                    defaultavata={DEFAULT_AVATA}
+                    user={this.state.user}
+                    slug={this.state.slug}
+                    pathname={this.props.location.pathname}
+                    likeDislike={(<LikeAndDislike slug={slug} userId={userId} pathname={this.props.location.pathname} />)}
+                  />
                 </div>
               </div>
               <div className="col-lg-1 rigth-nav text-center">

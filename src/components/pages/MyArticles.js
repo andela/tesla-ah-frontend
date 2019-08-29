@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable max-len */
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -8,6 +9,7 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Pagination from 'react-pagination-library';
+import { sortArrayDesd as sortArticles } from 'tesla-error-handler';
 import {
   getMyArticles,
   deleteArticle,
@@ -66,7 +68,7 @@ export class MyArticles extends Component {
               </div>
             </div>
           </div>
-          {articles.map((article) => {
+          {sortArticles(articles).map((article) => {
             const {
               image,
               body,
@@ -132,13 +134,6 @@ export class MyArticles extends Component {
         </div>
       );
     }
-    return (
-      <div>
-        <div className="homecontainer" data-test="homeComponent">
-          <Preloader />
-        </div>
-      </div>
-    );
   }
 }
 export const mapStateToProps = state => ({

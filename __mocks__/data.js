@@ -82,3 +82,157 @@ export const bookmarkk = [
     userId: 2,
   },
 ];
+
+export const comments = {
+  data: [
+    {
+      title: 'Go is an open source programming language that makes it easy to buildsimple, reliable, and efficient software.',
+      description: 'We are excited to share that our module mirror, index, andchecksum database are now production ready! The gocommand will use the module mirror and checksum database by default for Go 1.13 module users. Seeproxy.golang.org/privacy for privacy information about these services and the go command documentation for configuration details, including how to disable the use of these servers or use different ones. If you depend on non-public modules, see the documentation for configuring your environment.',
+      body: '{"article":{"body":{"blocks":[{"key":"4d32s","text":"Go is an open source programming language that makes it easy to buildsimple, reliable, and efficient software.","type":"header-two","depth":0,"inlineStyleRanges":[{"offset":69,"length":6,"style":"BOLD"},{"offset":77,"length":8,"style":"BOLD"},{"offset":91,"length":9,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"e7vma","text":"We are excited to share that our module mirror, index, andchecksum database are now production ready! The gocommand will use the module mirror and checksum database by default for Go 1.13 module users. Seeproxy.golang.org/privacy for privacy information about these services and the go command documentation for configuration details, including how to disable the use of these servers or use different ones. If you depend on non-public modules, see the documentation for configuring your environment.","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":106,"length":2,"style":"CODE"}],"entityRanges":[],"data":{}},{"key":"btmc5","text":"d","type":"image","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"aspect_ratio":{"width":1000,"height":376.6666666666667,"ratio":37.66666666666667},"width":1200,"caption":"type a caption (optional)","height":452,"forceUpload":false,"url":"https://res.cloudinary.com/newpoint/image/upload/v1567154838/ncizr9v5xt5fsmy4oyg0.png","loading_progress":0,"selected":false,"loading":true,"file":null,"direction":"center"}},{"key":"uvkf","text":"We are excited to share that our module mirror, index, andchecksum database are now production ready! The gocommand will use the module mirror and checksum database by default for Go 1.13 module users. ","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":106,"length":2,"style":"CODE"}],"entityRanges":[],"data":{}},{"key":"48ich","text":"Seeproxy.golang.org/privacy for privacy information about these services and the go command documentation for configuration details, including how to disable the use of these servers or use different ones. If you ","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":0,"length":213,"style":"CUSTOM_COLOR_#06a427"}],"entityRanges":[],"data":{}},{"key":"eq7rl","text":"depend on non-public modules, see the documentation for configuring your environment.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"ftuid","text":"dc","type":"image","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"aspect_ratio":{"width":1000,"height":720,"ratio":72},"width":1000,"caption":"type a caption (optional)","height":720,"forceUpload":false,"url":"https://res.cloudinary.com/newpoint/image/upload/v1567154862/pmvkbl4vecg9j4evs9j1.png","loading_progress":0,"selected":false,"loading":true,"file":null,"direction":"center"}},{"key":"dehoj","text":"We are excited to share that our module mirror, index, andchecksum database are now production ready! The gocommand will use the module mirror and checksum database by default for Go 1.13 module users. Seeproxy.golang.org/privacy for privacy information about these services and the go command documentation for configuration details, including how to disable the use of these servers or use different ones. If you depend on non-public modules, see the documentation for configuring your environment.","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":106,"length":2,"style":"CODE"}],"entityRanges":[],"data":{}},{"key":"3m37d","text":"","type":"image","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{"aspect_ratio":{"width":500,"height":216,"ratio":43.2},"width":500,"caption":"type a caption (optional)","height":216,"forceUpload":false,"url":"https://res.cloudinary.com/newpoint/image/upload/v1567158077/whnlar30e54lr3mpmjzu.png","loading_progress":0,"selected":false,"loading":true,"file":null,"direction":"center"}},{"key":"4ndpp","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"f582n","text":"We are excited to share that our module mirror, index, andchecksum database are now production ready! The gocommand will use the module mirror and checksum database by default for Go 1.13 module users. Seeproxy.golang.org/privacy for privacy information about these services and the go command documentation for configuration details, including how to disable the use of these servers or use different ones. If you depend on non-public modules, see the documentation for configuring your environment.","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":106,"length":2,"style":"CODE"}],"entityRanges":[],"data":{}}]},"title":"Go is an open source programming language that makes it easy to buildsimple, reliable, and efficient software.","description":"Go is an open source programming language that makes it easy to buildsimple, reliable, and efficient software.","tagList":["go","programming"]}}',
+      Comments: [
+        {
+          comment: 'jyhy',
+          updatedAt: '2019-09-01T09:45:56.343Z',
+          id: 75,
+          Comments: [
+            {
+              comment: 'fhiueiurdf',
+              updatedAt: '2019-09-01T10:23:04.544Z',
+              id: 77,
+              commentAuthor: {
+                avatar: 'https://res.cloudinary.com/tesla-ah-media/image/upload/v1567348506/w1k30oteaubuvduzqs7h.jpg',
+                firstName: 'Prestein',
+                lastName: 'Eric',
+                username: 'ericrukundo',
+              },
+            },
+            {
+              comment: 'm n',
+              updatedAt: '2019-09-01T11:26:57.404Z',
+              id: 80,
+              commentAuthor: {
+                avatar: 'https://res.cloudinary.com/tesla-ah-media/image/upload/v1567348506/w1k30oteaubuvduzqs7h.jpg',
+                firstName: 'Prestein',
+                lastName: 'Eric',
+                username: 'ericrukundo',
+              },
+            },
+          ],
+          commentAuthor: {
+            avatar: 'https://res.cloudinary.com/tesla-ah-media/image/upload/v1567348506/w1k30oteaubuvduzqs7h.jpg',
+            firstName: 'Prestein',
+            lastName: 'Eric',
+            username: 'ericrukundo',
+          },
+        },
+        {
+          comment: 'This comment has been deleted!',
+          updatedAt: '2019-09-01T10:25:02.683Z',
+          id: 65,
+          Comments: [
+            {
+              comment: 'gtjght',
+              updatedAt: '2019-09-01T09:31:00.609Z',
+              id: 73,
+              commentAuthor: {
+                avatar: 'https://res.cloudinary.com/tesla-ah-media/image/upload/v1567348506/w1k30oteaubuvduzqs7h.jpg',
+                firstName: 'Prestein',
+                lastName: 'Eric',
+                username: 'ericrukundo',
+              },
+            },
+            {
+              comment: 'rffv',
+              updatedAt: '2019-09-01T09:30:41.490Z',
+              id: 72,
+              commentAuthor: {
+                avatar: 'https://res.cloudinary.com/tesla-ah-media/image/upload/v1567348506/w1k30oteaubuvduzqs7h.jpg',
+                firstName: 'Prestein',
+                lastName: 'Eric',
+                username: 'ericrukundo',
+              },
+            },
+          ],
+          commentAuthor: {
+            avatar: 'https://res.cloudinary.com/tesla-ah-media/image/upload/v1567348506/w1k30oteaubuvduzqs7h.jpg',
+            firstName: 'Prestein',
+            lastName: 'Eric',
+            username: 'ericrukundo',
+          },
+        },
+        {
+          comment: 'good article',
+          updatedAt: '2019-08-31T21:09:04.300Z',
+          id: 60,
+          Comments: [
+            {
+              comment: 'yu7uy67u',
+              updatedAt: '2019-09-01T10:23:18.169Z',
+              id: 78,
+              commentAuthor: {
+                avatar: 'https://res.cloudinary.com/tesla-ah-media/image/upload/v1567348506/w1k30oteaubuvduzqs7h.jpg',
+                firstName: 'Prestein',
+                lastName: 'Eric',
+                username: 'ericrukundo',
+              },
+            },
+          ],
+          commentAuthor: {
+            avatar: 'https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=2559665340765064&height=50&width=50&ext=1568313351&hash=AeT1Hm3J1DYtNpRj',
+            firstName: 'Ryan',
+            lastName: 'Coleman',
+            username: 'freeusername',
+          },
+        },
+        {
+          comment: 'This comment has been deleted!',
+          updatedAt: '2019-08-31T17:57:57.205Z',
+          id: 34,
+          Comments: [
+            {
+              comment: 'yeah',
+              updatedAt: '2019-08-31T12:19:07.971Z',
+              id: 46,
+              commentAuthor: {
+                avatar: 'https://res.cloudinary.com/tesla-ah-media/image/upload/v1567348506/w1k30oteaubuvduzqs7h.jpg',
+                firstName: 'Prestein',
+                lastName: 'Eric',
+                username: 'ericrukundo',
+              },
+            },
+          ],
+          commentAuthor: {
+            avatar: 'https://res.cloudinary.com/tesla-ah-media/image/upload/v1567348506/w1k30oteaubuvduzqs7h.jpg',
+            firstName: 'Prestein',
+            lastName: 'Eric',
+            username: 'ericrukundo',
+          },
+        },
+        {
+          comment: 'Ohh! this looks good',
+          updatedAt: '2019-08-30T13:04:49.430Z',
+          id: 32,
+          Comments: [
+            {
+              comment: 'yeah, sure',
+              updatedAt: '2019-08-30T18:38:29.295Z',
+              id: 40,
+              commentAuthor: {
+                avatar: 'https://res.cloudinary.com/tesla-ah-media/image/upload/v1567348506/w1k30oteaubuvduzqs7h.jpg',
+                firstName: 'Prestein',
+                lastName: 'Eric',
+                username: 'ericrukundo',
+              },
+            },
+          ],
+          commentAuthor: {
+            avatar: 'https://res.cloudinary.com/tesla-ah-media/image/upload/v1567348506/w1k30oteaubuvduzqs7h.jpg',
+            firstName: 'Prestein',
+            lastName: 'Eric',
+            username: 'ericrukundo',
+          },
+        },
+      ],
+    },
+  ],
+};

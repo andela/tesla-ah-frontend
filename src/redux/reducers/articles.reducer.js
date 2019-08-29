@@ -1,7 +1,7 @@
 /* eslint-disable object-curly-newline */
 import {
   GET_ARTICLES,
-  GET_ONE_ARTICLES,
+  GET_ONE_ARTICLE,
   CREATE_ARTICLE,
   UPLOAD_IMAGE,
   UPDATE_ARTICLE,
@@ -11,6 +11,16 @@ import {
   DELETE_ARTICLE,
   BOOKMARK,
   GET_BOOKMARK,
+  COMMENT_ON_ARTICLE,
+  GET_COMMENTS,
+  REPLY_COMMENT,
+  DELETE_COMMENT,
+  GET_COMMENT_LIKES,
+  GET_COMMENT_DISLIKES,
+  DISLIKE_COMMENT,
+  LIKE_COMMENT,
+  EDIT_COMMENT,
+  GET_COMMENT_EDIT_HISTORY,
 } from '../actions/types/article.type';
 
 const initialState = {
@@ -23,6 +33,16 @@ const initialState = {
   error: {},
   Boomarks: [],
   boomark: {},
+  currentComment: {},
+  currentReplyComment: {},
+  currentDeletedComment: {},
+  currentLikedComment: {},
+  commentLikes: {},
+  commentDislikes: {},
+  currentDisLikedComment: {},
+  currentEditedComment: {},
+  currentCommentEditHistory: {},
+  comments: [],
 };
 
 export default (state = initialState, action) => {
@@ -39,7 +59,7 @@ export default (state = initialState, action) => {
         ...state,
         myarticles: payload,
       };
-    case GET_ONE_ARTICLES:
+    case GET_ONE_ARTICLE:
       return {
         ...state,
         article: payload,
@@ -78,6 +98,56 @@ export default (state = initialState, action) => {
       return {
         ...state,
         bookmark: payload,
+      };
+    case COMMENT_ON_ARTICLE:
+      return {
+        ...state,
+        currentComment: payload,
+      };
+    case GET_COMMENTS:
+      return {
+        ...state,
+        comments: payload,
+      };
+    case REPLY_COMMENT:
+      return {
+        ...state,
+        currentReplyComment: payload,
+      };
+    case DELETE_COMMENT:
+      return {
+        ...state,
+        currentDeletedComment: payload,
+      };
+    case GET_COMMENT_LIKES:
+      return {
+        ...state,
+        commentLikes: payload,
+      };
+    case GET_COMMENT_DISLIKES:
+      return {
+        ...state,
+        commentDislikes: payload,
+      };
+    case LIKE_COMMENT:
+      return {
+        ...state,
+        currentLikedComment: payload,
+      };
+    case DISLIKE_COMMENT:
+      return {
+        ...state,
+        currentDisLikedComment: payload,
+      };
+    case EDIT_COMMENT:
+      return {
+        ...state,
+        currentEditedComment: payload,
+      };
+    case GET_COMMENT_EDIT_HISTORY:
+      return {
+        ...state,
+        currentCommentEditHistory: payload,
       };
     case RESET_PROPS:
       return {

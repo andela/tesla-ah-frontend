@@ -51,6 +51,9 @@
       z-index: 100;
       bottom: -5px;
     }
+    .count{
+      border-radius: 50%;
+    }
     .floating-buttons {
       width: 60px;
       height: 60px;
@@ -106,11 +109,35 @@
     font-size: 20px;
   }
 }
+.like-article-btn{
+  color: $green;
+}
+.dislike-article-btn{
+  color: $orange;
+}
+}
+
+@media screen and (max-width: 894px) {
+  .view-article-content {
+    .rigth-nav {
+      display: none;
+      border: 0px solid gray;
+      .social-buttons {
+        float: left;
+        position: relative;
+        display: flex;
+        .flauting-buttons {
+          margin-right: 5px;
+        }
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
   .view-article-content {
     .rigth-nav {
+      display: none;
       border: 0px solid gray;
       .social-buttons {
         float: left;

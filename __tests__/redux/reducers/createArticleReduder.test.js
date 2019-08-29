@@ -6,7 +6,7 @@ import {
   GET_MY_ARTICLES,
   GET_ARTICLES,
   CREATE_ARTICLE,
-  GET_ONE_ARTICLES,
+  GET_ONE_ARTICLE,
   DELETE_ARTICLE,
   ARTICLE_ERRORS,
 } from '../../../src/redux/actions/types/article.type';
@@ -133,7 +133,7 @@ describe('Reducer test', () => {
   });
   it('Should return an object when article received successful', () => {
     const articles = getArticleReducer(initialState1, {
-      type: GET_ONE_ARTICLES,
+      type: GET_ONE_ARTICLE,
       payload: article[0],
     });
     expect(typeof articles).toBe('object');

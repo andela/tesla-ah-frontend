@@ -55,6 +55,7 @@ export class Profile extends Component {
   componentDidUpdate() {
     const { profile } = this.props;
     const { mainContent } = this.state;
+    /* istanbul ignore next */
     if (profile.hasArticles && !mainContent && this.showArticles) {
       if (this.showArticles.current) {
         this.showArticles.current.click();
@@ -167,7 +168,7 @@ export class Profile extends Component {
       match,
       history,
     } = this.props;
-
+    /* istanbul ignore next */
     if (!isLoggedIn) {
       history.push(`/auth/login?redirect=${history.location.pathname}`);
     } else if (isLoggedIn && unfollow) onFollowUser(isLoggedIn, match.params.username, true, true);
@@ -186,7 +187,7 @@ export class Profile extends Component {
     let bio;
     let heroImage;
     let followButton;
-
+    /* istanbul ignore next */
     if (!isFollowing) {
       followButton = (
         <button

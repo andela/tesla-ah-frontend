@@ -83,7 +83,6 @@ const getFollowers = (state, { followers }) => updateObject(state, {
   followersCount: followers.length,
 });
 
-
 const getFollowing = (state, { following }) => updateObject(state, {
   following,
   followingCount: following.length,
@@ -96,7 +95,6 @@ const successfulFollow = (state, { followers, following }) => updateObject(state
   followingCount: following.length,
   isDoneUpdatingFollowers: true,
 });
-
 
 const reducer = (state = initialState, action) => {
   const { type, payload } = action;
