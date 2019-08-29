@@ -1,14 +1,15 @@
+/* eslint-disable jsx-quotes */
 /* eslint-disable react/destructuring-assignment */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import Spinner from '../widgets/Spinner';
 import { login } from '../../redux/actions/users/login.actions';
-import validate from '../../utils/validations';
 import TextInput from '../common/TextInput';
 import Social from './SocialLogin';
+import Preloader from '../widgets/Preloader';
 
 export class Login extends Component {
   constructor(props) {
@@ -16,8 +17,17 @@ export class Login extends Component {
     this.state = {
       email: '',
       password: '',
+      isPageLoading: false,
     };
   }
+
+  componentWillMount = () => {
+    this.setState(prevState => ({ ...prevState, isPageLoading: true }));
+  };
+
+  componentDidMount = () => {
+    setTimeout(() => this.setState(prevState => ({ ...prevState, isPageLoading: false })), 1000);
+  };
 
   componentDidUpdate = () => {
     this.redirectOnSuccess();
@@ -28,37 +38,28 @@ export class Login extends Component {
   };
 
   redirectOnSuccess = () => {
-    const { isAuthenticated } = this.props;
-    return isAuthenticated ? this.props.history.push('/') : null;
+    const { isAuthenticated, location } = this.props;
+    const { redirect } = queryString.parse(location.search);
+    return isAuthenticated ? this.props.history.push(redirect || '/') : null;
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const formErrors = validate(this.state, 'login');
-    if (Object.values(formErrors).length) {
-      Object.values(formErrors).forEach((err) => {
-        toast.error(err);
-      });
-    } else {
-      const { email, password } = this.state;
-      this.props.login(email, password);
-    }
+    const { email, password } = this.state;
+    this.props.login(email, password);
   };
 
   render() {
-    const { email, password } = this.state;
-    const {
-      ui: { loading },
-    } = this.props;
+    const { isLogging } = this.props;
+    const { isPageLoading, email, password } = this.state;
+    if (isPageLoading) {
+      return <Preloader />;
+    }
     return (
-      <section className="main-section">
+      <section className="main-section-login">
         <div className="row row-login">
-          <div className="col-md-8" id="col-login">
-            <h4>Login to Authors Haven</h4>
-            <br />
-            <br />
-            <Social />
-            <br />
+          <div className="col-md-10" id="col-login">
+            <h4>Authors Haven</h4>
             <br />
             <form onSubmit={this.handleSubmit}>
               <div className="field">
@@ -72,7 +73,6 @@ export class Login extends Component {
                     required
                   />
                 </div>
-                <br />
                 <div className="form-group">
                   <TextInput
                     type="password"
@@ -88,10 +88,28 @@ export class Login extends Component {
                 <br />
                 <br />
 
-                <button type="submit" className="btn button is-grey-login">Login</button>
-                {loading ? <Spinner caption="Login..." /> : null}
+                {isLogging ? (
+                  <Spinner style={{ textAlign: 'center', margin: 0, padding: 0 }} />
+                ) : (
+                  <button type='submit' className='btn button is-grey-login'>
+                    Login
+                  </button>
+                )}
               </div>
             </form>
+            {!isLogging ? (
+              <Fragment>
+                <br />
+                <div className='btn-block text-center'>
+                  <p>Or</p>
+                </div>
+                <br />
+                <Social />
+                <br />
+              </Fragment>
+            ) : (
+              ''
+            )}
           </div>
         </div>
       </section>
@@ -99,16 +117,22 @@ export class Login extends Component {
   }
 }
 
-const mapStateToProps = ({ ui, login: { isAuthenticated } }) => ({
-  ui,
+const mapStateToProps = ({ login: { isAuthenticated, isLogging } }) => ({
   isAuthenticated,
+  isLogging,
 });
 
 Login.propTypes = {
+  location: PropTypes.instanceOf(Object),
   login: PropTypes.func.isRequired,
-  ui: PropTypes.instanceOf(Object).isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
+  isLogging: PropTypes.bool.isRequired,
   history: PropTypes.instanceOf(Object).isRequired,
+};
+Login.defaultProps = {
+  location: {
+    search: '',
+  },
 };
 
 export default connect(

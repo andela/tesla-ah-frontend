@@ -1,10 +1,21 @@
-.carousel-login{
+.social-btn-container{
+
+  .social-btn-fb-cont{
+    border: 1px solid gray;
+  }
+  .social-btn-tw-cont{
+    border: 1px solid gray;
+  }
+  .social-btn-go-cont{
+    border: 1px solid gray;
+  }
+  .carousel-login{
     border: 1px solid black;
     height: 70vh;
    & .carousel-login-div{
      margin-top: 15vh;
      margin-left: 20vh;
-     width: 40vh;
+     width: 50vh;
      height: 40vh;
    }
   }
@@ -51,6 +62,8 @@
   color: $white;
   background-color:#59b5fa;
   }
+}
+
   @media(max-width:768px){
     #login-dp{
     background-color: inherit;
@@ -66,7 +79,9 @@
       height: 40vh;
       margin-left: 4vh;
       margin-top: 10vh;
-      width: 85%;    
+      width: 60%;    
      }
     }
   }
+
+

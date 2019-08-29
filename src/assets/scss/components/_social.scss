@@ -1,7 +1,7 @@
-$base-spacing-unit: 22.5px;
+$base-spacing-unit: 20.7px;
 $half-spacing-unit: 5px;
 $border-radius-global: 15px;
-$button-width: auto;
+$button-width: 32.2%;
 $button-height: 40px;
 $button-text-color: white;
 
@@ -9,46 +9,86 @@ $button-text-color: white;
 .social {
   width: $button-width;
   display: inline-block;
-	padding: 0 ($base-spacing-unit - ($half-spacing-unit / 2)) 0 ($half-spacing-unit / 2);
-	border: 0 none;
-	border-radius: $border-radius-global;
+  padding: 0 ($base-spacing-unit - ($half-spacing-unit / 2)) 0
+    ($half-spacing-unit / 2);
+  border: 0 none;
+  border-radius: $border-radius-global;
+  text-decoration: none;
+  transition: all 250ms linear;
+  @include mediaMd {
+    width: 100%;
+    
+  }
+  @include mediaSm {
+    width: 100%;
+  }
+  @include mediaLg {
+    width: 100%;
+  }
+
+  &:hover {
     text-decoration: none;
-	transition: all 250ms linear;
-
-	&:hover {
-		text-decoration: none;
-		
-	}
-
+  }
 }
 
 .button--social-login {
-	margin-bottom: $half-spacing-unit;
-	margin-right: $half-spacing-unit;
-    color: $button-text-color;
-	height: $button-height;
-	line-height: $button-height - 4;
-	position: relative;
-    text-align: left;
+  margin-bottom: $half-spacing-unit;
+  margin-right: $half-spacing-unit;
+  color: $button-text-color;
+  height: $button-height;
+  line-height: $button-height - 4;
+  position: relative;
+  text-align: left;
+  @include mediaMd {
+    text-align: center;  
+  }
+  @include mediaSm {
+    text-align: center;
+  }
+  @include mediaLg {
+    text-align: center;
+  }
 
-	.icon {
-		margin-right: $half-spacing-unit;
-		font-size: $base-spacing-unit;
-		line-height: $base-spacing-unit;
-		width: ($base-spacing-unit * 2) - ($half-spacing-unit / 2);
-		height: $base-spacing-unit;
-		text-align: center;
-		display: inline-block;
-		position: relative;
-		top: 4px;
+  .icon {
+    margin-right: $half-spacing-unit;
+    font-size: $base-spacing-unit;
+    line-height: $base-spacing-unit;
+    width: ($base-spacing-unit * 2) - ($half-spacing-unit / 2);
+    height: $base-spacing-unit;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    
 
-		&:before {
-			display: inline-block;
-			width: ($base-spacing-unit * 2) - ($half-spacing-unit / 2) - 2;
-		}
+    &:before {
+      display: inline-block;
+      width: ($base-spacing-unit * 2) - ($half-spacing-unit / 2) - 2;
+    }
 
-		&:after {
-			content:"";
-		}
-	}
+    &:after {
+      content: '';
+    }
+  }
+}
+
+@each $name, $color in $social-list {
+  .button--#{$name} {
+    background-color: $color;
+    border: 1px solid darken($color, 10%);
+
+    .icon {
+      border-right: 1px solid darken($color, 10%);
+
+      &:after {
+        border-right: 1px solid lighten($color, 10%);
+      }
+    }
+
+    &:hover {
+      background-color: darken($color, 5%);
+      color: $button-text-color;
+      font-weight: bold;
+    }
+  }
 }
