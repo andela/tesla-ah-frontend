@@ -37,8 +37,9 @@ export class Header extends Component {
 
   render() {
     const {
-      login: { loggedIn, user },
+      login: { user },
       profile,
+      auth: { loggedIn },
     } = this.props;
     const isAuthenticated = this.getUser(sessionStorage.getItem('token'));
     return (
@@ -202,6 +203,7 @@ export class Header extends Component {
 const mapStateToProps = state => ({
   login: state.login,
   profile: state.profile,
+  auth: state.auth,
 });
 
 const mapDispatchToProps = (dispatch) => {
