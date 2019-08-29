@@ -40,7 +40,6 @@ export class Header extends Component {
   render() {
     const {
       login: { user },
-      profile,
       auth: { loggedIn },
     } = this.props;
     const isAuthenticated = this.getUser(sessionStorage.getItem('token'));
@@ -169,13 +168,7 @@ export class Header extends Component {
                 &nbsp;&nbsp;&nbsp;
                 <li id="nav-item noti-container message">
                   <Profilemenu
-                    avata={
-                      profile.user !== null
-                        ? profile.user.avatar
-                        : user.avatar
-                          ? user.avatar
-                          : 'https://scontent.fkgl1-1.fna.fbcdn.net/v/t1.0-9/16196015_10154888128487744_6901111466535510271_n.png?_nc_cat=103&_nc_oc=AQm1z5jCqvLA7cItJnm3RXa2_ApxETs_BsK1Y5lNksTqg0YsrGmwP91yr73V3BLnYOw&_nc_ht=scontent.fkgl1-1.fna&oh=e18554da0038703db68054626fa73da9&oe=5DE21BE9'
-                    }
+                    avata={user.avatar}
                     user={user}
                   />
                 </li>

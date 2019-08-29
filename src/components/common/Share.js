@@ -74,7 +74,7 @@ const Share = (props) => {
   if (article) {
     const tweet = `"${article.title}" - by ${article.author.username} @ ${FRONTEND_URL}/articles/${article.slug}`;
     return (
-      <React.Fragment>
+      <div>
         <div className="share-count">
           <button
             className="floating-buttons mt-3 facebook"
@@ -119,7 +119,7 @@ const Share = (props) => {
             emailCount > 0 && (<span className="badge badge-secondary count email">{emailCount}</span>)
           }
         </div>
-      </React.Fragment>
+      </div>
     );
   }
   return null;

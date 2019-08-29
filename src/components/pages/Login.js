@@ -1,6 +1,8 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-console */
 /* eslint-disable jsx-quotes */
+/* eslint-disable react/prop-types */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
@@ -43,12 +45,12 @@ export class Login extends Component {
   redirectOnSuccess = () => {
     let redirect;
     const { isAuthenticated, location } = this.props;
-    /* istanbul ignore next */
     if (location.state) {
+      /* istanbul ignore next */
       redirect = location.state.redirect;
     }
-    /* istanbul ignore next */
-    return isAuthenticated ? this.props.history.push(redirect || '/') : null;
+    const previousLink = sessionStorage.getItem('previousLink');
+    return previousLink && isAuthenticated ? this.props.history.goBack() : isAuthenticated ? this.props.history.push(redirect || '/') : null;
   };
 
   redirectOnReadArticle = () => {

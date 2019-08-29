@@ -2,8 +2,12 @@ version: "2"
 plugins:
   eslint:
     enabled: true
+    checks:
+      jsx-a11y/no-static-element-interactions:
+        enabled: false
   duplication:
     enabled: false
+    
 exclude_patterns:
   - "__tests__"
   - "__mocks__"
@@ -12,11 +16,10 @@ checks:
     config:
       threshold: 6
   complex-logic:
-    config:
-      threshold: 6
+    enabled: false
   file-lines:
     config:
-      threshold: 400
+      threshold: 500
   method-complexity:
     config:
       threshold: 250

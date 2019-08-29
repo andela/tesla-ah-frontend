@@ -15,9 +15,10 @@ import {
   deleteArticle,
 } from '../../redux/actions/article.actions';
 import { setLoading, setLoaded } from '../../redux/actions/ui.actions';
-import Preloader from '../widgets/Preloader';
+// import Preloader from '../widgets/Preloader';
 import Image from '../items/Imageitem';
 import { getItemDataFromDatabase } from '../../utils/getArticleItemData';
+import Preloader from '../widgets/Preloader';
 
 export class MyArticles extends Component {
   state = {
@@ -35,17 +36,7 @@ export class MyArticles extends Component {
 
   render() {
     const foundArticles = this.props.articles.data;
-    // console.log('foundArticles in redux', foundArticles);
-    if (foundArticles === undefined) {
-      return (
-        <div>
-          <div className="homecontainer" data-test="homeComponent">
-            <Preloader />
-          </div>
-        </div>
-      );
-    }
-    if (foundArticles) {
+    if (foundArticles !== undefined && foundArticles) {
       const articles = foundArticles.foundArticles;
       return (
         <div className="container mt-5 mb-5 center my-articles-container">
@@ -80,6 +71,7 @@ export class MyArticles extends Component {
               <Link
                 to={`/articles/${article.slug}`}
                 style={{ textDecoration: 'none' }}
+                key={article.slug}
               >
                 <div className="row mt-5 mb-3 ml-3 " key={article.slug}>
                   <div className="col-lg-7" style={{ cursor: 'pointer' }}>
@@ -134,6 +126,11 @@ export class MyArticles extends Component {
         </div>
       );
     }
+    return (
+      <div>
+        <Preloader />
+      </div>
+    );
   }
 }
 export const mapStateToProps = state => ({

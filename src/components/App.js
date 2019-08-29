@@ -4,7 +4,6 @@ import {
   Route,
   BrowserRouter,
   Switch,
-  Redirect,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
