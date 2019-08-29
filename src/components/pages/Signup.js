@@ -47,37 +47,39 @@ export class Signup extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-
-    const formErrors = validate(this.state, 'signup');
+    const {
+      firstName,
+      lastName,
+      email, username, password, confirmPassword, gender, bio, birthDate,
+    } = this.state;
+    const data = {
+      firstName,
+      lastName,
+      email,
+      username,
+      password,
+      confirmPassword,
+      gender,
+      bio,
+      birthDate,
+    };
+    const formErrors = validate(data, 'signup');
     if (Object.values(formErrors).length) {
       Object.values(formErrors).forEach((err) => {
         toast.error(err);
       });
     } else {
-      const {
-        state: {
-          firstName,
-          lastName,
-          email,
-          username,
-          password,
-          confirmPassword,
-          bio,
-          birthDate,
-          gender,
-        },
-      } = this;
       // eslint-disable-next-line react/destructuring-assignment
       this.props.createAccount({
-        firstName,
-        lastName,
-        email,
-        username,
-        password,
-        confirmPassword,
-        bio,
-        gender,
-        dateOfBirth: birthDate,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        username: this.state.username,
+        password: this.state.password,
+        confirmPassword: this.state.confirmPassword,
+        bio: this.state.bio,
+        gender: this.state.gender,
+        dateOfBirth: this.state.birthDate,
       });
     }
   };
