@@ -3,7 +3,7 @@
     "browser": true,
     "jest": true,
     "node": false,
-    "es6": true,
+    "es6": true
   },
   "parser": "babel-eslint",
   "parserOptions": {

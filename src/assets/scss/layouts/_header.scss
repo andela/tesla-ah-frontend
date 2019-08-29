@@ -18,6 +18,33 @@ header {
     }
   }
 
+  .dropdown-item-custom {
+    padding: 10px;
+    height: 300px;
+    overflow: scroll;
+  }
+
+  .notification-item {
+    margin: 7px 0;
+    padding: 7px;
+
+    a {
+      color: $dark;
+      text-decoration: none;
+      
+    }
+  }
+
+  .notification-item:hover {
+    background: $blue;
+    a {
+      color: #ffffff;
+      text-decoration: none;
+      
+    }
+
+  }
+
   nav {
     .logo {
       height: 50px;
