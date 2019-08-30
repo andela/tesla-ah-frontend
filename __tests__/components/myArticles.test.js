@@ -30,10 +30,22 @@ const props2 = {
   getMyArticles: jest.fn(),
   deleteArticle: jest.fn(),
 };
+const props3 = {
+  articles: {
+    data: {
+      foundArticles: [],
+      count: 0,
+    },
+  },
+  history: [],
+  getMyArticles: jest.fn(),
+  deleteArticle: jest.fn(),
+};
 
 describe('Fetch All Articles tests...', () => {
   const allArticles = shallow(<MyArticles {...props1} />);
   const allArticles1 = shallow(<MyArticles {...props2} />);
+  const allArticles2 = shallow(<MyArticles {...props3} />);
   it('it should render the AllArticles Component', () => {
     mapStateToProps({ article: { MyArticles: [] }, ui: {}, login: {} });
     expect(allArticles).toMatchSnapshot();
@@ -41,6 +53,10 @@ describe('Fetch All Articles tests...', () => {
   it('it should render the AllArticles Component', () => {
     allArticles1.instance().changeCurrentPage(1);
     expect(allArticles1).toMatchSnapshot();
+  });
+  it('it should render the AllArticles Component', () => {
+    allArticles2.instance().changeCurrentPage(1);
+    expect(allArticles2).toMatchSnapshot();
   });
 });
 
