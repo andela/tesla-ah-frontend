@@ -40,7 +40,11 @@ class ReadArticle extends Component {
     const { slug } = this.props.match.params;
     this.props.getBoomarks();
     this.props.getArticle(slug);
-    this.setState({ slug });
+    let user = {};
+    if (sessionStorage.getItem('token')) {
+      user = jwt(sessionStorage.getItem('token'));
+    }
+    this.setState({ user, slug });
   }
 
   componentWillReceiveProps(newProps) {
