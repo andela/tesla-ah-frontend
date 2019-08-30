@@ -17,7 +17,7 @@ checks:
       threshold: 400
   method-complexity:
     config:
-      threshold: 15
+      threshold: 20
   method-count:
     config:
       threshold: 20

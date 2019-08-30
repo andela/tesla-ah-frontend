@@ -10,7 +10,15 @@ import {
   UPDATE_PROFILE_FAIL,
   UPDATE_PROFILE_SUCCESS,
   SET_PROFILE_UPDATABLE,
+  GET_FOLLOWERS,
+  GET_FOLLOWING,
+  FOLLOW_USER_START,
+  FOLLOW_USER_SUCCESS,
+  SET_FOLLOWERS_UPDATABLE,
+  GET_FOLLOWERS_FAIL,
+  GET_FOLLOWING_FAIL,
 } from '../../../src/redux/actions/types/profile.type';
+import { profile } from '../../mockData';
 
 describe('Test profile reducers', () => {
   test('PROFILE_INIT_FAIL reducer', () => {
@@ -147,5 +155,81 @@ describe('Test profile reducers', () => {
       isDoneUpdating: false,
       updating: false,
     });
+  });
+
+  test('GET_FOLLOWERS reducer', () => {
+    const initialState = {
+      followers: null,
+      followersCount: 0,
+    };
+    expect(reducer(initialState, {
+      type: GET_FOLLOWERS,
+      payload: { followers: profile.followers },
+    })).toEqual({
+      followers: profile.followers,
+      followersCount: profile.followers.length,
+    });
+  });
+
+  test('GET_FOLLOWING reducer', () => {
+    const initialState = {
+      following: null,
+      followingCount: 0,
+    };
+    expect(reducer(initialState, {
+      type: GET_FOLLOWING,
+      payload: { following: profile.following },
+    })).toEqual({
+      following: profile.following,
+      followingCount: profile.following.length,
+    });
+  });
+
+  test('FOLLOW_USER_START reducer', () => {
+    const initialState = {
+      isDoneUpdatingFollowers: null,
+    };
+    expect(reducer(initialState, { type: FOLLOW_USER_START })).toEqual({
+      isDoneUpdatingFollowers: false,
+    });
+  });
+
+  test('FOLLOW_USER_SUCCESS reducer', () => {
+    const initialState = {
+      followers: null,
+      followersCount: 0,
+      following: null,
+      followingCount: 0,
+      isDoneUpdatingFollowers: false,
+    };
+    expect(reducer(initialState, {
+      type: FOLLOW_USER_SUCCESS,
+      payload: { followers: profile.followers, following: profile.following },
+    })).toEqual({
+      followers: profile.followers,
+      followersCount: profile.followers.length,
+      following: profile.following,
+      followingCount: profile.following.length,
+      isDoneUpdatingFollowers: true,
+    });
+  });
+
+  test('SET_FOLLOWERS_UPDATABLE reducer', () => {
+    const initialState = {
+      isDoneUpdatingFollowers: null,
+    };
+    expect(reducer(initialState, { type: SET_FOLLOWERS_UPDATABLE })).toEqual({
+      isDoneUpdatingFollowers: false,
+    });
+  });
+
+  test('GET_FOLLOWERS_FAIL reducer', () => {
+    const initialState = {};
+    expect(reducer(initialState, { type: GET_FOLLOWERS_FAIL })).toEqual({});
+  });
+
+  test('GET_FOLLOWING_FAIL reducer', () => {
+    const initialState = {};
+    expect(reducer(initialState, { type: GET_FOLLOWING_FAIL })).toEqual({});
   });
 });

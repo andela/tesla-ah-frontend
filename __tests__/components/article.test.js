@@ -2,7 +2,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { articles } from '../mockData';
-import Article from '../../src/components/common/Article';
+import Article from '../../src/components/common/ArticleCard';
 
 const renderArticleForm = (args) => {
   const defaultProps = {

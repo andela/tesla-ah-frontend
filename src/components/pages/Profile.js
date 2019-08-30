@@ -5,28 +5,47 @@ import { withErrorHandler } from 'tesla-error-handler';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-import Article from '../common/Article';
+import Article from '../common/ArticleCard';
 import Interests from '../widgets/Interests';
 import FollowCard from '../common/FollowCard';
 import {
   initProfile,
   getCurrentUser,
+  followUser,
+  setFollowersUpdatable,
 } from '../../redux/actions/profile.actions';
 import Fab from '../widgets/Fab';
 // eslint-disable-next-line import/no-named-as-default
 import ProfileEditForm from '../forms/ProfileEditForm';
 
-import profilePlaceholder from '../../assets/images/profile_placeholder.jpg';
+import profilePlaceholder from '../../assets/images/profile.svg';
 import Spinner from '../widgets/Spinner';
 
 export class Profile extends Component {
+  static getDerivedStateFromProps(props) {
+    const { profile } = props;
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) {
+      return { isFollowing: 'NO_USER' };
+    }
+    let isFollowing = false;
+    profile.followers.forEach((f) => {
+      if (f.follower.username === user.username) {
+        isFollowing = true;
+      }
+    });
+    return { isFollowing };
+  }
+
   constructor(props) {
     super(props);
     this.state = {
       mainContent: null,
+      isFollowing: false,
+      isLoggedIn: sessionStorage.getItem('token'),
     };
-    props.setCurrentUser();
-    props.initProfile(props.match.params.username);
+    props.setCurrentUser(sessionStorage.getItem('token'));
+    props.onInitProfile(props.match.params.username);
     this.showArticles = React.createRef();
   }
 
@@ -41,9 +60,19 @@ export class Profile extends Component {
   }
 
   handleTabChange = (tab) => {
-    const { profile } = this.props;
+    const {
+      profile,
+      onFollowUser,
+      match,
+    } = this.props;
+    const { isLoggedIn } = this.state;
     let content;
     let final;
+    let isCurrentUser;
+
+    if (profile.currentUser) {
+      isCurrentUser = match.params.username === profile.currentUser.username;
+    }
     // eslint-disable-next-line default-case
     switch (tab) {
       case 'articles':
@@ -82,6 +111,11 @@ export class Profile extends Component {
             bio={f.follower.bio || 'No bio'}
             followType="Followers"
             count={profile.followersCount}
+            isFollowedBack={f.isFollowedback}
+            userId={profile.user.id}
+            onFollowUser={() => onFollowUser(isLoggedIn, f.follower.username)}
+            onUnfollowUser={() => onFollowUser(isLoggedIn, f.follower.username, null, true)}
+            isCurrentUser={isCurrentUser}
           />
         ));
         final = (
@@ -105,7 +139,8 @@ export class Profile extends Component {
             username={f.followedUser.username}
             bio={f.followedUser.bio || 'No bio'}
             followType="Following"
-            noButton
+            onUnfollowUser={() => onFollowUser(isLoggedIn, f.followedUser.username, null, true)}
+            isCurrentUser={isCurrentUser}
           />
         ));
         final = (
@@ -122,13 +157,67 @@ export class Profile extends Component {
     }
   };
 
+  handleFollow = (unfollow) => {
+    const { isLoggedIn } = this.state;
+    const {
+      onFollowUser,
+      match,
+      history,
+    } = this.props;
+
+    if (!isLoggedIn) {
+      history.push(`/auth/login?redirect=${history.location.pathname}`);
+    } else if (isLoggedIn && unfollow) onFollowUser(isLoggedIn, match.params.username, true, true);
+    else onFollowUser(isLoggedIn, match.params.username, true);
+  }
+
   render() {
-    const { profile, match } = this.props;
-    const { mainContent } = this.state;
+    const {
+      profile,
+      match,
+      onSetFollowersUpdatable,
+    } = this.props;
+    const { mainContent, isFollowing } = this.state;
     let dateJoined;
     let email;
     let bio;
     let heroImage;
+    let followButton;
+
+    if (!isFollowing) {
+      followButton = (
+        <button
+          id="followUser"
+          type="button"
+          className="btn-custom"
+          onClick={() => this.handleFollow()}
+        >
+          Follow
+        </button>
+      );
+    } else if (isFollowing && isFollowing === 'NO_USER') {
+      followButton = (
+        <button
+          id="followUser"
+          type="button"
+          className="btn-custom"
+          onClick={() => this.handleFollow(true)}
+        >
+          Login to Follow
+        </button>
+      );
+    } else {
+      followButton = (
+        <button
+          id="followUser"
+          type="button"
+          className="btn-custom"
+          onClick={() => this.handleFollow(true)}
+        >
+          Unfollow
+        </button>
+      );
+    }
 
     if (profile.user) {
       const { email: userEmail } = profile.user;
@@ -142,6 +231,10 @@ export class Profile extends Component {
       let isCurrentUser;
       if (profile.currentUser) {
         isCurrentUser = match.params.username === profile.currentUser.username;
+      }
+
+      if (profile.isDoneUpdatingFollowers) {
+        onSetFollowersUpdatable();
       }
 
       return (
@@ -220,7 +313,7 @@ export class Profile extends Component {
           </div>
           <div className="container d-main-content">
             <div className="row flex-column flex-lg-row">
-              <div className="col order-1">
+              <div className="col order-1 p-0">
                 <div className="info-box info-box-content d-flex flex-column align-items-start">
                   <span className="fullname">
                     {`${capitalize(profile.user.firstName)} 
@@ -238,16 +331,12 @@ export class Profile extends Component {
                     {dateJoined}
                   </span>
                 </div>
-                {!isCurrentUser ? (
-                  <button type="button" className="btn-custom">
-                    Follow
-                  </button>
-                ) : null}
+                {!isCurrentUser ? followButton : null}
               </div>
-              <div className="col-12 col-lg-6 order-3 order-lg-2">
+              <div className="col-12 col-lg-6 order-3 order-lg-2 scrollable">
                 {mainContent || 'Loading...'}
               </div>
-              <div className="col interests order-2 order-lg-3">
+              <div className="col interests order-2 order-lg-3 p-0">
                 <div className="content-title d-flex justify-content-between align-items-center">
                   <span>Bio</span>
                 </div>
@@ -282,18 +371,24 @@ export class Profile extends Component {
   }
 }
 
-export const mapStateToProps = ({ profile }) => ({ profile });
+export const mapStateToProps = ({ profile, login }) => ({ profile, login });
 
 export const mapDispatchToProps = dispatch => ({
-  initProfile: username => dispatch(initProfile(username)),
-  setCurrentUser: () => dispatch(getCurrentUser()),
+  onInitProfile: (username, id) => dispatch(initProfile(username, id)),
+  setCurrentUser: token => dispatch(getCurrentUser(token)),
+  onFollowUser: (token, username, usePath, unfollow) => {
+    dispatch(followUser(token, username, usePath, unfollow));
+  },
+  onSetFollowersUpdatable: () => dispatch(setFollowersUpdatable()),
 });
 
 Profile.propTypes = {
   profile: PropTypes.instanceOf(Object).isRequired,
-  initProfile: PropTypes.func.isRequired,
+  onInitProfile: PropTypes.func.isRequired,
   setCurrentUser: PropTypes.func.isRequired,
   match: PropTypes.instanceOf(Object).isRequired,
+  onFollowUser: PropTypes.func.isRequired,
+  onSetFollowersUpdatable: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Profile, axios));

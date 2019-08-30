@@ -11,6 +11,12 @@ const renderFollowCard = (args) => {
     lastName: '',
     username: '',
     noButton: null,
+    bio: '',
+    isFollowedBack: true,
+    followType: 'Followers',
+    onUnfollowUser: jest.fn(),
+    onFollowUser: jest.fn(),
+    isCurrentUser: true,
   };
   const props = { ...defaultProps, ...args };
 
@@ -34,9 +40,10 @@ it('renders FollowCard component with follow button', () => {
     firstName,
     lastName,
     username,
+    isCurrentUser: false,
   });
-  expect(wrapper.find('.follow-card').length).toBe(1);
-  expect(wrapper.find('.btn-custom').length).toBe(1);
+  expect(wrapper.find('.follow-card--container').length).toBe(1);
+  expect(wrapper.find('.btn-custom').length).toBe(0);
 });
 
 it('renders FollowCard component without follow button', () => {
@@ -53,6 +60,6 @@ it('renders FollowCard component without follow button', () => {
     username,
     noButton: true,
   });
-  expect(wrapper.find('.follow-card').length).toBe(1);
-  expect(wrapper.find('.btn-custom').length).toBe(0);
+  expect(wrapper.find('.follow-card--container').length).toBe(1);
+  expect(wrapper.find('.btn-custom').length).toBe(1);
 });

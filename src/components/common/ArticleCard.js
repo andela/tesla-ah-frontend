@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { trim } from 'lodash';
 
-import '../../assets/scss/components/Article.scss';
+import '../../assets/scss/components/ArticleCard.scss';
 
 const Article = (props) => {
   const {
@@ -50,6 +51,30 @@ const Article = (props) => {
       </Link>
     </React.Fragment>
   );
+};
+
+const stringPropType = PropTypes.string;
+
+Article.defaultProps = {
+  coverImage: '',
+  title: '',
+  description: '',
+  lastUpdated: '',
+  readTime: '',
+  likes: 0,
+  dislikes: 0,
+  slug: '',
+};
+
+Article.propTypes = {
+  coverImage: stringPropType,
+  title: stringPropType,
+  description: stringPropType,
+  lastUpdated: stringPropType,
+  readTime: stringPropType,
+  likes: PropTypes.number,
+  dislikes: PropTypes.number,
+  slug: stringPropType,
 };
 
 export default Article;

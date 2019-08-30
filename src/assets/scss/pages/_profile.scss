@@ -1,6 +1,10 @@
 .view-profile--container {
   background-color: #F4F4F4;
 
+  .no-padding {
+    padding: 0;
+  }
+
   .view-profile--spinner {
     position: relative;
     height: 700px;
@@ -167,6 +171,11 @@
   
   .interests .info-box {
     padding-top: 10px;
+  }
+
+  .scrollable {
+    height: 800px;
+    overflow: scroll;
   }
   
   @media (min-height: 300px) {

@@ -1,7 +1,7 @@
 @import '../abstracts/variables';
 
 .article-card {
-  padding: 15px 10px;
+  padding: 15px;
   background-color: #fff;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -16,18 +16,27 @@
 
 .article-card-img {
   border-radius: 5px;
-  height: 300px;
+  height: 250px;
 }
 
 .article-title {
   color: #000;
-  font-size: 2em;
+  font-size: 1.5em;
+  margin: 5px 0;
+}
+
+.article-description {
+  text-align: justify;
+  color: rgba(0, 0, 0, 0.856);
+}
+
+.article-actions {
+  color: rgba(0, 0, 0, 0.514);
 }
 
 .article-description,
 .article-actions {
-  color: #000;
-  font-size: 1.3em;
+  font-size: 1em;
 }
 
 a:hover {
