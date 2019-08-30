@@ -1,5 +1,8 @@
-import axios from 'axios';
+/* eslint-disable object-curly-newline */
+/* eslint-disable import/prefer-default-export */
 // import axioz from '../../utils/axios-ah';
+
+import axios from 'axios';
 import {
   UPLOAD_IMAGE,
   CREATE_ARTICLE,
@@ -9,12 +12,15 @@ import {
   RESET_PROPS,
   DELETE_ARTICLE,
   GET_MY_ARTICLES,
+  BOOKMARK,
+  BOOKMARK_ERROR,
+  GET_BOOKMARK,
 } from './types/article.type';
 import {
   STORAGE_BASE_URL,
   IMAGE_STORAGE_PRESENTS,
   API_URL,
-  HEADER_CONFIG,
+  HEADER_CONFIG, BACKEND_URL,
 } from '../../utils/constants';
 
 export const createArticle = article => async (dispatch) => {
@@ -62,7 +68,6 @@ export const getArticle = slug => async (dispatch) => {
     payload: data,
   });
 };
-
 export const getArticles = page => async (dispatch) => {
   const { data } = await axios.get(`${API_URL}/articles?page=${page}&limit=10`);
   dispatch({
@@ -90,4 +95,43 @@ export const getMyArticles = page => async (dispatch) => {
     type: GET_MY_ARTICLES,
     payload: res.data,
   });
+};
+
+export const getBoomarks = () => async (dispatch) => {
+  const { data } = await axios.get(`${BACKEND_URL}/api/bookmarks`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      token: sessionStorage.getItem('token'),
+    },
+  });
+  dispatch({
+    type: GET_BOOKMARK,
+    payload: data.data,
+  });
+};
+
+export const bookmark = slug => async (dispatch) => {
+  try {
+    const { data } = await axios.post(
+      `${BACKEND_URL}/api/articles/${slug}/bookmark`,
+      {},
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          token: sessionStorage.getItem('token'),
+        },
+      },
+    );
+    dispatch({
+      type: BOOKMARK,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: BOOKMARK_ERROR,
+      payload: error.response.data,
+    });
+  }
 };
