@@ -9,6 +9,8 @@ import author from './authorprofile.reducer';
 import profileReducer from './profile.reducer';
 
 import searchReducer from './article/search.reducer';
+import optInOptOutEmailReducer from './optInOptOutEmail.reducer';
+import optInOptOutAppReducer from './optInOptOutApp.reducer';
 
 export default combineReducers({
   ui: uiReducer,
@@ -20,4 +22,6 @@ export default combineReducers({
   author,
   profile: profileReducer,
   search: searchReducer,
+  optInOptOutApp: optInOptOutAppReducer,
+  optInOptOutEmail: optInOptOutEmailReducer,
 });
