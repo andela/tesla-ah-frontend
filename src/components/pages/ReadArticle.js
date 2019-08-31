@@ -23,6 +23,7 @@ import { getUserProfile } from '../../redux/actions/author/authoruser.action';
 import { DEFAULT_AVATA } from '../../utils/constants';
 import Preloader from '../widgets/Preloader';
 import LikeAndDislike from '../common/LikeAndDislike';
+import Share from '../common/Share';
 
 class ReadArticle extends Component {
   state = {
@@ -174,22 +175,14 @@ class ReadArticle extends Component {
               </div>
               <div className="col-lg-1 rigth-nav text-center">
                 <div className="social-buttons">
-                  <div className="flauting-buttons mt-3 facebook">
-                    <i className="fab fa-facebook-f" />
-                  </div>
-                  <div className="flauting-buttons mt-3 twitter">
-                    <i className="fab fa-twitter" />
-                  </div>
-                  <div className="flauting-buttons mt-3 email">
-                    <i className="fas fa-envelope-open" />
-                  </div>
+                  <Share article={Article.article} />
                   <div
                     onClick={this.handleClickBookmark}
                     className={`${
                       username === this.state.Article.article.author.username
                         ? 'hide-button'
                         : ''
-                    } flauting-buttons mt-3 bookmark`}
+                    } floating-buttons mt-3 bookmark`}
                   >
                     <i className={BookmarkButton} />
                   </div>
@@ -202,7 +195,7 @@ class ReadArticle extends Component {
                         username !== this.state.Article.article.author.username
                           ? 'hide-button'
                           : ''
-                      } flauting-buttons mt-3 edit`}
+                      } floating-buttons mt-3 edit`}
                     >
                       <i className="fas fa-edit" />
                     </div>
@@ -212,7 +205,7 @@ class ReadArticle extends Component {
                       username !== this.state.Article.article.author.username
                         ? 'hide-button'
                         : ''
-                    } flauting-buttons mt-3 delete`}
+                    } floating-buttons mt-3 delete`}
                     data-toggle="modal"
                     data-target="#myModal"
                   >
