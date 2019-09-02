@@ -1,10 +1,10 @@
 /* eslint-disable jsx-quotes */
-/* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import queryString from 'query-string';
 import Spinner from '../widgets/Spinner';
 import { login } from '../../redux/actions/users/login.actions';
 import TextInput from '../common/TextInput';
@@ -29,18 +29,18 @@ export class Login extends Component {
     setTimeout(() => this.setState(prevState => ({ ...prevState, isPageLoading: false })), 1000);
   };
 
-  componentDidUpdate() {
-    this.redirectOnReadArticle();
-  }
+  componentDidUpdate = () => {
+    this.redirectOnSuccess();
+  };
 
   onChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
   };
 
-  redirectOnReadArticle = () => {
+  redirectOnSuccess = () => {
     const { isAuthenticated, location } = this.props;
-    const url = location.state && location.state.redirectt;
-    return isAuthenticated ? this.props.history.push(url || '/') : null;
+    const { redirect } = queryString.parse(location.search);
+    return isAuthenticated ? this.props.history.push(redirect || '/') : null;
   };
 
   handleSubmit = (e) => {
@@ -122,12 +122,6 @@ const mapStateToProps = ({ login: { isAuthenticated, isLogging } }) => ({
   isLogging,
 });
 
-Login.defaultProps = {
-  location: {
-    search: '',
-  },
-};
-
 Login.propTypes = {
   location: PropTypes.instanceOf(Object),
   login: PropTypes.func.isRequired,
@@ -138,12 +132,6 @@ Login.propTypes = {
 Login.defaultProps = {
   location: {
     search: '',
-  },
-};
-
-Login.defaultProps = {
-  location: {
-    state: '',
   },
 };
 

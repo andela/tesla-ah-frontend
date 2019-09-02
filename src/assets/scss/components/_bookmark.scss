@@ -1,0 +1,63 @@
+@import '../utils/mobile';
+.Bookmarks{
+
+  .bookmark_container {
+    .bookmark-title {
+      font-size:30px;
+    }
+      & .itemcontainer{
+          margin-left: -15px;
+        & [for='story_readtime'] {
+          float: right;
+          margin-left:25px
+        }
+    @include mediaMd {
+        padding: 0px 15px 15px 0px;
+        margin-left: -15px;
+        & [for='story_readtime'] {
+          float: right;
+        }
+        & img {
+          @include mediaMd {
+            margin-left: -20px;
+          }
+        }
+      }
+    }
+    .bookmark-item-cont {
+      .remove-btn {
+        background-color: transparent;
+        color: $email;
+        border-color: $email;
+        margin-left: 6px;
+        @include mediaMd {
+          margin-left: -10px;
+        }
+      }
+      .bookmark-link {
+        &:hover {
+          text-decoration: none;
+          font-size: 16.2px;
+        }
+      }
+    }
+  }
+  .no-bookmarks{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20px;
+    height: 490px;
+    padding: 13% 0px 0px 0px;
+    // border:solid 2px $black;
+    margin-bottom: -200px;
+    color: $dark;
+    @include mediaSm{
+      padding: 47% 0px 0px 0px;
+      font-size: 20px;
+    }
+    @include mediaMd{
+      padding: 35% 0px 0px 0px;
+    }
+
+  }
+}
