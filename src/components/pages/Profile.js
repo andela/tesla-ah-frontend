@@ -57,7 +57,9 @@ export class Profile extends Component {
     const { mainContent } = this.state;
     /* istanbul ignore next */
     if (profile.hasArticles && !mainContent && this.showArticles) {
+      /* istanbul ignore next */
       if (this.showArticles.current) {
+        /* istanbul ignore next */
         this.showArticles.current.click();
       }
     }
@@ -170,6 +172,7 @@ export class Profile extends Component {
     } = this.props;
     /* istanbul ignore next */
     if (!isLoggedIn) {
+      /* istanbul ignore next */
       history.push(`/auth/login?redirect=${history.location.pathname}`);
     } else if (isLoggedIn && unfollow) onFollowUser(isLoggedIn, match.params.username, true, true);
     else onFollowUser(isLoggedIn, match.params.username, true);
@@ -189,6 +192,7 @@ export class Profile extends Component {
     let followButton;
     /* istanbul ignore next */
     if (!isFollowing) {
+      /* istanbul ignore next */
       followButton = (
         <button
           id="followUser"

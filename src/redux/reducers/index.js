@@ -13,6 +13,7 @@ import optInOptOutEmailReducer from './optInOptOutEmail.reducer';
 import optInOptOutAppReducer from './optInOptOutApp.reducer';
 import bookmarkedArticles from './bookmarks.reducer';
 import ratingReducer from './ratingArticle/rating.reducer';
+import chatReducer from './users/chat.reducers';
 
 export default combineReducers({
   ui: uiReducer,
@@ -29,4 +30,5 @@ export default combineReducers({
   bookmarkedArticles,
   likeAndDislike,
   rating: ratingReducer,
+  chats: chatReducer,
 });

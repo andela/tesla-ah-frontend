@@ -1,0 +1,114 @@
+.chat{
+  &__container{
+    min-height: 80vh;
+  }
+  &__box{
+    margin:auto 20%;
+    border:1px solid lighten($grey,50%);
+    padding: 20px;
+    border-radius: 5px;
+    overflow:scroll;
+    height: 100vh;
+  }
+  &__message{
+    border:1px solid $grey;
+    padding: 8px;
+    border-radius: 15px;
+    margin:10px auto;
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin-right: 50%;
+    margin-left: 0;
+    @include mediaSm{
+      display: block;
+    }
+    
+  }
+  &__mine{
+    background:$grey-ish;
+    color:$white;
+    margin-left:50%;
+    border:0;
+    p{
+      margin-right:20px;
+    }
+  }
+  &__avatar{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    border: 1px solid $grey;
+    margin-top:10px;
+    @include mediaSm{
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+    }
+  }
+  &__form{
+    display:flex;
+    justify-content: space-around;
+  }
+  &__header{
+    display:flex;
+    margin: auto 20%;
+    i{
+      font-size:40px;
+    }
+  }
+  &__friend{
+    margin-left: 30px;
+  }
+  &__message{
+    &--data{
+      margin: auto 10px;
+    }
+  }
+  &__info{
+    position:relative;
+    i{
+      position: relative;
+      color:$grey;
+    }
+  }
+  &__user{
+    display: flex;
+    justify-content: space-between;
+    &--name{
+      margin-top:15px;
+      margin-right:20px;
+      margin-left:10px;
+      p{
+        color:$dark;
+      }
+    }
+    &--status{
+      margin-top:15px;
+      i{
+        color:$grey;
+      }
+    }
+    &--info{
+      display: flex;
+      justify-content: space-evenly;
+    }
+  }
+
+  &__back{
+    color:$dark;
+  }
+  &__username{
+    color:$dark;
+  }
+}
+
+.users{
+  &__container{
+    margin:auto 20%;
+  }
+  &__title{
+    margin-bottom: 5px;
+    margin-left:15%;
+  }
+}
