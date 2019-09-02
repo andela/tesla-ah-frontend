@@ -11,3 +11,6 @@ export const HEADER_CONFIG = {
     token: `${sessionStorage.getItem('token')}`,
   },
 };
+
+export const LOCAL_SOCKET_SERVER = 'http://localhost:3000';
+export const REMOTE_SOCKET_SERVER = 'https://tesla-ah-staging.herokuapp.com';

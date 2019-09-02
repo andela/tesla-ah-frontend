@@ -8,6 +8,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import QueryString from 'query-string';
 import Spinner from '../widgets/Spinner';
 import { login } from '../../redux/actions/users/login.actions';
 import TextInput from '../common/TextInput';
@@ -35,7 +36,6 @@ export class Login extends Component {
 
   componentDidUpdate = () => {
     this.redirectOnSuccess();
-    this.redirectOnReadArticle();
   };
 
   onChange = ({ target }) => {
@@ -49,17 +49,12 @@ export class Login extends Component {
       /* istanbul ignore next */
       redirect = location.state.redirect;
     }
-    const previousLink = sessionStorage.getItem('previousLink');
-    return previousLink && isAuthenticated ? this.props.history.goBack() : isAuthenticated ? this.props.history.push(redirect || '/') : null;
+    const redirectUrl = QueryString.parse(location.search).redirect;
+    console.log(redirectUrl);
+    /* istanbul ignore next */
+    return isAuthenticated ? this.props.history.push(redirectUrl || redirect || '/') : null;
   };
 
-  redirectOnReadArticle = () => {
-    const { isAuthenticated, location } = this.props;
-    /* istanbul ignore next */
-    const url = location.state && location.state.redirect;
-    /* istanbul ignore next */
-    return isAuthenticated ? this.props.history.push(url || '/') : null;
-  };
 
   handleSubmit = (e) => {
     e.preventDefault();

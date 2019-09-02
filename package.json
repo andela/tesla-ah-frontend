@@ -137,6 +137,7 @@
     "serve": "^11.1.0",
     "shards-react": "^1.0.3",
     "sinon": "^7.4.1",
+    "socket.io-client": "^2.2.0",
     "tesla-error-handler": "^2.8.0",
     "timeago.js": "^4.0.0-beta.2",
     "webpack-bundle-analyzer": "^3.4.1"

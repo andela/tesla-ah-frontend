@@ -3,10 +3,12 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Article from '../Article/Article';
+import { Link } from 'react-router-dom';
 import Alert from '../common/Alert';
 import Spinner from '../widgets/Spinner';
 import Form from '../forms/SearchForm';
+import ArticleItem from '../items/Articleitem';
+import { getItemDataFromDatabase } from '../../utils/getArticleItemData';
 
 export class Results extends Component {
   static propTypes = {
@@ -35,7 +37,7 @@ export class Results extends Component {
     } = this.props;
     return (
       <Fragment>
-        <div className="search__results">
+        <div className="search__results container mt-5">
           <Form />
           {pending ? (
             <div className="row">
@@ -57,7 +59,9 @@ export class Results extends Component {
             { /* const goodArticle = getFreshArticle(article);
             console.log(goodArticle); */ }
             return (
-              <Article key={article.slug} article={article} />
+              <Link to={`/articles/${article.slug}`} key={article.id}>
+                <ArticleItem article={getItemDataFromDatabase(article)} />
+              </Link>
             );
           })}
           {failed ? (

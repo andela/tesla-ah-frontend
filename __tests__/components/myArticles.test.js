@@ -8,10 +8,13 @@ import configureStore from 'redux-mock-store';
 import { MyArticles, mapStateToProps } from '../../src/components/pages/MyArticles';
 import { getMyArticles } from '../../src/redux/actions/article.actions';
 import { article } from '../../__mocks__/data';
+import SessionStorage from '../../__mocks__/sessionStorageMock';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 const store = mockStore({});
+
+let storage;
 
 const props1 = {
   articles: {
@@ -63,10 +66,13 @@ describe('Fetch All Articles tests...', () => {
 describe('Should get MyArticles', () => {
   beforeEach(() => {
     moxios.install();
+    storage = window.sessionStorage;
+    window.sessionStorage = new SessionStorage();
   });
   afterEach(() => {
     moxios.uninstall();
     store.clearActions();
+    window.sessionStorage = storage;
   });
   test('should get My Articles', async () => {
     await moxios.wait(() => {
