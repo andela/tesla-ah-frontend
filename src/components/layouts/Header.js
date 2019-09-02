@@ -46,14 +46,16 @@ export class Header extends Component {
     return (
       <header className="nav-to-shrink">
         <nav className="navbar navbar-expand-lg container">
-          <img
-            className="navbar-brand logo"
-            src={logo}
-            alt="AH"
-            style={{
-              width: 50,
-            }}
-          />
+          <Link to="/">
+            <img
+              className="navbar-brand logo"
+              src={logo}
+              alt="AH"
+              style={{
+                width: 50,
+              }}
+            />
+          </Link>
           {/* eslint-disable-nextline  */}
           <Link to="/" className="navbar-brand blue">
             Authors Haven

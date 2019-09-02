@@ -26,7 +26,11 @@
       }
       & .left-nav {
         border: 1px solid $white;
+        .tag-button {
+          background-color: $grey;
+        }
       }
+      
     }
   }
   & .editor-main-section-r {
