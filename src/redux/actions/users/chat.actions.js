@@ -79,6 +79,11 @@ export default () => async (dispatch) => {
         type: types.GET_CHAT_USERS,
         payload: getUniqueUsers(availUsers),
       });
+    } else {
+      dispatch({
+        type: types.GET_CHAT_USERS,
+        payload: [],
+      });
     }
   } catch (error) {
     console.log(error);
