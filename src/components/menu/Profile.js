@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   ListGroup,
@@ -14,8 +17,10 @@ import {
   PopoverBody,
 } from 'reactstrap';
 import UserCard from '../Card/UserCard';
+import { loggOut } from '../../redux/actions/auth.actions';
 
-export default class Profilemenuitem extends Component {
+
+class Profilemenuitem extends Component {
   state = {
     isOpenUserCardPopover: false,
   };
@@ -24,6 +29,15 @@ export default class Profilemenuitem extends Component {
     this.setState({
       isOpenUserCardPopover: !this.state.isOpenUserCardPopover,
     });
+  };
+
+  loggOut = (event) => {
+    event.preventDefault();
+    const { loggOut } = this.props;
+    loggOut();
+    sessionStorage.clear();
+    localStorage.clear();
+    window.location.replace('/');
   };
 
   render() {
@@ -104,14 +118,16 @@ export default class Profilemenuitem extends Component {
                       &nbsp;&nbsp; Help
                     </ListGroupItem>
                   </Link>
-                  <ListGroupItem
-                    onClick={this.toggleUserCardPopover}
-                    action
-                    className="border-light"
-                  >
-                    <i className="fas fa-sign-out-alt" />
+                  <Link to="/" onClick={this.loggOut}>
+                    <ListGroupItem
+                      onClick={this.toggleUserCardPopover}
+                      action
+                      className="border-light"
+                    >
+                      <i className="fas fa-sign-out-alt" />
                     &nbsp;&nbsp; Logout
-                  </ListGroupItem>
+                    </ListGroupItem>
+                  </Link>
                 </ListGroup>
               </UserCard>
             </PopoverBody>
@@ -121,3 +137,9 @@ export default class Profilemenuitem extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => ({
+  loggOut: () => dispatch(loggOut()),
+});
+
+export default connect(null, mapDispatchToProps)(Profilemenuitem);

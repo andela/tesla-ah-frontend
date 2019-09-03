@@ -44,7 +44,6 @@ const initialState = {
   currentCommentEditHistory: {},
   comments: [],
 };
-
 export default (state = initialState, action) => {
   const { type, payload } = action;
 

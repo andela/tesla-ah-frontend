@@ -5,6 +5,7 @@ import moxios from 'moxios';
 import {
   createAccount,
   verifyAccount,
+  loggOut,
 } from '../../../src/redux/actions/auth.actions';
 
 const userData = {
@@ -87,6 +88,17 @@ describe('Should make it happen', () => {
     });
     return store.dispatch(verifyAccount('1234')).then(() => {
       expect(store.getActions().length).toEqual(3);
+    });
+  });
+  test('should be able to log out', () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        message: ' you are now logged out',
+      });
+    });
+    return store.dispatch(loggOut()).then(() => {
     });
   });
 });

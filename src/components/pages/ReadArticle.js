@@ -63,10 +63,6 @@ class ReadArticle extends Component {
     if (newProps.Author) {
       this.setState({ Author: newProps.Author });
     }
-    if (newProps.Delete.message) {
-      this.setState({ redirectToMyArticles: true });
-      toast.success('Articles has been deleted successfully...');
-    }
     if (newProps.myBookmarks.length > 0) {
       const { slug } = this.props.match.params;
       if (
@@ -103,6 +99,13 @@ class ReadArticle extends Component {
       this.setState({ redirectToLogin: true });
     }
   };
+
+  handleDeleteArticle = (slug) => {
+    this.props.deleteArticle(slug).then(() => {
+      this.setState({ redirectToMyArticles: true });
+      toast.success('Articles has been deleted successfully...');
+    });
+  }
 
   isThisSlugBookmarked = (slug, bookmarks = []) => {
     const data = bookmarks.find(item => item && item.slug === slug);
@@ -266,7 +269,7 @@ class ReadArticle extends Component {
                       type="button"
                       className="btn btn-default text-white"
                       data-dismiss="modal"
-                      onClick={() => this.props.deleteArticle(this.state.slug)}
+                      onClick={() => this.handleDeleteArticle(this.state.slug)}
                     >
                       Yes
                     </button>

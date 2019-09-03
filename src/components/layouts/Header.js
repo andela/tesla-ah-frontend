@@ -1,3 +1,6 @@
+/* eslint-disable no-shadow */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
@@ -22,8 +25,6 @@ export class Header extends Component {
     if (localStorage.getItem('user')) {
       onInitProfile();
     }
-    // eslint-disable-next-line react/destructuring-assignment
-    // this.props.setLoggedIn();
   }
 
   getUser = (token) => {
@@ -150,16 +151,22 @@ export class Header extends Component {
             )}
             {loggedIn || isAuthenticated ? (
               <ul className="nav-right navbar-nav">
-                <div>
-                  <li id="nav-item noti-container">
-                    <div id="noti-counter">5</div>
-                    <i
-                      id="noti-button"
-                      className="nav-link is-active nav-shrink fa fa-bell"
-                    />
-                  </li>
-                </div>
-                &nbsp;&nbsp;&nbsp;&nbsp;
+                <li id="nav-item noti-container">
+                  <div id="noti-counter">5 </div>
+                  <i
+                    id="noti-button"
+                    className="nav-link is-active nav-shrink fa fa-bell"
+                  />
+                </li>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <li id="nav-item noti-container message">
+                  <div id="noti-counter">2</div>
+                  <i
+                    id="noti-button"
+                    className="nav-link is-active nav-shrink fa fa-envelope"
+                  />
+                </li>
+                &nbsp;&nbsp;&nbsp;
                 <li id="nav-item noti-container message">
                   <Profilemenu
                     avata={

@@ -32,6 +32,7 @@ export class Home extends Component {
     if (!token && this.props.location.search) {
       const search = QueryString.parse(this.props.location.search);
       sessionStorage.setItem('token', search.token);
+      window.location.reload(true);
     }
   }
 

@@ -1,7 +1,10 @@
 import * as actionTypes from '../../../../src/redux/actions/types/auth.type';
 import authReducer, { initialState } from '../../../../src/redux/reducers/users/login.reducer';
+import logoutReducer from '../../../../src/redux/reducers/auth.reducer';
 
 describe('Auth reducer', () => {
+  const initialStates = {
+  };
   test('LOGIN_PENDING', () => {
     const reducer = authReducer(initialState, {
       type: actionTypes.LOGIN_PENDING,
@@ -36,5 +39,13 @@ describe('Auth reducer', () => {
     });
 
     expect(reducer.error).toEqual('Bad request!');
+  });
+  test('LOG_OUT_SUCCESS', () => {
+    const expectedState = {
+      ...initialStates,
+      logOut: true,
+    };
+    const state = logoutReducer(initialStates, ({ type: actionTypes.LOG_OUT_SUCCESS, payload: 'you logged out' }));
+    expect(state).toEqual(expectedState);
   });
 });

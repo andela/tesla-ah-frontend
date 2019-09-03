@@ -22,7 +22,7 @@ export const UserCard = ({
       <CardBody className="d-flex justify-content-center align-items-center flex-column">
         <Avatar src={avatar} size={avatarSize} className="mb-2" />
         <CardTitle className="popover-profile-text-t">{title}</CardTitle>
-        <CardSubtitle className="popover-profile-text">{subtitle}</CardSubtitle>
+        {!subtitle && (<CardSubtitle className="popover-profile-text">{subtitle}</CardSubtitle>)}
       </CardBody>
       {children}
     </Card>

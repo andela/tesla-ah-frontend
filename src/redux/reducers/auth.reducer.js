@@ -4,6 +4,7 @@ import {
   SIGNUP_SUCCESS,
   VERIFIED,
   VERIFICATION_FAILED,
+  LOG_OUT_SUCCESS,
 } from '../actions/types/auth.type';
 
 const initialState = {
@@ -41,6 +42,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         verifailed: true,
+      };
+    case LOG_OUT_SUCCESS:
+      return {
+        ...state,
+        logOut: true,
       };
     default:
       return state;
