@@ -7,6 +7,7 @@ import resetPasswordReducer from './resetPassword.reducer';
 import applyPasswordReducer from './applyPassword.reducer';
 import author from './authorprofile.reducer';
 import profileReducer from './profile.reducer';
+import likeAndDislike from './likeAndDislike.reducer';
 import searchReducer from './article/search.reducer';
 import optInOptOutEmailReducer from './optInOptOutEmail.reducer';
 import optInOptOutAppReducer from './optInOptOutApp.reducer';
@@ -25,4 +26,5 @@ export default combineReducers({
   optInOptOutApp: optInOptOutAppReducer,
   optInOptOutEmail: optInOptOutEmailReducer,
   bookmarkedArticles,
+  likeAndDislike,
 });

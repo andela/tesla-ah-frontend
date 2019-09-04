@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-unused-state */
@@ -21,6 +22,7 @@ import {
 import { getUserProfile } from '../../redux/actions/author/authoruser.action';
 import { DEFAULT_AVATA } from '../../utils/constants';
 import Preloader from '../widgets/Preloader';
+import LikeAndDislike from '../common/LikeAndDislike';
 
 class ReadArticle extends Component {
   state = {
@@ -106,7 +108,8 @@ class ReadArticle extends Component {
     const {
       Article,
       Author,
-      user: { username },
+      slug,
+      user: { username, id: userId },
     } = this.state;
     let contentBlocks = [];
     if (this.state.redirect) {
@@ -114,7 +117,7 @@ class ReadArticle extends Component {
         <Redirect
           to={{
             pathname: '/auth/login',
-            state: { redirectt: this.props.location.pathname },
+            state: { redirect: this.props.location.pathname },
           }}
         />
       );
@@ -166,6 +169,7 @@ class ReadArticle extends Component {
                     content={{ blocks: contentBlocks, entityMap: {} }}
                     read_only
                   />
+                  { username !== this.state.Article.article.author.username && (<LikeAndDislike slug={slug} userId={userId} pathname={this.props.location.pathname} />)}
                 </div>
               </div>
               <div className="col-lg-1 rigth-nav text-center">
@@ -189,24 +193,9 @@ class ReadArticle extends Component {
                   >
                     <i className={BookmarkButton} />
                   </div>
-                  <div
-                    className={`${
-                      username === this.state.Article.article.author.username
-                        ? 'hide-button'
-                        : ''
-                    } flauting-buttons mt-3`}
-                  >
-                    <i className="fas fa-thumbs-up" />
-                  </div>
-                  <div
-                    className={`${
-                      username === this.state.Article.article.author.username
-                        ? 'hide-button'
-                        : ''
-                    } flauting-buttons mt-3 dislike`}
-                  >
-                    <i className="fas fa-thumbs-down" />
-                  </div>
+                  {
+                    username === this.state.Article.article.author.username
+                  }
                   <Link to={`/article/${this.state.slug}/edit`}>
                     <div
                       className={`${

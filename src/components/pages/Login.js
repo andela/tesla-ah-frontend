@@ -26,11 +26,15 @@ export class Login extends Component {
   };
 
   componentDidMount = () => {
-    setTimeout(() => this.setState(prevState => ({ ...prevState, isPageLoading: false })), 1000);
+    setTimeout(
+      () => this.setState(prevState => ({ ...prevState, isPageLoading: false })),
+      1000,
+    );
   };
 
   componentDidUpdate = () => {
     this.redirectOnSuccess();
+    this.redirectOnReadArticle();
   };
 
   onChange = ({ target }) => {
@@ -41,6 +45,12 @@ export class Login extends Component {
     const { isAuthenticated, location } = this.props;
     const { redirect } = queryString.parse(location.search);
     return isAuthenticated ? this.props.history.push(redirect || '/') : null;
+  };
+
+  redirectOnReadArticle = () => {
+    const { isAuthenticated, location } = this.props;
+    const url = location.state && location.state.redirect;
+    return isAuthenticated ? this.props.history.push(url || '/') : null;
   };
 
   handleSubmit = (e) => {
@@ -89,9 +99,11 @@ export class Login extends Component {
                 <br />
 
                 {isLogging ? (
-                  <Spinner style={{ textAlign: 'center', margin: 0, padding: 0 }} />
+                  <Spinner
+                    style={{ textAlign: 'center', margin: 0, padding: 0 }}
+                  />
                 ) : (
-                  <button type='submit' className='btn button is-grey-login'>
+                  <button type="submit" className="btn button is-grey-login">
                     Login
                   </button>
                 )}
@@ -100,7 +112,7 @@ export class Login extends Component {
             {!isLogging ? (
               <Fragment>
                 <br />
-                <div className='btn-block text-center'>
+                <div className="btn-block text-center">
                   <p>Or</p>
                 </div>
                 <br />

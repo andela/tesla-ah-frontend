@@ -25,10 +25,10 @@ export class Home extends Component {
     this.props.getArticles(this.state.currentPage);
   }
 
-  // eslint-disable-next-line consistent-return
   componentDidMount() {
+    window.scroll(0, window.pageYOffset - this.props.scrollStepInPx);
     const token = sessionStorage.getItem('token');
-    if (!token) {
+    if (!token && this.props.location.search) {
       const search = QueryString.parse(this.props.location.search);
       sessionStorage.setItem('token', search.token);
     }

@@ -3,3 +3,5 @@
 exports[`Fetch All Articles tests... it should render the AllArticles Component 1`] = `ShallowWrapper {}`;
 
 exports[`Fetch All Articles tests... it should render the AllArticles Component 2`] = `ShallowWrapper {}`;
+
+exports[`Fetch All Articles tests... it should render the AllArticles Component 3`] = `ShallowWrapper {}`;

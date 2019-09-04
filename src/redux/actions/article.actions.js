@@ -22,6 +22,12 @@ import {
   API_URL,
   HEADER_CONFIG, BACKEND_URL,
 } from '../../utils/constants';
+import {
+  LIKE_ARTICLE_SUCCESS,
+  DISLIKE_ARTICLE_SUCCESS,
+  GET_ARTICLE_LIKES_SUCCESS,
+  GET_ARTICLE_DISLIKES_SUCCESS,
+} from './types/likeAndDislike.type';
 
 export const createArticle = article => async (dispatch) => {
   const { data } = await axios.post(
@@ -134,4 +140,71 @@ export const bookmark = slug => async (dispatch) => {
       payload: error.response.data,
     });
   }
+};
+export const likeArticle = slug => async (dispatch) => {
+  const token = sessionStorage.getItem('token');
+  try {
+    const { data } = await axios.post(
+      `${BACKEND_URL}/api/articles/${slug}/like`,
+      {},
+      {
+        headers: {
+          token,
+        },
+      },
+    );
+    dispatch({
+      type: LIKE_ARTICLE_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    dispatch({
+      type: LIKE_ARTICLE_SUCCESS,
+      payload: error.response,
+    });
+    return error.response;
+  }
+};
+
+export const dislikeArticle = slug => async (dispatch) => {
+  try {
+    const token = sessionStorage.getItem('token');
+    const { data } = await axios.post(
+      `${BACKEND_URL}/api/articles/${slug}/dislike`,
+      {},
+      {
+        headers: {
+          token,
+        },
+      },
+    );
+    dispatch({
+      type: DISLIKE_ARTICLE_SUCCESS,
+      payload: data,
+    });
+    return data;
+  } catch (error) {
+    dispatch({
+      type: DISLIKE_ARTICLE_SUCCESS,
+      payload: error.response,
+    });
+    return error.response;
+  }
+};
+export const getArticleLikes = slug => async (dispatch) => {
+  const { data } = await axios.get(`${BACKEND_URL}/api/articles/${slug}/like`);
+  dispatch({
+    type: GET_ARTICLE_LIKES_SUCCESS,
+    payload: data.data,
+  });
+  return data.data;
+};
+export const getArticleDislikes = slug => async (dispatch) => {
+  const { data } = await axios.get(`${BACKEND_URL}/api/articles/${slug}/dislike`);
+  dispatch({
+    type: GET_ARTICLE_DISLIKES_SUCCESS,
+    payload: data.data,
+  });
+  return data.data;
 };
