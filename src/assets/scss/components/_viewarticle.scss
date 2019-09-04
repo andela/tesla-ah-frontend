@@ -33,11 +33,25 @@
     .social-buttons {
       float: right;
       position: fixed;
-      .hide-button{
+
+      .hide-button {
         display: none;
       }
+      :hover {
+        cursor: pointer;
+      }
     }
-    .flauting-buttons {
+    .share-count {
+      position: relative;
+    }
+    .share-count .count {
+      position: absolute;
+      right: -10px;
+      padding: 5px 5px;
+      z-index: 100;
+      bottom: -5px;
+    }
+    .floating-buttons {
       width: 60px;
       height: 60px;
       border-radius: 50%;
@@ -48,6 +62,7 @@
       justify-content: center;
       align-items: center;
       background: $blue;
+      outline: none;
       & i {
         color: white;
         font-size: 25px;
@@ -101,7 +116,7 @@
         float: left;
         position: relative;
         display: flex;
-        .flauting-buttons {
+        .floating-buttons {
           margin-right: 5px;
         }
       }
@@ -117,7 +132,7 @@
         float: left;
         position: relative;
         display: flex;
-        .flauting-buttons {
+        .floating-buttons {
           width: 50px;
           height: 50px;
           margin-right: 5px;

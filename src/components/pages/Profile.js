@@ -334,11 +334,8 @@ export class Profile extends Component {
                     {dateJoined}
                   </span>
                   {isCurrentUser ? (
-                    <div>
-                      <br />
-                      <span className="notifications">
-                    Notifications
-                      </span>
+                    <div className="notifications--container">
+                      <span className="notifications font-weight-bold">Notification Settings</span>
                       <div>
                         <OptInOptOutApp />
                       </div>

@@ -33,7 +33,8 @@
     "no-undef": "warn",
     "no-unused-vars": "warn",
     "no-trailing-spaces": "warn",
-    "max-len": "warn"
+    "max-len": "warn",
+    "arrow-body-style": "warn"
   },
   "root": true
 }

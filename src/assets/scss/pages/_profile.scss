@@ -177,6 +177,13 @@
     height: 800px;
     overflow: scroll;
   }
+
+  .notifications--container {
+    border-top: 2px solid $dark;
+    margin: 10px 0;
+    padding-top: 10px;
+    width: 100%;
+  }
   
   @media (min-height: 300px) {
     .d-sidenav {

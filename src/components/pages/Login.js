@@ -139,7 +139,6 @@ Login.propTypes = {
   login: PropTypes.func.isRequired,
   isAuthenticated: PropTypes.bool.isRequired,
   isLogging: PropTypes.bool.isRequired,
-  history: PropTypes.instanceOf(Object).isRequired,
 };
 Login.defaultProps = {
   location: {
