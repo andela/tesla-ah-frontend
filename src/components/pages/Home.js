@@ -8,6 +8,7 @@ import QueryString from 'query-string';
 import { Link } from 'react-router-dom';
 import Pagination from 'react-pagination-library';
 import { toast } from 'react-toastify';
+import { sortArrayDesd as sortArticles } from 'tesla-error-handler';
 import Slider from '../layouts/Slider';
 import Main from '../layouts/Maincontent';
 import { getArticles } from '../../redux/actions/article.actions';
@@ -35,9 +36,11 @@ export class Home extends Component {
   }
 
   componentWillReceiveProps(newProps) {
+    /* istanbul ignore next */
     if (newProps.article.articles) {
       this.setState({ isLoading: false });
     }
+    /* istanbul ignore next */
     if (newProps.auth.verified) {
       toast.success('Welcome back, you are now Verified!');
     }
@@ -53,7 +56,7 @@ export class Home extends Component {
     let articleslist = {};
     if (!this.state.isLoading) {
       articleslist = this.props.article;
-      articleItems = this.props.article.articles.map(article => (
+      articleItems = sortArticles(this.props.article.articles).map(article => (
         <Link
           className="col-md-6"
           key={article.id}

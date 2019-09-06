@@ -12,6 +12,7 @@ export const setLoaded = () => ({
 
 export const setLoggedIn = () => (dispatch) => {
   const token = sessionStorage.getItem('token');
+  /* istanbul ignore next */
   if (token && jwtDecode(token)) {
     dispatch({
       type: LOGGED_IN,
