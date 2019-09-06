@@ -28,8 +28,9 @@ import SearchResults from './pages/SearchResults';
 import Editarticle from './pages/Editarticle';
 import MyArticles from './pages/MyArticles';
 import Bookmarks from './pages/Bookmark';
+import Privateroute from '../routes/Privateroute';
 
-const App = ({ isAuthenticated }) => (
+const App = () => (
   <BrowserRouter>
     <Header />
     <ToastContainer />
@@ -44,22 +45,10 @@ const App = ({ isAuthenticated }) => (
       <Route exact path="/resetPasswordRequest" component={ResetPasswordRequest} />
       <Route exact path="/profile/:username" component={Profile} />
       <Route exact path="/search" component={SearchResults} />
-      <Route exact path="/articles" component={MyArticles} />
-      <Route exact path="/article/new" component={Create} />
-      <Route exact path="/article/:slug/edit" component={Editarticle} />
-      <Route
-        exact
-        path="/bookmarks"
-        render={props => (isAuthenticated ? (
-          <Bookmarks {...props} />
-        ) : (
-        // eslint-disable-next-line react/prop-types
-          <Redirect to={`/auth/login?redirect=${props.location.pathname}`} />
-        ))
-        }
-      />
-
-
+      <Privateroute exact path="/articles" component={MyArticles} />
+      <Privateroute exact path="/article/new" component={Create} />
+      <Privateroute exact path="/article/:slug/edit" component={Editarticle} />
+      <Privateroute exact path="/bookmarks" component={Bookmarks} />
       <Route component={PageNotFound} />
     </Switch>
     <Footer />

@@ -1,10 +1,11 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-console */
 /* eslint-disable jsx-quotes */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import queryString from 'query-string';
 import Spinner from '../widgets/Spinner';
 import { login } from '../../redux/actions/users/login.actions';
 import TextInput from '../common/TextInput';
@@ -26,10 +27,8 @@ export class Login extends Component {
   };
 
   componentDidMount = () => {
-    setTimeout(
-      () => this.setState(prevState => ({ ...prevState, isPageLoading: false })),
-      1000,
-    );
+    /* istanbul ignore next */
+    setTimeout(() => this.setState(prevState => ({ ...prevState, isPageLoading: false })), 1000);
   };
 
   componentDidUpdate = () => {
@@ -42,14 +41,21 @@ export class Login extends Component {
   };
 
   redirectOnSuccess = () => {
+    let redirect;
     const { isAuthenticated, location } = this.props;
-    const { redirect } = queryString.parse(location.search);
+    /* istanbul ignore next */
+    if (location.state) {
+      redirect = location.state.redirect;
+    }
+    /* istanbul ignore next */
     return isAuthenticated ? this.props.history.push(redirect || '/') : null;
   };
 
   redirectOnReadArticle = () => {
     const { isAuthenticated, location } = this.props;
+    /* istanbul ignore next */
     const url = location.state && location.state.redirect;
+    /* istanbul ignore next */
     return isAuthenticated ? this.props.history.push(url || '/') : null;
   };
 

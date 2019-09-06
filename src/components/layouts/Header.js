@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from '../../assets/img/logo_st.png';
 import { initProfile } from '../../redux/actions/profile.actions';
+import Profilemenu from '../menu/Profile';
 // import { setLoggedIn } from '../../redux/actions/ui.actions';
 
 export class Header extends Component {
@@ -147,33 +148,26 @@ export class Header extends Component {
             )}
             {loggedIn || isAuthenticated ? (
               <ul className="nav-right navbar-nav">
-                <li id="nav-item noti-container">
-                  <div id="noti-counter">5</div>
-                  <i
-                    id="noti-button"
-                    className="nav-link is-active nav-shrink fa fa-bell"
-                  />
-                </li>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <div>
+                  <li id="nav-item noti-container">
+                    <div id="noti-counter">5</div>
+                    <i
+                      id="noti-button"
+                      className="nav-link is-active nav-shrink fa fa-bell"
+                    />
+                  </li>
+                </div>
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 <li id="nav-item noti-container message">
-                  <div id="noti-counter">2</div>
-                  <i
-                    id="noti-button"
-                    className="nav-link is-active nav-shrink fa fa-envelope"
-                  />
-                </li>
-                &nbsp;&nbsp;&nbsp;
-                <li id="nav-item noti-container message">
-                  <img
-                    className="menu-profile-image"
-                    src={
+                  <Profilemenu
+                    avata={
                       profile.user !== null
                         ? profile.user.avatar
                         : user.avatar
                           ? user.avatar
                           : 'https://scontent.fkgl1-1.fna.fbcdn.net/v/t1.0-9/16196015_10154888128487744_6901111466535510271_n.png?_nc_cat=103&_nc_oc=AQm1z5jCqvLA7cItJnm3RXa2_ApxETs_BsK1Y5lNksTqg0YsrGmwP91yr73V3BLnYOw&_nc_ht=scontent.fkgl1-1.fna&oh=e18554da0038703db68054626fa73da9&oe=5DE21BE9'
                     }
-                    alt="AH"
+                    user={user}
                   />
                 </li>
               </ul>

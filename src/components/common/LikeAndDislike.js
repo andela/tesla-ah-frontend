@@ -1,8 +1,6 @@
-/* eslint-disable no-console */
 /* eslint-disable max-len */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/no-unused-state */
-/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/sort-comp */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -37,8 +35,8 @@ class LikeAndDislike extends Component {
   };
 
   articleLikes = (slug) => {
-    const { getArticleLikes } = this.props;
-    getArticleLikes(slug);
+    const { getArticleLikes: gatl } = this.props;
+    gatl(slug);
   };
 
   getArticleDislikes =(slug) => {
@@ -68,18 +66,17 @@ class LikeAndDislike extends Component {
       if (res.status === 500) {
         this.setState({ redirect: true });
       } else {
-        const { slug } = this.props;
+        const { slug: slg } = this.props;
         if (res.status === 403) {
           toast.warn('You have already liked this article!');
         } else {
           this.setState({ isLiked: true });
         }
 
-        this.props.getArticleDislikes(slug).then((resp) => {
-          console.log(this.props.userId);
+        this.props.getArticleDislikes(slg).then((resp) => {
           this.setState({ dislikes: resp.numberOfDislikes, isDisliked: this.isDislikedArticle(resp.dislikedUser, this.props.userId) });
         });
-        this.props.getArticleLikes(slug).then((resp) => {
+        this.props.getArticleLikes(slg).then((resp) => {
           this.setState({ likes: resp.numberOfLikes, isLiked: this.isLikedArticle(resp.likedUser, this.props.userId) });
         });
       }
@@ -91,7 +88,6 @@ class LikeAndDislike extends Component {
       if (res.status === 500) {
         this.setState({ redirect: true });
       } else {
-        const { slug } = this.props;
         if (res.status === 403) {
           toast.warn('You have already disliked this article!');
         } else {
@@ -112,8 +108,6 @@ class LikeAndDislike extends Component {
       likes,
       dislikes,
     } = this.state;
-    const likeButton = this.setState.isLikedArticle ? 'fa fa-thumbs-o-up' : 'fas fa-thumbs-up';
-    const dislikeButton = this.setState.isDislikedArticle ? 'fa fa-thumbs-o-up' : 'fas fa-thumbs-up';
     if (this.state.redirect) {
       return (
         <Redirect
@@ -128,14 +122,14 @@ class LikeAndDislike extends Component {
       <div>
         <ButtonGroup size="sm">
           <Button theme="white" onClick={() => this.handleLikeArticle(this.props.slug)}>
-            <span className="text-success">
+            <span className="like-article-btn">
               <i className={`${this.state.isLiked ? 'fas' : 'far'} fa-thumbs-up`} />
             </span>
             &nbsp;&nbsp;
             {likes}
           </Button>
           <Button theme="white" onClick={() => this.handleDislikeArticle(this.props.slug)}>
-            <span className="text-danger">
+            <span className="dislike-article-btn">
               <i className={`${this.state.isDisliked ? 'fas' : 'far'} fa-thumbs-down`} />
             </span>
             &nbsp;&nbsp;

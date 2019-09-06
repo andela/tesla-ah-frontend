@@ -18,7 +18,7 @@ describe('Home Components tests...', () => {
       articles: article,
     },
     getArticles: jest.fn(),
-    location: { search: 'path' },
+    location: { search: 'cdcdcd' },
   };
   beforeAll(() => {
     home = shallow(<Home {...props} />);

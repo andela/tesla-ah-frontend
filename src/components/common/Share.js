@@ -83,7 +83,9 @@ const Share = (props) => {
           >
             <i className="fab fa-facebook-f" />
           </button>
-          <span className="badge badge-secondary count">{facebookCount}</span>
+          {
+            facebookCount > 0 && (<span className="badge badge-secondary count facebook">{facebookCount}</span>)
+          }
         </div>
         <div className="share-count">
           <button
@@ -97,7 +99,9 @@ const Share = (props) => {
               <i className="fab fa-twitter" />
             </a>
           </button>
-          <span className="badge badge-secondary count">{twitterCount}</span>
+          {
+            twitterCount > 0 && (<span className="badge badge-secondary count twitter">{twitterCount}</span>)
+          }
         </div>
         <div className="share-count">
           <button
@@ -111,7 +115,9 @@ const Share = (props) => {
               <i className="fas fa-envelope-open" />
             </a>
           </button>
-          <span className="badge badge-secondary count">{emailCount}</span>
+          {
+            emailCount > 0 && (<span className="badge badge-secondary count email">{emailCount}</span>)
+          }
         </div>
       </React.Fragment>
     );

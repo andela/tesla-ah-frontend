@@ -11,7 +11,7 @@ class Articleitem extends Component {
     const { article } = this.props;
     const { image, body } = article;
     const {
-      slug, readtime, createdAt, title,
+      slug, readtime, createdAt, title, id,
     } = article.article;
     return (
       <div className="itemcontainer">
