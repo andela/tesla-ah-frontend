@@ -1,3 +1,8 @@
+/* eslint-disable quotes */
+/* eslint-disable prefer-destructuring */
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
+/* eslint-disable class-methods-use-this */
+/* eslint-disable no-console */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -27,7 +32,6 @@ import LikeAndDislike from '../common/LikeAndDislike';
 import Share from '../common/Share';
 import Comments from '../Card/CommentCard';
 
-
 class ReadArticle extends Component {
   state = {
     Article: {},
@@ -41,6 +45,9 @@ class ReadArticle extends Component {
     userId: {},
     isBookmarked: false,
     isPreviousBookmarked: false,
+    idReadOnly: true,
+    selectedText: '',
+    highlightText: `go command documentation for configuration`,
   };
 
   componentWillMount() {
@@ -54,6 +61,10 @@ class ReadArticle extends Component {
     }
     this.setState({ user, slug });
   }
+
+  // componentDidMount() {
+  //   this.highlight('We are excited to share that our module mirror');
+  // }
 
   componentWillReceiveProps(newProps) {
     if (newProps.Article) {
@@ -109,6 +120,39 @@ class ReadArticle extends Component {
     }
     return false;
   };
+
+  handleHighlightSelection = () => {
+    console.log(window.getSelection().toString);
+    const selectedText = this.getSelectionText();
+    if (selectedText !== this.state.selectedText) {
+      this.setState({ selectedText });
+    }
+    return false;
+  };
+
+ getSelectionText = () => {
+   let text = '';
+   if (window.getSelection) {
+     text = window.getSelection().toString();
+   } else if (document.selection && document.selection.type !== 'Control') {
+     text = document.selection.createRange().text;
+   }
+   return window.getSelection();
+ }
+
+  highlight = (text) => {
+    console.log(text);
+    if (this.state.Article && this.state.Author.profile) {
+      const inputText = document.getElementById('article-body-disp');
+      let { innerHTML } = inputText;
+      const index = innerHTML.indexOf(text);
+      console.log(innerHTML);
+      if (index >= 0) {
+        innerHTML = `${innerHTML.substring(0, index)}<span  class='highlight'>${innerHTML.substring(index, index + text.length)}</span>${innerHTML.substring(index + text.length)}`;
+        inputText.innerHTML = innerHTML;
+      }
+    }
+  }
 
   render() {
     const {
@@ -173,17 +217,31 @@ class ReadArticle extends Component {
                     <Rater total={5} rating={2} />
                   </div>
                 </div>
-                <div className="mt-3">
-                  <DisplayContent
-                    content={{ blocks: contentBlocks, entityMap: {} }}
-                    read_only
-                  />
+                <div
+                  className="mt-3"
+                >
+                  <div
+                    id="article-body-disp"
+                    onMouseOut={() => this.handleHighlightSelection()}
+                  >
+                    <DisplayContent
+                      content={{ blocks: contentBlocks, entityMap: {} }}
+                      read_only={this.state.idReadOnly}
+                      onSelect={this.handleChange}
+                    />
+                  </div>
                   <Comments
                     defaultavata={DEFAULT_AVATA}
                     user={this.state.user}
                     slug={this.state.slug}
                     pathname={this.props.location.pathname}
-                    likeDislike={(<LikeAndDislike slug={slug} userId={userId} pathname={this.props.location.pathname} />)}
+                    likeDislike={(
+                      <LikeAndDislike
+                        slug={slug}
+                        userId={userId}
+                        pathname={this.props.location.pathname}
+                      />
+)}
                   />
                 </div>
               </div>
@@ -200,9 +258,7 @@ class ReadArticle extends Component {
                   >
                     <i className={BookmarkButton} />
                   </div>
-                  {
-                    username === this.state.Article.article.author.username
-                  }
+                  {username === this.state.Article.article.author.username}
                   <Link to={`/article/${this.state.slug}/edit`}>
                     <div
                       className={`${
@@ -222,6 +278,16 @@ class ReadArticle extends Component {
                     } floating-buttons mt-3 delete`}
                     data-toggle="modal"
                     data-target="#myModal"
+                  >
+                    <i className="fas fa-trash-alt" />
+                  </div>
+                  <div
+                    className={`${
+                      username !== this.state.Article.article.author.username
+                        ? ''
+                        : ''
+                    } floating-buttons mt-3 delete`}
+                    onClick={() => this.highlight(this.state.highlightText)}
                   >
                     <i className="fas fa-trash-alt" />
                   </div>

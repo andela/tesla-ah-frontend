@@ -1,5 +1,9 @@
 .view-article-content {
   min-height: 90vh;
+  .highlight {
+    background-color: yellow;
+    cursor: pointer;
+  }
   .editor-main {
     justify-content: center;
   }
