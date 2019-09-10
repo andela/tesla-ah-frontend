@@ -1,17 +1,18 @@
 /* eslint-disable max-len */
 /* eslint-disable no-unused-expressions */
+/* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-unused-state */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import DisplayContent from 'Dante2';
+import jwt from 'jwt-decode';
 import Rater from 'react-rater';
 import Moment from 'react-moment';
 import { toast } from 'react-toastify';
-import jwt from 'jwt-decode';
 import { Link, Redirect } from 'react-router-dom';
 import {
   getArticle,
@@ -48,11 +49,7 @@ class ReadArticle extends Component {
     const { slug } = this.props.match.params;
     this.props.getBoomarks();
     this.props.getArticle(slug);
-    let user = {};
-    if (sessionStorage.getItem('token')) {
-      user = jwt(sessionStorage.getItem('token'));
-    }
-    this.setState({ user, slug });
+    this.setState({ slug });
   }
 
   componentWillReceiveProps(newProps) {
@@ -79,6 +76,11 @@ class ReadArticle extends Component {
         this.setState({ isBookmarked: true, isPreviousBookmarked: true });
       }
     }
+
+    this.setState(prevState => ({
+      ...prevState,
+      user: { ...prevState.user, ...newProps.user },
+    }));
   }
 
   handleClickBookmark = () => {
@@ -178,6 +180,15 @@ class ReadArticle extends Component {
                     content={{ blocks: contentBlocks, entityMap: {} }}
                     read_only
                   />
+                  {(Article.article.tagList || []).map(tag => (
+                    <Fragment>
+                      <Link to={`/tags?tag=${tag}`} className="btn button is-grey btn-xs tag-button" style={{ backgroundColor: '5px', marginBottom: '20px' }}>
+                        {' '}
+                        {tag}
+                      </Link>
+                      {' '}
+                    </Fragment>
+                  ))}
                   <Comments
                     defaultavata={DEFAULT_AVATA}
                     user={this.state.user}
@@ -281,6 +292,7 @@ const mapStateToProps = state => ({
   Delete: state.article.deletedArticle,
   myBookmarks: state.article.Boomarks,
   bookmark: state.article.bookmark,
+  user: state.login.user,
 });
 
 export default connect(

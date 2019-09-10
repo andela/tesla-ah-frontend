@@ -29,6 +29,7 @@ import Editarticle from './pages/Editarticle';
 import MyArticles from './pages/MyArticles';
 import Bookmarks from './pages/Bookmark';
 import Privateroute from '../routes/Privateroute';
+import ArticleTags from './pages/ArticleTags';
 
 const App = () => (
   <BrowserRouter>
@@ -45,6 +46,7 @@ const App = () => (
       <Route exact path="/resetPasswordRequest" component={ResetPasswordRequest} />
       <Route exact path="/profile/:username" component={Profile} />
       <Route exact path="/search" component={SearchResults} />
+      <Route exact path="/tags" component={ArticleTags} />
       <Privateroute exact path="/articles" component={MyArticles} />
       <Privateroute exact path="/article/new" component={Create} />
       <Privateroute exact path="/article/:slug/edit" component={Editarticle} />
