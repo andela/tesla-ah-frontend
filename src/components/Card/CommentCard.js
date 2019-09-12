@@ -40,7 +40,6 @@ class Comments extends Component {
     const { slug, getComments: gc } = this.props;
     this.setState({ slug: this.props.slug });
     gc(slug).then((resp) => {
-      console.log(resp);
       this.setState({ commentvalue: '', isNewComment: true, comments: [] });
       this.setState({ commentvalue: '', isNewComment: true, comments: resp.data[0] ? resp.data[0].Comments : [] });
     });
@@ -53,7 +52,7 @@ class Comments extends Component {
       } else {
         this.props.getComments(slug).then((resp) => {
           this.setState({ commentvalue: '', isNewComment: true, comments: [] });
-          this.setState({ commentvalue: '', isNewComment: true, comments: resp.data[0].Comments });
+          this.setState({ commentvalue: '', isNewComment: true, comments: resp.data[0] ? resp.data[0].Comments : [] });
         });
       }
     });
@@ -66,7 +65,7 @@ class Comments extends Component {
       } else {
         this.props.getComments(slug).then((resp) => {
           this.setState({ commentvalue: '', isNewComment: true, comments: [] });
-          this.setState({ commentvalue: '', isNewComment: true, comments: resp.data[0].Comments });
+          this.setState({ commentvalue: '', isNewComment: true, comments: resp.data[0] ? resp.data[0].Comments : [] });
         });
       }
     });
@@ -83,7 +82,7 @@ class Comments extends Component {
       } else {
         this.props.getComments(slug).then((resp) => {
           this.setState({ commentvalue: '', isNewComment: true, comments: [] });
-          this.setState({ commentvalue: '', isNewComment: true, comments: resp.data[0].Comments });
+          this.setState({ commentvalue: '', isNewComment: true, comments: resp.data[0] ? resp.data[0].Comments : [] });
         });
       }
     });
@@ -97,7 +96,7 @@ class Comments extends Component {
         toast('Comment deleted successful');
         this.props.getComments(slug).then((resp) => {
           this.setState({ commentvalue: '', isNewComment: true, comments: [] });
-          this.setState({ commentvalue: '', isNewComment: true, comments: resp.data[0].Comments });
+          this.setState({ commentvalue: '', isNewComment: true, comments: resp.data[0] ? resp.data[0].Comments : [] });
         });
       }
     });

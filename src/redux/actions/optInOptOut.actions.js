@@ -22,19 +22,17 @@ export const optInApp = () => async (dispatch) => {
 };
 export const optedInApp = () => async (dispatch) => {
   const token = sessionStorage.getItem('token');
-  const res = await axios.get(`${BACKEND_URL}/api/user/optinapp`, { headers: { token } });
+  await axios.get(`${BACKEND_URL}/api/user/optinapp`, { headers: { token } });
   dispatch({
     type: ALREADY_OPTED_IN_APP,
-    payload: res.data,
   });
 };
 
 export const optedInEmail = () => async (dispatch) => {
   const token = sessionStorage.getItem('token');
-  const res = await axios.get(`${BACKEND_URL}/api/user/optinemail`, { headers: { token } });
+  await axios.get(`${BACKEND_URL}/api/user/optinemail`, { headers: { token } });
   dispatch({
     type: ALREADY_OPTED_IN_EMAIL,
-    payload: res.data,
   });
 };
 

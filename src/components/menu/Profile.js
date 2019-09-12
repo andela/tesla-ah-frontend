@@ -7,7 +7,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {
   ListGroup,
   ListGroupItem,
@@ -16,6 +16,8 @@ import {
   Popover,
   PopoverBody,
 } from 'reactstrap';
+import Avatar from './Avata';
+
 import UserCard from '../Card/UserCard';
 import { loggOut } from '../../redux/actions/auth.actions';
 
@@ -29,6 +31,7 @@ class Profilemenuitem extends Component {
     this.setState({
       isOpenUserCardPopover: !this.state.isOpenUserCardPopover,
     });
+    return (<Redirect to={`/profile/${this.props.user.username}`} />);
   };
 
   loggOut = (event) => {
@@ -45,11 +48,10 @@ class Profilemenuitem extends Component {
       <div className="profile-menu-container">
         <NavItem>
           <NavLink id="Popover2">
-            <img
+            <Avatar
               onClick={this.toggleUserCardPopover}
-              className="menu-profile-image"
               src={this.props.avata}
-              alt="AH"
+              className="mb-2 menu-profile-image"
             />
           </NavLink>
           <Popover
@@ -68,7 +70,7 @@ class Profilemenuitem extends Component {
                 avatar={this.props.avata}
               >
                 <ListGroup flush>
-                  <Link to={`/profile/${this.props.user.username}`}>
+                  <a href={`/profile/${this.props.user.username}`}>
                     <ListGroupItem
                       onClick={this.toggleUserCardPopover}
                       action
@@ -77,7 +79,7 @@ class Profilemenuitem extends Component {
                       <i className="fas fa-user" />
                       &nbsp;&nbsp; Profile
                     </ListGroupItem>
-                  </Link>
+                  </a>
                   <Link to="/article/new">
                     <ListGroupItem
                       onClick={this.toggleUserCardPopover}

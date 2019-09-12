@@ -119,7 +119,6 @@ describe('Opt In Opt out Actions', () => {
     return store.dispatch(optedInApp()).then(() => {
       expect(store.getActions().length).toEqual(5);
       expect(actions[4].type).toEqual('ALREADY_OPTED_IN_APP');
-      expect(actions[4].payload.message).toEqual('You are already opted-in!');
     });
   });
   it('should dispatch ALREADY_OPTED_IN_EMAIL', async () => {
@@ -136,7 +135,6 @@ describe('Opt In Opt out Actions', () => {
     return store.dispatch(optedInEmail()).then(() => {
       expect(store.getActions().length).toEqual(6);
       expect(actions[5].type).toEqual('ALREADY_OPTED_IN_EMAIL');
-      expect(actions[5].payload.message).toEqual('You are already opted-in!');
     });
   });
   it('should throw error OPTED_IN_APP', async () => {

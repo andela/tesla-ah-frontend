@@ -27,6 +27,7 @@ import { IS_LOADING, IS_LOADED } from '../../../src/redux/actions/types/ui.type'
 import { GET_USER_PROFILE } from '../../../src/redux/actions/types/authorprofile.type';
 import getauthorreducer from '../../../src/redux/reducers/authorprofile.reducer';
 import getUiReducer from '../../../src/redux/reducers/ui.reducer';
+import { API_URL } from '../../../src/utils/constants';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
@@ -205,15 +206,17 @@ describe('Get profile action', () => {
     store.clearActions();
   });
   test('should get user profile', async () => {
-    moxios.wait(() => {
-      const request = moxios.requests.mostRecent();
-      request.respondWith({
-        status: 200,
-        response: { profile: {} },
-      });
+    moxios.stubRequest(`${API_URL}/profiles/ericrukundo`, {
+      status: 200,
+      response: { profile: {} },
+    });
+    moxios.stubRequest(`${API_URL}/profile/jhjadhfakda100`, {
+      status: 404,
+      response: { error: 'user profile not found' },
     });
     return store.dispatch(getUserProfile('ericrukundo')).then(() => {
       expect(store.getActions().length).toEqual(1);
+      expect(store.getActions()[0].type).toEqual(GET_USER_PROFILE);
     });
   });
 });

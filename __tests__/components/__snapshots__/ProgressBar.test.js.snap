@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressBar Tests should render the ProgressBar component 1`] = `ShallowWrapper {}`;

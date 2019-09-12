@@ -23,6 +23,12 @@
    
   }
 }
-// .likeButton p{
-//  margin: 20px;
-// }
+
+.btn{
+  &.green {
+    background: $green;
+    color: $white;
+    border-radius: 5px;
+    outline: none;
+  }
+}

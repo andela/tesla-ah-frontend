@@ -3,32 +3,38 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable object-curly-newline */
 /* eslint-disable react/no-unused-state */
-/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable no-nested-ternary */
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
+/* eslint-disable react/no-access-state-in-setstate */
 /* eslint-disable react/destructuring-assignment */
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import DisplayContent from 'Dante2';
 import jwt from 'jwt-decode';
-import Rater from 'react-rater';
+import Rater from 'react-rating';
 import Moment from 'react-moment';
 import { toast } from 'react-toastify';
 import { Link, Redirect } from 'react-router-dom';
-import {
-  getArticle,
-  deleteArticle,
-  resetProps,
-  getBoomarks,
-  bookmark,
-} from '../../redux/actions/article.actions';
+import { getArticle, deleteArticle, resetProps, getBoomarks, bookmark } from '../../redux/actions/article.actions';
 import { getUserProfile } from '../../redux/actions/author/authoruser.action';
+import { getRating, createRating, updateRating } from '../../redux/actions/ratingArticle/rating.actions';
 import { DEFAULT_AVATA } from '../../utils/constants';
 import Preloader from '../widgets/Preloader';
 import LikeAndDislike from '../common/LikeAndDislike';
 import Share from '../common/Share';
 import Comments from '../Card/CommentCard';
+import ArticleRatingOverall from './ArticleRatingOverall';
 
-
+const theme = {
+  color: '#ffd700',
+  border: '1px solid #fff',
+  fontSize: '10px',
+};
+let ratingValues;
 class ReadArticle extends Component {
   state = {
     Article: {},
@@ -42,6 +48,10 @@ class ReadArticle extends Component {
     userId: {},
     isBookmarked: false,
     isPreviousBookmarked: false,
+    isHovered: false,
+    isClicked: false,
+    ratingValue: 0,
+    isRated: false,
   };
 
   componentWillMount() {
@@ -50,9 +60,16 @@ class ReadArticle extends Component {
     this.props.getBoomarks();
     this.props.getArticle(slug);
     this.setState({ slug });
+    let user = {};
+    if (sessionStorage.getItem('token')) {
+      user = jwt(sessionStorage.getItem('token'));
+    }
+    this.setState({ user, slug });
+    this.props.getRating(slug);
   }
 
   componentWillReceiveProps(newProps) {
+    const { slug } = this.props.match.params;
     if (newProps.Article) {
       this.setState({ Article: newProps.Article });
       if (!this.state.isProfileRequested) {
@@ -64,7 +81,6 @@ class ReadArticle extends Component {
       this.setState({ Author: newProps.Author });
     }
     if (newProps.myBookmarks.length > 0) {
-      const { slug } = this.props.match.params;
       if (
         this.isThisSlugBookmarked(slug, newProps.myBookmarks)
         && !this.state.isPreviousBookmarked
@@ -77,6 +93,60 @@ class ReadArticle extends Component {
       ...prevState,
       user: { ...prevState.user, ...newProps.user },
     }));
+  }
+
+  onMouseEnterHandler =() => {
+    this.setState({ isHovered: !this.state.isHovered });
+  }
+
+  onMouseLeaveHandler = () => {
+    this.setState({ isHovered: false });
+  }
+
+  onClickHandle =() => {
+    this.setState({ isClicked: !this.state.isClicked });
+  }
+
+  onChangeHandle = (rate) => {
+    this.setState({ ratingValue: rate });
+  }
+
+  onCreateRating = (e, slug) => {
+    e.preventDefault();
+    ratingValues = this.state.ratingValue;
+    if (ratingValues === 0) {
+      return toast.error('Select The Stars For Your Ratings!');
+    }
+    this.props.createRating(slug, ratingValues);
+    this.setState({
+      isRated: !this.state.isRated,
+      isClicked: !this.state.isClicked,
+      ratingValue: 0,
+    });
+    this.props.getRating(slug);
+    return (<Redirect to={slug} />);
+  }
+
+  onUpdateRating = (e, slug) => {
+    e.preventDefault();
+    ratingValues = this.state.ratingValue;
+    if (ratingValues === 0) {
+      return toast.error('Select The Stars For Your Ratings!');
+    }
+    this.props.updateRating(slug, ratingValues);
+    this.setState({
+      isRated: !this.state.isRated,
+      isClicked: !this.state.isClicked,
+      ratingValue: 0,
+    });
+    this.props.getRating(slug);
+    return (<Redirect to={slug} />);
+  }
+
+  onPercentageHandle = (str) => {
+    const data = str.split('');
+    const value = parseInt(`${data[0]}${data[1]}${data[2]}`, 10);
+    return value;
   }
 
   handleClickBookmark = () => {
@@ -92,7 +162,6 @@ class ReadArticle extends Component {
       bookmarkArticle(slug);
       this.props.getBoomarks(slug);
       this.setState({
-        // eslint-disable-next-line react/no-access-state-in-setstate
         isBookmarked: !this.state.isBookmarked,
       });
     } catch (err) {
@@ -116,12 +185,8 @@ class ReadArticle extends Component {
   };
 
   render() {
-    const {
-      Article,
-      Author,
-      slug,
-      user: { username, id: userId },
-    } = this.state;
+    const { Article, Author, slug, user: { username, id: userId }, isRated } = this.state;
+    const { login, rating } = this.props;
     let contentBlocks = [];
     if (this.state.redirectToLogin) {
       return (
@@ -136,10 +201,12 @@ class ReadArticle extends Component {
     if (this.state.redirectToMyArticles) {
       return <Redirect to="/articles" />;
     }
+
+    if (isRated && rating.errors.data !== undefined && rating.errors.data.status === 403) {
+      toast.warn('You are not allowed to rate your own article!');
+    }
     if (Article && Author.profile) {
-      const BookmarkButton = this.state.isBookmarked
-        ? 'fas fa-bookmark'
-        : 'far fa-bookmark';
+      const BookmarkButton = this.state.isBookmarked ? 'fas fa-bookmark' : 'far fa-bookmark';
       const content = JSON.parse(Article.article.body);
       const { blocks } = content.article.body;
       contentBlocks = blocks.splice(1, blocks.length);
@@ -171,11 +238,29 @@ class ReadArticle extends Component {
                       </Link>
                     </div>
                     <div>
-                      <Moment format="D MMM YYYY">
+                      <Moment format="DD MMM YYYY">
                         {Article.article.createdAt}
                       </Moment>
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      {Article.article.readtime}
                     </div>
-                    <Rater total={5} rating={2} />
+                    <div onMouseOver={this.onMouseEnterHandler} onMouseOut={this.onMouseLeaveHandler}>
+                      <Rater
+                        initialRating={
+                          rating.Ratings !== undefined ? rating.Ratings.report.Average : 0
+                        }
+                        style={theme}
+                        emptySymbol="fa fa-star-o fa-2x"
+                        fullSymbol="fa fa-star fa-2x"
+                        readonly
+                      />
+                    </div>
+                    { this.state.isHovered ? (
+                      <ArticleRatingOverall
+                        rating={rating}
+                        onPercentageHandle={this.onPercentageHandle}
+                      />
+                    ) : null }
                   </div>
                 </div>
                 <div className="mt-3">
@@ -239,6 +324,78 @@ class ReadArticle extends Component {
                   >
                     <i className="fas fa-trash-alt" />
                   </div>
+                  {/* eslint-disable-next-line */}
+                  {username !== this.state.Article.article.author.username
+                    ? (
+                      <div className="floating-buttons mt-3 star" onClick={this.onClickHandle}>
+                        <i className="fas fa-star" />
+                      </div>
+                    ) : null
+                  }
+                  {this.state.isClicked ? login.isAuthenticated
+                    && login.user.id > 0
+                    ? (
+                      <div
+                        className="card p-2 mt-1"
+                        style={{
+                          width: '20rem', zIndex: '500', position: 'absolute',
+                        }}
+                      >
+                        <div className="row">
+                          <div className="col-lg-12">
+                                Give Us Your Ratings On This Article
+                          </div>
+                          <div className="col-lg-6">
+                            <Rater
+                              initialRating={this.state.ratingValue}
+                              style={theme}
+                              emptySymbol="fa fa-star-o fa-2x"
+                              fullSymbol="fa fa-star fa-2x"
+                              onChange={this.onChangeHandle}
+                            />
+                          </div>
+                          <div className="col-lg-6">
+                            <button
+                              className="btn green"
+                              type="submit"
+                              onClick={
+                              rating.errors.data !== undefined && rating.errors.data.status === 400
+                                ? e => this.onUpdateRating(e, Article.article.slug)
+                                : e => this.onCreateRating(e, Article.article.slug)
+                              }
+                            >
+                              {
+                                rating.errors.data !== undefined
+                                  && rating.errors.data.status === 400
+                                  ? 'Update Rating' : rating.errors
+                                    ? 'Submit Rating' : null
+                              }
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div
+                        className="card p-2 mt-1"
+                        style={{
+                          width: '20rem', zIndex: '500', position: 'absolute',
+                        }}
+                      >
+                        <div className="row">
+                          <div className="col-lg-12">
+                                  Give Us Your Ratings On This Article
+                          </div>
+                          <div className="col-lg-6">
+                            <Link to="/auth/login">
+                              <button className="btn green" type="submit" onClick={() => sessionStorage.setItem('previousLink', `/articles/${Article.article.slug}`)}>
+                                Login First
+                              </button>
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
+
+                    ) : null}
                 </div>
               </div>
             </main>
@@ -296,6 +453,9 @@ const mapStateToProps = state => ({
   myBookmarks: state.article.Boomarks,
   bookmark: state.article.bookmark,
   user: state.login.user,
+  profile: state.profile,
+  login: state.login,
+  rating: state.rating,
 });
 
 export default connect(
@@ -307,5 +467,8 @@ export default connect(
     resetProps,
     getBoomarks,
     bookmark,
+    getRating,
+    createRating,
+    updateRating,
   },
 )(ReadArticle);

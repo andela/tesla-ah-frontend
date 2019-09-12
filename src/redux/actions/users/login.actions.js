@@ -1,10 +1,11 @@
 
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-undef */
-
+// import React from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import jwt from 'jwt-decode';
+// import { Redirect } from 'react-router-dom';
 import { BACKEND_URL } from '../../../utils/constants';
 import * as userActionTypes from '../types/auth.type';
 

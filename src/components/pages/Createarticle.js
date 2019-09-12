@@ -67,7 +67,6 @@ export class Createarticle extends Component {
     if (this.state.redirect) {
       return <Redirect to={`/articles/${slug}`} />;
     }
-    // console.log(this.state.isUpdating);
     return (
       <div className="container create-article-container mt-4">
         <Editor

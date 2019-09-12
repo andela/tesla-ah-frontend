@@ -7,7 +7,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/label-has-for */
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { format } from 'timeago.js';
 import { connect } from 'react-redux';
 import { sortArryAsd as sortComments } from 'tesla-error-handler';
@@ -222,13 +222,13 @@ export class Commentitem extends Component {
         }}
       >
         <div className="">
-          <Link to={`/profile/${props.isReply ? props.username : username}`}>
+          <a href={`/profile/${props.isReply ? props.username : username}`}>
             <Avatar
               src={props.avatar || defaultAvata}
               size={40}
               className="mb-2"
             />
-          </Link>
+          </a>
         </div>
         <div className="ml-3">
           <div className="comment-profile-section">

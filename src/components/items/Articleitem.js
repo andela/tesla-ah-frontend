@@ -36,6 +36,7 @@ class Articleitem extends Component {
                   <Moment format="D MMM YYYY">{createdAt}</Moment>
                 </p>
               </div>
+              &nbsp;&nbsp;&nbsp;
               <div className="read-time">
                 <p htmlFor="story_readtime" className="h6 text-secondary font-weight-normal">
                   {readtime}
