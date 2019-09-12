@@ -114,6 +114,7 @@
     "react-pagination-library": "^0.1.14",
     "react-rater": "^5.1.0",
     "react-redux": "^7.1.0",
+    "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-router-last-location": "^2.0.1",
     "react-social-icons": "^4.1.0",

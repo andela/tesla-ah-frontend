@@ -6,6 +6,8 @@ import {
   VERIFIED,
   SIGNUP_SUCCESS,
   VERIFICATION_FAILED,
+  LOG_OUT_SUCCESS,
+  LOG_OUT,
 } from './types/auth.type';
 
 export const createAccount = userInfo => async (dispatch) => {
@@ -44,6 +46,23 @@ export const verifyAccount = token => async (dispatch) => {
     dispatch(setLoaded());
     dispatch({
       type: VERIFICATION_FAILED,
+    });
+  }
+};
+
+export const loggOut = () => async (dispatch) => {
+  try {
+    const { data } = await axios.get(`${BACKEND_URL}/api/auth/signout`, {
+      headers: { token: sessionStorage.getItem('token') },
+    });
+    dispatch({
+      type: LOG_OUT_SUCCESS,
+      payload: { message: data.message },
+    });
+  } catch (error) {
+    dispatch({
+      type: LOG_OUT,
+      payload: error,
     });
   }
 };

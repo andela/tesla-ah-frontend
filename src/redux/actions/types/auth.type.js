@@ -10,3 +10,5 @@ export const LOGIN_REDIRECT_PATH = 'LOGIN_REDIRECT_PATH';
 export const LOGIN_CHECK_STATE = 'LOGIN_CHECK_STATE';
 export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
 export const ERROR_LOGIN = 'ERROR_LOGIN';
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
+export const LOG_OUT = 'LOG_OUT';
