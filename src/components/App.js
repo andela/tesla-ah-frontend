@@ -27,8 +27,12 @@ import SearchResults from './pages/SearchResults';
 import Editarticle from './pages/Editarticle';
 import MyArticles from './pages/MyArticles';
 import Bookmarks from './pages/Bookmark';
-import Privateroute from '../routes/Privateroute';
 import ArticleTags from './pages/ArticleTags';
+import ChatUsers from './pages/ChatUsers';
+import Chat from './pages/Chat';
+
+// Private route import
+import Privateroute from '../routes/Privateroute';
 
 const App = () => (
   <BrowserRouter>
@@ -50,6 +54,8 @@ const App = () => (
       <Privateroute exact path="/article/new" component={Create} />
       <Privateroute exact path="/article/:slug/edit" component={Editarticle} />
       <Privateroute exact path="/bookmarks" component={Bookmarks} />
+      <Privateroute exact path="/users" component={ChatUsers} />
+      <Privateroute exact path="/users/:username/chat" component={Chat} />
       <Route component={PageNotFound} />
     </Switch>
     <Footer />

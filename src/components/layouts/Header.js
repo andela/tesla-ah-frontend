@@ -89,69 +89,14 @@ export class Header extends Component {
               </ul>
             </Link>
             {!loggedIn && !isAuthenticated ? (
-              <ul className="navbar-nav mr-auto nav-left">
-                <li className="nav-item active">
-                  {/* eslint-disable-nextline  */}
-                  <Link className="nav-link is-active" to="/">
-                    Home
-                    <span className="sr-only">(current)</span>
-                  </Link>
-                </li>
-                <li className="nav-item dropdown">
-                  {/* eslint-disable-nextline  */}
-                  <Link
-                    className="nav-link dropdown-toggle nav-shrink"
-                    to="/"
-                    id="navbarDropdown"
-                    role="button"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    Categories
-                  </Link>
-                  <div
-                    className="dropdown-menu"
-                    aria-labelledby="navbarDropdown"
-                  >
-                    {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">
-                      Technology
-                    </Link>
-                    {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">
-                      Sport
-                    </Link>
-                    {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">
-                      Design
-                    </Link>
-                    {/* eslint-disable-nextline  */}
-                    <Link className="dropdown-item" to="/">
-                      Politics
-                    </Link>
-                  </div>
-                </li>
-                <li className="nav-item">
-                  {/* eslint-disable-nextline  */}
-                  <Link className="nav-link nav-shrink" to="/">
-                    About Us
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  {/* eslint-disable-nextline  */}
-                  <Link className="nav-link nav-shrink" to="/" tabIndex="-1">
-                    Contacts
-                  </Link>
-                </li>
-              </ul>
+              <div />
             ) : (
               <div />
             )}
             {loggedIn || isAuthenticated ? (
               <ul className="nav-right navbar-nav">
                 <li id="nav-item noti-container">
-                  <div id="noti-counter">5 </div>
+                  <div id="noti-counter">5</div>
                   <i
                     id="noti-button"
                     className="nav-link is-active nav-shrink fa fa-bell"
@@ -159,11 +104,12 @@ export class Header extends Component {
                 </li>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <li id="nav-item noti-container message">
-                  <div id="noti-counter">2</div>
-                  <i
-                    id="noti-button"
-                    className="nav-link is-active nav-shrink fa fa-envelope"
-                  />
+                  <Link to="/users">
+                    <i
+                      id="noti-button"
+                      className="nav-link is-active nav-shrink far fa-comments"
+                    />
+                  </Link>
                 </li>
                 &nbsp;&nbsp;&nbsp;
                 <li id="nav-item noti-container message">

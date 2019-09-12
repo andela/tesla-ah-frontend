@@ -4,9 +4,11 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
-import Article from '../Article/Article';
+import { Link } from 'react-router-dom';
 import searchArticles from '../../redux/actions/article/search.action';
 import Preloader from '../widgets/Preloader';
+import ArticleItem from '../items/Articleitem';
+import { getItemDataFromDatabase } from '../../utils/getArticleItemData';
 
 export class Tags extends Component {
   constructor() {
@@ -45,7 +47,9 @@ export class Tags extends Component {
             </h4>
             {searchResults.map(article => (
 
-              <Article key={article.slug} article={article} />
+              <Link to={`/articles/${article.slug}`} key={article.id}>
+                <ArticleItem article={getItemDataFromDatabase(article)} />
+              </Link>
             ))}
           </div>
         </div>

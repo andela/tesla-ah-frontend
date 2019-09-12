@@ -7,6 +7,7 @@ import {
   verifyAccount,
   loggOut,
 } from '../../../src/redux/actions/auth.actions';
+import SessionStorage from '../../../__mocks__/sessionStorageMock';
 
 const userData = {
   firstName: 'Elie',
@@ -24,13 +25,17 @@ const middleware = [thunk];
 const mockStore = configureStore(middleware);
 
 const store = mockStore({});
+let storage;
 describe('Should make it happen', () => {
   beforeEach(() => {
     moxios.install();
+    storage = window.sessionStorage;
+    window.sessionStorage = new SessionStorage();
   });
   afterEach(() => {
     moxios.uninstall();
     store.clearActions();
+    window.sessionStorage = storage;
   });
   test('Let us see if it works', async () => {
     moxios.wait(() => {

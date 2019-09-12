@@ -5,18 +5,24 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
 import { getBoomarks, bookmark } from '../../../src/redux/actions/article.actions';
+import SessionStorage from '../../../__mocks__/sessionStorageMock';
 
 const middleware = [thunk];
 const mockStore = configureStore(middleware);
 const store = mockStore({});
 
+let storage;
+
 describe('test for bookmarking article to read  later', () => {
   beforeEach(() => {
     moxios.install();
+    storage = window.sessionStorage;
+    window.sessionStorage = new SessionStorage();
   });
   afterEach(() => {
     moxios.uninstall();
     store.clearActions();
+    window.sessionStorage = storage;
   });
   test('should get bookmarks', async () => {
     moxios.wait(() => {
