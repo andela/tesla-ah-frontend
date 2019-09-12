@@ -1,3 +1,6 @@
+/* eslint-disable jsx-a11y/mouse-events-have-key-events */
+/* eslint-disable react/no-access-state-in-setstate */
+/* eslint-disable jsx-a11y/label-has-for */
 /* eslint-disable max-len */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable react/button-has-type */
@@ -52,6 +55,7 @@ class ReadArticle extends Component {
     isClicked: false,
     ratingValue: 0,
     isRated: false,
+    onHover: false,
   };
 
   componentWillMount() {
@@ -96,10 +100,18 @@ class ReadArticle extends Component {
   }
 
   onMouseEnterHandler =() => {
+    this.setState({ onHover: !this.state.onHover });
+  }
+
+  onMouseOverHandler =() => {
     this.setState({ isHovered: !this.state.isHovered });
   }
 
   onMouseLeaveHandler = () => {
+    this.setState({ onHover: false });
+  }
+
+  onMouseOutHandler = () => {
     this.setState({ isHovered: false });
   }
 
@@ -229,7 +241,7 @@ class ReadArticle extends Component {
                       <img className="" src={avatar || DEFAULT_AVATA} alt="" />
                     </Link>
                   </div>
-                  <div className="ml-3">
+                  <div className="ml-3 w-50">
                     <div>
                       <Link
                         to={`/profile/${this.state.Article.article.author.username}`}
@@ -238,11 +250,37 @@ class ReadArticle extends Component {
                       </Link>
                     </div>
                     <div>
-                      <Moment format="DD MMM YYYY">
-                        {Article.article.createdAt}
-                      </Moment>
-                      &nbsp;&nbsp;&nbsp;&nbsp;
-                      {Article.article.readtime}
+                      <div className="h6 text-secondary font-weight-normal">
+                        <Moment format="DD MMM YYYY">
+                          {Article.article.createdAt}
+                        </Moment>
+                        &nbsp;&nbsp;&nbsp;
+                        <span onMouseOver={this.onMouseOverHandler} onMouseOut={this.onMouseOutHandler}>
+                          <i className="far fa-eye" />
+                        </span>
+                        &nbsp;
+                        {this.state.Article.article.views}
+                        {this.state.isHovered ? (
+                          <label
+                            htmlFor="Views"
+                            style={{
+                              padding: '5px',
+                              zIndex: '500',
+                              marginTop: '20px',
+                              marginLeft: '-55px',
+                              position: 'absolute',
+                              backgroundColor: 'black',
+                              color: 'white',
+                            }}
+                          >
+                            {' '}
+                            Views
+
+                          </label>
+                        ) : null}
+                          &nbsp;&nbsp;&nbsp;&nbsp;
+                        {Article.article.readtime}
+                      </div>
                     </div>
                     <div onMouseOver={this.onMouseEnterHandler} onMouseOut={this.onMouseLeaveHandler}>
                       <Rater
@@ -255,7 +293,7 @@ class ReadArticle extends Component {
                         readonly
                       />
                     </div>
-                    { this.state.isHovered ? (
+                    { this.state.onHover ? (
                       <ArticleRatingOverall
                         rating={rating}
                         onPercentageHandle={this.onPercentageHandle}

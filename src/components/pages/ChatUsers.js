@@ -9,6 +9,7 @@ import { REMOTE_SOCKET_SERVER } from '../../utils/constants';
 // Components import
 import User from '../items/Chatuser';
 import Preloader from '../widgets/Preloader';
+import Alert from '../common/Alert';
 
 export class Users extends Component {
   constructor(props) {
@@ -50,13 +51,27 @@ export class Users extends Component {
           <div className="row mt-3 mb-5">
             <div className="col-sm-2" />
             <ul className="folowees__list list-group col-sm-8">
-              {users.map(user => (
-                <li className="folowees__list--item list-group-item" key={user.id}>
-                  <Link to={`/users/${user.username}/chat`} className="followees__list--item-link">
-                    <User data={user} />
-                  </Link>
-                </li>
-              ))}
+              {users.length ? (
+                <div>
+                  {users.map(user => (
+                    <li
+                      className="folowees__list--item list-group-item"
+                      key={user.id}
+                    >
+                      <Link
+                        to={`/users/${user.username}/chat`}
+                        className="followees__list--item-link"
+                      >
+                        <User data={user} />
+                      </Link>
+                    </li>
+                  ))}
+                </div>
+              ) : (
+                <Alert type="info">
+                  <p>No friends yet!</p>
+                </Alert>
+              )}
             </ul>
             <div className="col-sm-2" />
           </div>
@@ -67,5 +82,10 @@ export class Users extends Component {
 }
 
 // eslint-disable-next-line max-len
-export const mapStateToProps = ({ chats: { users, usersPending: pending } }) => ({ users, pending });
-export default connect(mapStateToProps, { getUsers })(Users);
+export const mapStateToProps = ({
+  chats: { users, usersPending: pending },
+}) => ({ users, pending });
+export default connect(
+  mapStateToProps,
+  { getUsers },
+)(Users);
