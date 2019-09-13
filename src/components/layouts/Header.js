@@ -1,6 +1,7 @@
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable no-undef */
 /* eslint-disable max-len */
@@ -13,7 +14,7 @@ import PropTypes from 'prop-types';
 import logo from '../../assets/img/logo_st.png';
 import { initProfile } from '../../redux/actions/profile.actions';
 import Profilemenu from '../menu/Profile';
-// import { setLoggedIn } from '../../redux/actions/ui.actions';
+import { getUnreadNotifications, readNotification } from '../../redux/actions/notifications.actions';
 
 export class Header extends Component {
   static propTypes = {
@@ -21,9 +22,24 @@ export class Header extends Component {
   };
 
   componentWillMount() {
-    const { onInitProfile } = this.props;
+    const { onInitProfile, onNotifications } = this.props;
     if (localStorage.getItem('user')) {
       onInitProfile();
+      onNotifications();
+    }
+  }
+
+  componentDidUpdate() {
+    const {
+      onNotifications,
+    } = this.props;
+    const { socketIO } = this.props;
+    if (socketIO) {
+      try {
+        onNotifications();
+      } catch (error) {
+        const err = error;
+      }
     }
   }
 
@@ -37,10 +53,17 @@ export class Header extends Component {
     return user;
   };
 
+  readNotification = (id) => {
+    const { onRead, onNotifications } = this.props;
+    onRead(id);
+    onNotifications();
+  };
+
   render() {
     const {
       login: { user },
       auth: { loggedIn },
+      notifications,
     } = this.props;
     const isAuthenticated = this.getUser(sessionStorage.getItem('token'));
     return (
@@ -95,13 +118,47 @@ export class Header extends Component {
             )}
             {loggedIn || isAuthenticated ? (
               <ul className="nav-right navbar-nav">
-                <li id="nav-item noti-container">
-                  <div id="noti-counter">5</div>
-                  <i
-                    id="noti-button"
-                    className="nav-link is-active nav-shrink fa fa-bell"
-                  />
-                </li>
+                <div>
+                  <li id="nav-item noti-container">
+                    <a
+                      className="nav-link dropdown-toggle waves-effect waves-light"
+                      id="navbarDropdownMenuLink-5"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="true"
+                    >
+                      {(notifications.length > 0) ? <div id="noti-counter">{notifications.length}</div> : null}
+                      <i
+                        id="noti-button"
+                        className="nav-link is-active nav-shrink fa fa-bell"
+                      />
+                    </a>
+                    {(notifications.length > 0)
+                      ? (
+                        <div
+                          className="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+                          aria-labelledby="navbarDropdownMenuLink-5"
+                        >
+                          <div className="dropdown-item waves-effect waves-light dropdown-item-custom">
+                            {notifications.map(notification => (
+                              <div
+                                className="notification-item"
+                                key={notification.id}
+                                onClick={() => {
+                                  this.readNotification(notification.id);
+                                  return <div>{notification.message}</div>;
+                                }}
+                              >
+                                <Link to={notification.url}>
+                                  {notification.message}
+                                </Link>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      ) : null}
+                  </li>
+                </div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <li id="nav-item noti-container message">
                   <Link to="/users">
@@ -111,7 +168,7 @@ export class Header extends Component {
                     />
                   </Link>
                 </li>
-                &nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 <li id="nav-item noti-container message">
                   <Profilemenu
                     avata={user.avatar}
@@ -146,6 +203,8 @@ const mapStateToProps = state => ({
   login: state.login,
   profile: state.profile,
   auth: state.auth,
+  notifications: state.allNotifications.notifications,
+  socketIO: state.allNotifications.socketIO,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -153,10 +212,19 @@ const mapDispatchToProps = (dispatch) => {
   if (user) {
     return {
       onInitProfile: () => dispatch(initProfile(user.username)),
+      onNotifications: () => {
+        dispatch(getUnreadNotifications());
+      },
+      onRead: (id) => {
+        dispatch(readNotification(id));
+      },
     };
   }
-  return {};
+
+  return {
+  };
 };
+
 
 export default connect(
   mapStateToProps,

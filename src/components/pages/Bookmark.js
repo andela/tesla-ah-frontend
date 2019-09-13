@@ -40,7 +40,7 @@ export class Bookmarks extends Component {
             {bookmarkedArticles.list.map(article => (
               <div className="bookmark-item-cont">
                 <Link
-                  className="col-md-6 bookmark-link"
+                  className="col-md-6"
                   key={article.id}
                   to={`/articles/${article.slug}`}
                 >

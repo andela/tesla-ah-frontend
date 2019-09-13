@@ -38,6 +38,7 @@ export const login = (email, password) => async (dispatch) => {
     const token = data.data.token;
     const user = jwt(token);
     sessionStorage.setItem('token', token);
+    sessionStorage.setItem('username', user.username);
     toast.success(`Thank you ${user.firstName}, you are now logged in successfully!`);
     dispatch(loginSuccess(token, user));
     dispatch(loggedIn());

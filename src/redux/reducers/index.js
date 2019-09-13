@@ -8,6 +8,8 @@ import applyPasswordReducer from './applyPassword.reducer';
 import author from './authorprofile.reducer';
 import profileReducer from './profile.reducer';
 import likeAndDislike from './likeAndDislike.reducer';
+import notificationsReducer from './notifications.reducer';
+
 import searchReducer from './article/search.reducer';
 import optInOptOutEmailReducer from './optInOptOutEmail.reducer';
 import optInOptOutAppReducer from './optInOptOutApp.reducer';
@@ -31,4 +33,5 @@ export default combineReducers({
   likeAndDislike,
   rating: ratingReducer,
   chats: chatReducer,
+  allNotifications: notificationsReducer,
 });
