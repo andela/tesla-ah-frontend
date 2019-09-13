@@ -1,5 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import axios from 'axios';
+import { removeNull } from 'tesla-error-handler';
 import {
   GET_BOOKMARKS_PENDING,
   GET_BOOKMARKS,
@@ -21,7 +22,7 @@ export const listBookmarkedArticle = () => async (dispatch) => {
     });
     dispatch({
       type: GET_BOOKMARKS,
-      payload: res.data.data,
+      payload: removeNull(res.data.data),
     });
   } catch (error) {
     dispatch({

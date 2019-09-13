@@ -98,7 +98,7 @@ export class Header extends Component {
           </button>
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            <Link to="/search" className="search__anchor--form">
+            <a href="/search" className="search__anchor--form">
               <ul className="navbar-nav mr-auto nav-left">
                 <li className="nav-item nav-right">
                   <input
@@ -110,7 +110,7 @@ export class Header extends Component {
                   />
                 </li>
               </ul>
-            </Link>
+            </a>
             {!loggedIn && !isAuthenticated ? (
               <div />
             ) : (
@@ -127,7 +127,7 @@ export class Header extends Component {
                       aria-haspopup="true"
                       aria-expanded="true"
                     >
-                      {(notifications.length > 0) ? <div id="noti-counter">{notifications.length}</div> : null}
+                      {(notifications.length > 0) ? <div id="noti-counter">{notifications.length >= 10 ? '9+' : notifications.length}</div> : null}
                       <i
                         id="noti-button"
                         className="nav-link is-active nav-shrink fa fa-bell"
@@ -160,7 +160,7 @@ export class Header extends Component {
                   </li>
                 </div>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <li id="nav-item noti-container message">
+                <li id="nav-item noti-container message" className="chat__icon">
                   <Link to="/users">
                     <i
                       id="noti-button"

@@ -105,6 +105,46 @@ describe('Create article action', () => {
       expect(store.getActions().length).toEqual(1);
     });
   });
+  test('should create an article', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 400,
+        response: {
+          error: 'No tags',
+        },
+      });
+    });
+
+    return store.dispatch(createArticle({
+      title: 's',
+      description: 's',
+      body: 's',
+      tagList: 's',
+    })).then(() => {
+      expect(store.getActions().length).toEqual(0);
+    });
+  });
+  test('should create an article', async () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 403,
+        response: {
+          error: 'Unauthorized',
+        },
+      });
+    });
+
+    return store.dispatch(createArticle({
+      title: 's',
+      description: 's',
+      body: 's',
+      tagList: 's',
+    })).then(() => {
+      expect(store.getActions().length).toEqual(0);
+    });
+  });
 });
 describe('Update article action', () => {
   beforeEach(() => {

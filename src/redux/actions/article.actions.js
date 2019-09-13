@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import {
   UPLOAD_IMAGE,
   CREATE_ARTICLE,
@@ -21,6 +22,7 @@ import {
   DISLIKE_COMMENT,
   EDIT_COMMENT,
   GET_COMMENT_EDIT_HISTORY,
+  GET_ARTICLE_ERROR,
 } from './types/article.type';
 import {
   STORAGE_BASE_URL,
@@ -37,16 +39,24 @@ import {
 } from './types/likeAndDislike.type';
 
 export const createArticle = article => async (dispatch) => {
-  const { data } = await axios.post(`${API_URL}/articles`, article, {
-    headers: {
-      'Content-Type': 'application/json',
-      token: `${sessionStorage.getItem('token')}`,
-    },
-  });
-  dispatch({
-    type: CREATE_ARTICLE,
-    payload: data,
-  });
+  try {
+    const { data } = await axios.post(`${API_URL}/articles`, article, {
+      headers: {
+        'Content-Type': 'application/json',
+        token: `${sessionStorage.getItem('token')}`,
+      },
+    });
+    dispatch({
+      type: CREATE_ARTICLE,
+      payload: data,
+    });
+  } catch (error) {
+    if (error.response.status === 400) {
+      toast.warn('No tags provided');
+    } else {
+      toast.warn(error.response.data.error);
+    }
+  }
 };
 export const updateArticle = (article, slug) => async (dispatch) => {
   const { data } = await axios.put(`${API_URL}/articles/${slug}`, article, {
@@ -77,11 +87,17 @@ export const uploadImage = e => async (dispatch) => {
 };
 
 export const getArticle = slug => async (dispatch) => {
-  const { data } = await axios.get(`${API_URL}/articles/${slug}`);
-  dispatch({
-    type: GET_ONE_ARTICLE,
-    payload: data,
-  });
+  try {
+    const { data } = await axios.get(`${API_URL}/articles/${slug}`);
+    dispatch({
+      type: GET_ONE_ARTICLE,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_ARTICLE_ERROR,
+    });
+  }
 };
 
 export const getArticles = page => async (dispatch) => {

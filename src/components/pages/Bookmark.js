@@ -1,11 +1,12 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
 /* eslint-disable object-curly-spacing */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { removeNull } from 'tesla-error-handler';
 import Articleitem from '../items/Articleitem';
 import { listBookmarkedArticle, deleteBookmarkedArticle} from '../../redux/actions/bookmark.action';
 import { getItemDataFromDatabase } from '../../utils/getArticleItemData';
@@ -31,21 +32,23 @@ export class Bookmarks extends Component {
     if (bookmarkedArticles.loading) {
       return <Preloader />;
     }
+    const originalBookmarks = removeNull(bookmarkedArticles.list);
+
     return (
       <div className="Bookmarks" style={{ minHeight: pageHeight - 200 }}>
         {hasBookmarks ? (
           <div className="container bookmark_container">
             <h4 className="ml-3 mt-5 bookmark-title">Bookmarks</h4>
             <hr className="ml-3" />
-            {bookmarkedArticles.list.map(article => (
+            {originalBookmarks.map(article => (
               <div className="bookmark-item-cont">
-                <Link
+                <a
                   className="col-md-6"
                   key={article.id}
-                  to={`/articles/${article.slug}`}
+                  href={`/articles/${article.slug}`}
                 >
                   <Articleitem show key={article.id} article={getItemDataFromDatabase(article)} />
-                </Link>
+                </a>
                 <button
                   onClick={e => deleteBookmark(article.slug)}
                   type="submit"

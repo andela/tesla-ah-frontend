@@ -2,7 +2,7 @@
 import React from 'react';
 import crying from '../../assets/img/crying-cartoon.png';
 
-const PageNotFound = () => (
+const ArticleNotFound = ({ slug }) => (
   <div className="container notfound__container">
     <div className="notfound__container--content">
       <div className="row">
@@ -12,7 +12,11 @@ const PageNotFound = () => (
         <div className="col-sm-6 notfound__container--description">
           <h2>Awww... Don't cry.</h2>
           <p>
-            The page you are looking for is not found
+The article with this slug:
+            {' '}
+            <i>{slug}</i>
+            {' '}
+does not exist.
           </p>
           <a href="/" className="btn button is-grey">Go back to homepage</a>
         </div>
@@ -21,4 +25,4 @@ const PageNotFound = () => (
   </div>
 );
 
-export default PageNotFound;
+export default ArticleNotFound;

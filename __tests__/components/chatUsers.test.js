@@ -19,6 +19,9 @@ describe('Chat users page tests', () => {
   beforeAll(() => {
     chatUsers = shallow(<Users {...props} />);
     instance = chatUsers.instance();
+    instance.setState({
+      users,
+    });
   });
   test('Should render perfectly', () => {
     expect(chatUsers).toBeDefined();

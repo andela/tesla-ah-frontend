@@ -270,6 +270,7 @@ export class Profile extends Component {
                       className="nav-link"
                       onClick={() => this.handleTabChange('articles')}
                       type="button"
+                      style={{ outline: 'none' }}
                     >
                       Articles
                       <span className="badge badge-light d-badge">
@@ -283,6 +284,7 @@ export class Profile extends Component {
                       id="followerBtn"
                       onClick={() => this.handleTabChange('followers')}
                       type="button"
+                      style={{ outline: 'none' }}
                     >
                       Followers
                       <span className="badge badge-light d-badge">
@@ -296,6 +298,7 @@ export class Profile extends Component {
                       id="followingBtn"
                       onClick={() => this.handleTabChange('following')}
                       type="button"
+                      style={{ outline: 'none' }}
                     >
                       Following
                       <span className="badge badge-light d-badge">
@@ -310,6 +313,7 @@ export class Profile extends Component {
                       type="button"
                       className="btn-custom"
                       data-toggle="modal"
+                      style={{ outline: 'none' }}
                       data-target="#exampleModalCenter"
                     >
                       Edit Profile

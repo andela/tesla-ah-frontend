@@ -31,6 +31,7 @@ import LikeAndDislike from '../common/LikeAndDislike';
 import Share from '../common/Share';
 import Comments from '../Card/CommentCard';
 import ArticleRatingOverall from './ArticleRatingOverall';
+import ArticleNotFound from '../common/ArticleNotFound';
 
 const theme = {
   color: '#ffd700',
@@ -56,6 +57,7 @@ class ReadArticle extends Component {
     ratingValue: 0,
     isRated: false,
     onHover: false,
+    notFound: false,
   };
 
   componentWillMount() {
@@ -97,6 +99,11 @@ class ReadArticle extends Component {
       ...prevState,
       user: { ...prevState.user, ...newProps.user },
     }));
+    if (newProps.article.notfound) {
+      this.setState({
+        notFound: newProps.article.notfound,
+      });
+    }
   }
 
   onMouseEnterHandler =() => {
@@ -476,6 +483,9 @@ class ReadArticle extends Component {
         </div>
       );
     }
+    if (this.state.notFound) {
+      return <ArticleNotFound slug={this.props.match.params.slug} />;
+    }
     return (
       <div>
         <Preloader />
@@ -494,6 +504,7 @@ const mapStateToProps = state => ({
   profile: state.profile,
   login: state.login,
   rating: state.rating,
+  article: state.article,
 });
 
 export default connect(

@@ -1,0 +1,15 @@
+.notfound{
+  &__container{
+    min-height: 80vh;
+    &--image{
+      width: 30vw;
+      height: 60vh;
+      @include mediaSm{
+        width: 80vw;
+      }
+    }
+    &--description{
+      margin-top:150px;
+    }
+  }
+}

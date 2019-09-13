@@ -21,6 +21,7 @@ import {
   LIKE_COMMENT,
   EDIT_COMMENT,
   GET_COMMENT_EDIT_HISTORY,
+  GET_ARTICLE_ERROR,
 } from '../actions/types/article.type';
 
 const initialState = {
@@ -43,6 +44,7 @@ const initialState = {
   currentEditedComment: {},
   currentCommentEditHistory: {},
   comments: [],
+  notfound: false,
 };
 export default (state = initialState, action) => {
   const { type, payload } = action;
@@ -158,6 +160,11 @@ export default (state = initialState, action) => {
         myarticles: {},
         deletedArticle: {},
         error: {},
+      };
+    case GET_ARTICLE_ERROR:
+      return {
+        ...state,
+        notfound: true,
       };
     default:
       return state;

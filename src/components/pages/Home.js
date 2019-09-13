@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import QueryString from 'query-string';
-import { Link } from 'react-router-dom';
 import Pagination from 'react-pagination-library';
 import { toast } from 'react-toastify';
 import { sortArrayDesd as sortArticles } from 'tesla-error-handler';
@@ -58,17 +57,16 @@ export class Home extends Component {
     if (!this.state.isLoading) {
       articleslist = this.props.article;
       articleItems = sortArticles(this.props.article.articles).map(article => (
-        <Link
+        <a
           className="col-md-6"
           key={article.id}
-          href=""
-          to={`/articles/${article.slug}`}
+          href={`/articles/${article.slug}`}
         >
           <Articleitem
             key={article.id}
             article={getItemDataFromDatabase(article)}
           />
-        </Link>
+        </a>
       ));
       return (
         <div>

@@ -18,10 +18,16 @@ class Articleitem extends Component {
   }
 
   /* istanbul ignore next */
-  onMouseLeaveHandler = () => this.setState({ onHover: false })
+  onMouseLeaveHandler = () => {
+    /* istanbul ignore next */
+    this.setState({ onHover: false });
+  }
 
   /* istanbul ignore next */
-  onMouseEnterHandler = () => this.setState({ onHover: !false })
+  onMouseEnterHandler = () => {
+    /* istanbul ignore next */
+    this.setState({ onHover: !false });
+  }
 
   render() {
     const { article } = this.props;

@@ -48,4 +48,20 @@ describe('Auth reducer', () => {
     const state = logoutReducer(initialStates, ({ type: actionTypes.LOG_OUT_SUCCESS, payload: 'you logged out' }));
     expect(state).toEqual(expectedState);
   });
+  test('Should get user info after registration', () => {
+    const expectedState = {
+      ...initialState,
+      user: {
+        username: 'elie',
+      },
+      isAuthenticated: true,
+    };
+    const state = authReducer(initialState, {
+      type: actionTypes.SET_CURRENT_USER,
+      payload: {
+        username: 'elie',
+      },
+    });
+    expect(state).toEqual(expectedState);
+  });
 });

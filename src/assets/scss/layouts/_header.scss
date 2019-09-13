@@ -87,6 +87,12 @@ header {
 
     #noti-container {
       position: relative;
+      .chat__icon{
+        a{
+          margin-top:10px;
+        }
+        
+      }
     }
 
     #noti-button {

@@ -6,7 +6,6 @@
 /* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Pagination from 'react-pagination-library';
 import { sortArrayDesd as sortArticles } from 'tesla-error-handler';
@@ -68,8 +67,8 @@ export class MyArticles extends Component {
               },
             } = getItemDataFromDatabase(article);
             return (
-              <Link
-                to={`/articles/${article.slug}`}
+              <a
+                href={`/articles/${article.slug}`}
                 style={{ textDecoration: 'none' }}
                 key={article.slug}
               >
@@ -113,7 +112,7 @@ export class MyArticles extends Component {
                   </div>
                   <Image title={title} image={image} />
                 </div>
-              </Link>
+              </a>
             );
           })}
           <div className="text-center container pagination-container">

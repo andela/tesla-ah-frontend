@@ -11291,10 +11291,10 @@ terser@^4.1.2:
     source-map "~0.6.1"
     source-map-support "~0.5.12"
 
-tesla-error-handler@^2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/tesla-error-handler/-/tesla-error-handler-2.8.1.tgz#025e176600e6254079e53cd41225f0908d15f167"
-  integrity sha512-v8piJPI1vXdzXqlDcGAB+HFIugkH6NgKXw1oJrHizLzF3MKlxpj7pkG0UmqIZPmpb9FkHEAkcC+Ub7sFycy/KA==
+tesla-error-handler@^2.8.3:
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/tesla-error-handler/-/tesla-error-handler-2.8.3.tgz#e42a27fed0c6c55c5ad0e9dadca118fb7e367fd6"
+  integrity sha512-8OVimkvK10nTUMp716rRat4Fp/QCsFWu31qfJGOmF7cTO7J3kQAs/z9YYxaWQz27XukYUB0cdmAxiMq6B/lAyw==
 
 test-exclude@^5.2.3:
   version "5.2.3"

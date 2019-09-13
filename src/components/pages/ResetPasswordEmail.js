@@ -24,7 +24,9 @@ export class ResetPasswordEmail extends Component {
           ? ''
           : 'Email is required and should look like this : example@email.com!';
         break;
+      /* istanbul ignore next */
       default:
+        break;
     }
     this.setState({
       [name]: value,

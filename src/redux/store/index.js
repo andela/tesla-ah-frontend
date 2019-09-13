@@ -20,6 +20,7 @@ export const testStore = (initialStates) => {
 };
 
 const enableDevTools = NODE_ENV === 'development'
+  /* istanbul ignore next */
   ? composeWithDevTools(applyMiddleware(...middleware))
   : applyMiddleware(...middleware);
 

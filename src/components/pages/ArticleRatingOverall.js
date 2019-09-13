@@ -26,7 +26,7 @@ const ArticleRatingOverall = ({ rating, onPercentageHandle }) => {
           <div className="col-lg-6">
             <Rater
               initialRating={
-              rating.Ratings !== undefined ? rating.Ratings.report.Average : 0
+                rating.Ratings !== undefined ? Math.ceil(rating.Ratings.report.Average) : 0
           }
               style={theme}
               emptySymbol="fa fa-star-o fa-2x"
@@ -35,7 +35,7 @@ const ArticleRatingOverall = ({ rating, onPercentageHandle }) => {
             />
           </div>
           <div className="col-lg-6">
-            {rating.Ratings !== undefined ? rating.Ratings.report.Average : 0}
+            {rating.Ratings !== undefined ? (rating.Ratings.report.Average).toFixed(1) : 0}
             {' '}
             out of 5 stars
           </div>
