@@ -80,7 +80,7 @@ class Profilemenuitem extends Component {
                       &nbsp;&nbsp; Profile
                     </ListGroupItem>
                   </a>
-                  <Link to="/article/new">
+                  <a href="/article/new">
                     <ListGroupItem
                       onClick={this.toggleUserCardPopover}
                       action
@@ -89,7 +89,7 @@ class Profilemenuitem extends Component {
                       <i className="fas fa-pen" />
                       &nbsp;&nbsp; Create New Story
                     </ListGroupItem>
-                  </Link>
+                  </a>
                   <Link to="/articles">
                     <ListGroupItem
                       onClick={this.toggleUserCardPopover}
@@ -108,16 +108,6 @@ class Profilemenuitem extends Component {
                     >
                       <i className="fas fa-bookmark" />
                       &nbsp;&nbsp; Bookmarks
-                    </ListGroupItem>
-                  </Link>
-                  <Link>
-                    <ListGroupItem
-                      onClick={this.toggleUserCardPopover}
-                      action
-                      className="border-light"
-                    >
-                      <i className="fas fa-question-circle" />
-                      &nbsp;&nbsp; Help
                     </ListGroupItem>
                   </Link>
                   <Link to="/" onClick={this.loggOut}>

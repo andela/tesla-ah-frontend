@@ -33,6 +33,13 @@ const Login = (state = initialState, { type, payload }) => {
         isAuthenticated: true,
         isLogging: false,
       };
+    case authTypes.SET_CURRENT_USER:
+      localStorage.setItem('user', JSON.stringify(payload));
+      return {
+        ...state,
+        user: payload,
+        isAuthenticated: true,
+      };
     default:
       return state;
   }

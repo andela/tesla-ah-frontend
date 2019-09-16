@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import jwt from 'jwt-decode';
 import { setLoading, setLoaded } from './ui.actions';
 import { BACKEND_URL } from '../../utils/constants';
 import {
@@ -8,6 +9,7 @@ import {
   VERIFICATION_FAILED,
   LOG_OUT_SUCCESS,
   LOG_OUT,
+  SET_CURRENT_USER,
 } from './types/auth.type';
 
 export const createAccount = userInfo => async (dispatch) => {
@@ -18,11 +20,18 @@ export const createAccount = userInfo => async (dispatch) => {
       `${BACKEND_URL}/api/auth/signup`,
       userInfo,
     );
+    /* istanbul ignore next */
     dispatch(setLoaded());
-    // eslint-disable-next-line no-undef
+    /* istanbul ignore next */
     sessionStorage.setItem('token', data.data.token);
-    localStorage.user = JSON.stringify(data.data);
+    /* istanbul ignore next */
+    dispatch({
+      type: SET_CURRENT_USER,
+      payload: jwt(data.data.token),
+    });
+    /* istanbul ignore next */
     toast.success('You are now registered to AH, check your email to verify your account');
+    /* istanbul ignore next */
     dispatch({
       type: SIGNUP_SUCCESS,
     });
@@ -38,6 +47,11 @@ export const verifyAccount = token => async (dispatch) => {
   try {
     await axios.get(`${BACKEND_URL}/api/auth/verify/?token=${token}`);
     dispatch(setLoaded());
+    sessionStorage.setItem('token', token);
+    dispatch({
+      type: SET_CURRENT_USER,
+      payload: jwt(token),
+    });
     dispatch({
       type: VERIFIED,
     });

@@ -11,6 +11,14 @@ const props = {
     loading: false,
   },
   login: jest.fn(),
+  location: {
+    state: {
+      redirect: {},
+    },
+    search: {
+      redirect: {},
+    },
+  },
 };
 
 let login;

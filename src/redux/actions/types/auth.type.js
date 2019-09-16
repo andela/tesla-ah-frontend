@@ -12,3 +12,4 @@ export const SUBMIT_LOGIN = 'SUBMIT_LOGIN';
 export const ERROR_LOGIN = 'ERROR_LOGIN';
 export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS';
 export const LOG_OUT = 'LOG_OUT';
+export const SET_CURRENT_USER = 'SET_CURRENT_USER';

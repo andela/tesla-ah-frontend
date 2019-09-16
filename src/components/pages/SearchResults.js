@@ -3,7 +3,6 @@
 import React, { Fragment, Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import Alert from '../common/Alert';
 import Spinner from '../widgets/Spinner';
 import Form from '../forms/SearchForm';
@@ -59,9 +58,9 @@ export class Results extends Component {
             { /* const goodArticle = getFreshArticle(article);
             console.log(goodArticle); */ }
             return (
-              <Link to={`/articles/${article.slug}`} key={article.id}>
+              <a href={`/articles/${article.slug}`} key={article.id}>
                 <ArticleItem article={getItemDataFromDatabase(article)} />
-              </Link>
+              </a>
             );
           })}
           {failed ? (

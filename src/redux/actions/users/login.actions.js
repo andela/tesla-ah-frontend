@@ -37,6 +37,7 @@ export const login = (email, password) => async (dispatch) => {
     const { data } = send;
     const token = data.data.token;
     const user = jwt(token);
+    localStorage.setItem('user', JSON.stringify(user));
     sessionStorage.setItem('token', token);
     sessionStorage.setItem('username', user.username);
     toast.success(`Thank you ${user.firstName}, you are now logged in successfully!`);
