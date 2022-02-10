@@ -94,7 +94,7 @@
     "moment": "^2.24.0",
     "moment-timezone": "^0.5.26",
     "moxios": "^0.4.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "path": "^0.12.7",
     "polished": "*",
     "popper.js": "^1.15.0",
