@@ -87,7 +87,7 @@
     "history": "^4.9.0",
     "install": "^0.13.0",
     "joi-browser": "^13.4.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "jwt-decode": "^2.2.0",
     "local-storage": "^2.0.0",
     "lodash": "^4.17.15",
